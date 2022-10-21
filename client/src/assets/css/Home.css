@@ -1,0 +1,41 @@
+.banner {
+    width: 100%;
+    height: 20rem;
+    margin-bottom: 3rem;
+    padding: 7rem;
+    font-size: 83px;
+    font-style: italic;
+    color: #a9a9aba8;
+    text-align: center;
+    background-image: url("../../assets/polina-silivanova-42_l9l5Pxwk-unsplash.jpg");
+}
+
+.info {
+    padding: 10px;
+    width: 100%;
+    height: 25rem;
+    /* border: 1px solid white; */
+    margin-bottom: 2rem;
+}
+
+.wbtn {
+    text-align: center;
+    padding: 30px;
+
+}
+
+.wb {
+    border: 2px solid rgb(159, 159, 187);
+    border-radius: 15px;
+    padding: 30px;
+    background-color: #23204976;
+}
+
+.wc {
+    font-style: italic;
+}
+
+.jimg {
+    width: 100%;
+    height: auto;
+}
