@@ -5,7 +5,7 @@ import "@klaytn/contracts/KIP/token/KIP7/KIP7.sol";
 import "@klaytn/contracts/access/Ownable.sol";
 
 contract PlatformToken is KIP7, Ownable {
-    constructor() KIP7("JDEXToken", "JDEX") {
+    constructor() KIP7("YDEXTestToken", "YTDEX") {
         _mint(msg.sender, 10000000 * 10**decimals());
     }
 

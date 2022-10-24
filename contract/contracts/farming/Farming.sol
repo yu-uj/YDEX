@@ -28,12 +28,12 @@ contract Farming is Ownable, ReentrancyGuard {
 
     // Info of each pool.
     struct PoolInfo {
-        address lpToken; // Address of LP token contract.
+        address lpToken; // Address of LP token contract. lp토큰 컨트랙트 주소
         uint32 bonusMultiplier; // Bonus multiplier for the farming pool
         uint64 bonusEndBlock; // Block number after which the pool doesn't get any bonus from `bonusMultiplier`.
-        uint256 totalStaked; // Amount of LP tokens staked in the pool.
-        uint64 allocPoint; // How many allocation points assigned to this pool. PTNs to distribute per block.
-        uint64 lastRewardBlock; // Last block number that PTNs distribution occurs.
+        uint256 totalStaked; // Amount of LP tokens staked in the pool. 풀에 스테이킹된 lp토큰의 양
+        uint64 allocPoint; // How many allocation points assigned to this pool. PTNs to distribute per block. 이 풀의 할당 비율
+        uint64 lastRewardBlock; // Last block number that PTNs distribution occurs. 마지막으로 플랫폼토큰이 지급된 블록 넘버
         uint128 accPtnPerShare; // Accumulated PTNs per share, times 1e12.
     }
 
@@ -229,7 +229,6 @@ contract Farming is Ownable, ReentrancyGuard {
                     _pid,
                     pool.lastRewardBlock,
                     block.number
-                );
                 uint256 ptnReward = (multiplier *
                     ptnPerBlock *
                     pool.allocPoint) / totalAllocPoint;

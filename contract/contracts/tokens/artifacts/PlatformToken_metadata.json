@@ -1,0 +1,677 @@
+{
+	"compiler": {
+		"version": "0.8.12+commit.f00d7308"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					}
+				],
+				"name": "allowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "burn",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "subtractedValue",
+						"type": "uint256"
+					}
+				],
+				"name": "decreaseAllowance",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getChainId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "addedValue",
+						"type": "uint256"
+					}
+				],
+				"name": "increaseAllowance",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "mint",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransfer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransfer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"allowance(address,address)": {
+					"details": "See {IKIP7-allowance}."
+				},
+				"approve(address,uint256)": {
+					"details": "See {IKIP7-approve}. NOTE: If `amount` is the maximum `uint256`, the allowance is not updated on `transferFrom`. This is semantically equivalent to an infinite approval. Requirements: - `spender` cannot be the zero address."
+				},
+				"balanceOf(address)": {
+					"details": "See {IKIP7-balanceOf}."
+				},
+				"decimals()": {
+					"details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5.05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {KIP7} uses, unless this function is overridden; NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IKIP7-balanceOf} and {IKIP7-transfer}."
+				},
+				"decreaseAllowance(address,uint256)": {
+					"details": "Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IKIP7-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`."
+				},
+				"increaseAllowance(address,uint256)": {
+					"details": "Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IKIP7-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address."
+				},
+				"name()": {
+					"details": "Returns the name of the token."
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
+				"safeTransfer(address,uint256)": {
+					"details": "See {IKIP7-safeTransfer}. Emits a {Transfer} event Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`. - if `recipient` is a smart contract, it must implement {IKIP7Receiver}"
+				},
+				"safeTransfer(address,uint256,bytes)": {
+					"details": "Same as {xref-KIP7-safeTransfer-address-uint256-}[`safeTransfer`], with an additional `_data` parameter which is forwarded in {IKIP7Receiver-onKIP7Received} to contract recipients. Emits a {Transfer} event"
+				},
+				"safeTransferFrom(address,address,uint256)": {
+					"details": "See {IKIP7-safeTransferFrom}. Emits a {Transfer} event Emits an {Approval} event indicating the updated allowance. This is not required by the KIP. See the note at the beginning of {KIP7}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`. - if `recipient` is a smart contract, it must implement {IKIP7Receiver}"
+				},
+				"safeTransferFrom(address,address,uint256,bytes)": {
+					"details": "Same as {xref-KIP7-safeTransferFrom-address-uint256-}[`safeTransferFrom`], with an additional `_data` parameter which is forwarded in {IKIP7Receiver-onKIP7Received} to contract recipients. Emits a {Transfer} event Emits an {Approval} event indicating the updated allowance."
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IKIP13-supportsInterface}."
+				},
+				"symbol()": {
+					"details": "Returns the symbol of the token, usually a shorter version of the name."
+				},
+				"totalSupply()": {
+					"details": "See {IKIP7-totalSupply}."
+				},
+				"transfer(address,uint256)": {
+					"details": "See {IKIP7-transfer}. Requirements: - `to` cannot be the zero address. - the caller must have a balance of at least `amount`."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "See {IKIP7-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {KIP7}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `amount`. - the caller must have allowance for ``from``'s tokens of at least `amount`."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/tokens/PlatformToken.sol": "PlatformToken"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@klaytn/contracts/KIP/interfaces/IKIP13.sol": {
+			"keccak256": "0x538533dcc430536d456ae9e781680ca578ce70bab6b2db7cc18422d2babfd030",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2138a452ed0d0e65ec203a3b4cc610c065b8072efdd3d7757914c0597f1a08fb",
+				"dweb:/ipfs/QmR5TvG2H5SwbLmDMnbUHfDxxHW6upYLdCbsZtibHVEvEr"
+			]
+		},
+		"@klaytn/contracts/KIP/token/KIP7/IKIP7.sol": {
+			"keccak256": "0x9ad208086b69dffd327a65877e2304ff51b111e7303ef415ff01fd884c714a51",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1ba07be24ca6b3f976160c3351ecc064e56ec47be4c12cba0c693219130bfba2",
+				"dweb:/ipfs/QmR3FykeTjeSedaU8cSvfRoJ7bMscoWvP5FWtu1sfzHXCo"
+			]
+		},
+		"@klaytn/contracts/KIP/token/KIP7/IKIP7Receiver.sol": {
+			"keccak256": "0x67261ba02258b78860bff7a0a955474f7831d6bb00d7027859b63e0ff1f05a4a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://aacb28d196440a8cde1383f8c988992d5842ca610f2cb13b7f79aae15feb9176",
+				"dweb:/ipfs/Qma7fkd2hm9Yho8Jbjb2mp52ziawEiPFpfA6qNEZfp9rwm"
+			]
+		},
+		"@klaytn/contracts/KIP/token/KIP7/KIP7.sol": {
+			"keccak256": "0x7ff814fd360a948ce5fd84baf99d1b282e517d15f76328b53a8d42cba93bb934",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0eb2c280e0af2ec882e470ba5cc1dea9bbeaf85217f7d988b0bd5f2f31ad4929",
+				"dweb:/ipfs/QmXRaiYqpiCWgnRVYNMVs36mZWT9ZV6fzAiaswXGyxSdP8"
+			]
+		},
+		"@klaytn/contracts/KIP/token/KIP7/extensions/IKIP7Metadata.sol": {
+			"keccak256": "0xe4687748e1b4c29a35ffbebd8b7fa7e79f6473448d6cf014bd61c93666594151",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8fb4d882f8780e6f51caee73f6b2ba93cad088d53df5c02f511368942c605f79",
+				"dweb:/ipfs/QmZqbEf94MFocmaMPN2sSyUbRTEmvqmRAKTdxxnFkE9u4L"
+			]
+		},
+		"@klaytn/contracts/KIP/utils/introspection/IKIP13.sol": {
+			"keccak256": "0xb63277576f18a3a05c2ec7736bbb7b4a0bd0d12bbd823a4751144d60273a2c46",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3d5b38071876acadb51cd31254f6eefa30d9240c21b531bdb89648f7475231fd",
+				"dweb:/ipfs/QmVvkB9Uwwdq2QJp1uU6eJrcetmaU9zdcNvdg2z9zRmy9e"
+			]
+		},
+		"@klaytn/contracts/KIP/utils/introspection/KIP13.sol": {
+			"keccak256": "0x9efe61dd73941b281759ca65eaaa0338c9a4105ba8c5d5c5b4998438830c8ed9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://261ed10e8f4c3c6408f119e62b87acc63413ff3c848c4b415e2a596eda29aacf",
+				"dweb:/ipfs/QmeaBqThx2gmgG4HrR6Uk6Xjcyx5kUs2SSRMK4nkUZRVX6"
+			]
+		},
+		"@klaytn/contracts/access/Ownable.sol": {
+			"keccak256": "0x24e0364e503a9bbde94c715d26573a76f14cd2a202d45f96f52134ab806b67b9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e12cbaa7378fd9b62280e4e1d164bedcb4399ce238f5f98fc0eefb7e50577981",
+				"dweb:/ipfs/QmXRoFGUgfsaRkoPT5bxNMtSayKTQ8GZATLPXf69HcRA51"
+			]
+		},
+		"@klaytn/contracts/utils/Address.sol": {
+			"keccak256": "0x2ccf9d2313a313d41a791505f2b5abfdc62191b5d4334f7f7a82691c088a1c87",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b3a57d0854b2fdce6ebff933a48dca2445643d1eccfc27f00292e937f26c6a58",
+				"dweb:/ipfs/QmW45rZooS9TqR4YXUbjRbtf2Bpb5ouSarBvfW1LdGprvV"
+			]
+		},
+		"@klaytn/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"contracts/tokens/PlatformToken.sol": {
+			"keccak256": "0x0b9a0ae3cec4190a3ba4d2c4d83ad43999a74e3c42acc8a59a9b70cd5485541c",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://ba75fc654374873cefae0c3fe6f33e23b7960d306e670b9fc31282451fe24f7a",
+				"dweb:/ipfs/QmSmEmtQiTpJBqK3qStfnxNgn7Hrf897PJ4duzM7QhUkhH"
+			]
+		}
+	},
+	"version": 1
+}
