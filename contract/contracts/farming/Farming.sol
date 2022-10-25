@@ -11,14 +11,9 @@ contract Farming is Ownable, ReentrancyGuard {
     // Info of each user.
     using SafeCast for uint256;
     struct UserInfo {
-        uint256 amount; // How many LP tokens the user has provided.
+        uint256 amount; // 유저가 deposit한 lp토큰 양
         uint256 rewardDebt; // Reward debt. See explanation below.
-        //
-        // We do some fancy math here. Basically, any point in time, the amount of PTNs
-        // (Platform token) entitled to a user but is pending to be distributed is:
-        //
-        //   pending reward = (user.amount * pool.accPtnPerShare) - user.rewardDebt
-        //
+
         // Whenever a user deposits or withdraws LP tokens to a pool. Here's what happens:
         //   1. The pool's `accPtnPerShare` (and `lastRewardBlock`) gets updated.
         //   2. User receives the pending reward sent to his/her address.
@@ -141,7 +136,6 @@ contract Farming is Ownable, ReentrancyGuard {
 
     /**
      * @notice Adds a new LP farming pool.
-     * @dev Can only be called by the multisig contract.
      * @param _allocPoint Number of allocation points for the new pool.
      * @param _lpToken Address of the LP KIP7 token.
      * @param _withUpdate Whether call "massUpdatePools" operation.
@@ -186,7 +180,6 @@ contract Farming is Ownable, ReentrancyGuard {
 
     /**
      * @notice Update the given pool's PTN allocation point.
-     * @dev Can only be called by the multisig contract.
      * @param _pid The id of the pool. See `poolInfo`.
      * @param _allocPoint New number of allocation points for the pool.
      * @param _withUpdate Whether call "massUpdatePools" operation.
@@ -229,6 +222,7 @@ contract Farming is Ownable, ReentrancyGuard {
                     _pid,
                     pool.lastRewardBlock,
                     block.number
+                );
                 uint256 ptnReward = (multiplier *
                     ptnPerBlock *
                     pool.allocPoint) / totalAllocPoint;

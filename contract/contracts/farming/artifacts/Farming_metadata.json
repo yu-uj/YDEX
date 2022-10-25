@@ -648,7 +648,6 @@
 			"kind": "dev",
 			"methods": {
 				"add(uint256,address,bool,uint256,uint256)": {
-					"details": "Can only be called by the multisig contract.",
 					"params": {
 						"_allocPoint": "Number of allocation points for the new pool.",
 						"_bonusMultiplier": "The pool reward multipler.",
@@ -696,7 +695,6 @@
 					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
 				},
 				"set(uint256,uint256,bool)": {
-					"details": "Can only be called by the multisig contract.",
 					"params": {
 						"_allocPoint": "New number of allocation points for the pool.",
 						"_pid": "The id of the pool. See `poolInfo`.",
@@ -784,11 +782,11 @@
 	},
 	"sources": {
 		"contracts/farming/Farming.sol": {
-			"keccak256": "0xfb1f20eae4f6457034f6c2b5b2010eab61c34160c7bfd6b6dad2284684546cde",
+			"keccak256": "0x7d3a46b953566559e127190c85ead279ed12c4cd6208d5da2d31e03a2e4bc865",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://234d31f32a14eba211b269882a4e643bc30b0fb1461151ef46be5926ef902c02",
-				"dweb:/ipfs/QmeSJTDAFW8sGYSzGg72EvkGMTrgFs4QHkk5VS3YrZFGM9"
+				"bzz-raw://f13b37d4586ecea848b7f95f06ccd253a4a217f0feb1e3e8bce0ddb7f236066b",
+				"dweb:/ipfs/QmavkcV2upbLP84mZ5QoxR2g8gmzsBdXYsRhqyZVocdyRC"
 			]
 		},
 		"contracts/interfaces/IAccessControl.sol": {
