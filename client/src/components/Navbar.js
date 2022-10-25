@@ -1,11 +1,8 @@
 // import { Navbar, Nav, Container, Button, NavDropdown } from 'react-bootstrap';
 import { AppBar, Toolbar, Container, Avatar, Button, MenuItem, Tooltip, IconButton, Box, Menu, Typography, Fade } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
 import React from "react";
 import CounterContainer from '../redux/CounterContainer';
-import '../assets/css/Navbar.css'
-// import '../assets/JDlogo.png'
 
 function Navigation() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,6 +32,9 @@ function Navigation() {
 							</Button>
 							<Button component={Link} to="/mytoken" sx={{ my: 2, color: "white", display: "block" }} size="large">
 								My Token
+							</Button>
+							<Button component={Link} to="/liquidity" sx={{ my: 2, color: "white", display: "block" }} size="large">
+								Liquidity
 							</Button>
 							<Button component={Link} to="/swap" sx={{ my: 2, color: "white", display: "block" }} size="large">
 								Swap
@@ -69,7 +69,7 @@ function Navigation() {
 						</Box>
 						<CounterContainer />
 					</Toolbar>
-					
+
 				</Container>
 			</AppBar>
 		</div>

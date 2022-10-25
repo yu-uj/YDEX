@@ -37,7 +37,7 @@ const RouterAddress = '0x63e3cB8C959068DD947c3FadF7455044B5C36b8f';
 
 const DexRouterContract = new caver.klay.Contract(DexRouterabi, RouterAddress);
 
-const Swap = ({ form, former, children, todo, todoo, teacher }) => {
+const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
   const [show, setShow] = useState(false);
   const [create, setCreate] = useState(false);
 
@@ -242,8 +242,8 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
     <div>
 
       <div className="swapPageInfo">
-        <h2>Token Swap</h2>
-        <p>보유하고 있는 <b>JDEX 토큰</b>과 <b>KIP7 토큰</b>을 <br /> 원하는 다른 토큰과 <b>스왑</b> 할 수 있습니다.</p>
+        <h2>Add Liquidity</h2>
+        <p>보유하고 있는 <b>JDEX 토큰</b>과 <b>KIP7 토큰</b>으로 <br /> 원하는 풀에 <b>유동성 공급</b>을 할 수 있습니다.</p>
       </div>
 
       <div className="box-model">
@@ -251,7 +251,7 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
           {former}
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={3}>
-              <Grid item xs={6}><h4 className="st">제공</h4></Grid>
+              <Grid item xs={6}><h4 className="st">투입</h4></Grid>
               <Grid item xs={6}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                   <Button variant="contained" onClick={handleInputquarter}>25%</Button>
@@ -280,7 +280,7 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
                     onClose={() => createClose({ isSave: false })}
                   >
                     <Box sx={style}>
-                      <Typography id="modal-modal-title" variant="h6" component="h2">제공 토큰</Typography>
+                      <Typography id="modal-modal-title" variant="h6" component="h2">토큰 1</Typography>
 
                       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         <Box
@@ -374,7 +374,7 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
           {todo}
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={3}>
-              <Grid item xs={12}><h4 className="st">수령</h4></Grid>
+              <Grid item xs={12}><h4 className="st">투입</h4></Grid>
               {/* <Col sm={4}>
                 <Form>
                   {["checkbox"].map((type) => (
@@ -410,7 +410,7 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
                     onClose={() => handleClose({ isSave: false })}
                   >
                     <Box sx={style}>
-                      <Typography id="modal-modal-title" variant="h6" component="h2">수령 토큰</Typography>
+                      <Typography id="modal-modal-title" variant="h6" component="h2">토큰 2</Typography>
 
                       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         <Box
@@ -488,7 +488,7 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
           <br />
           <div className="d-grid gap-2">
             <Button variant="contained" size="lg" onClick={swap}>
-              Swap
+              Add Liquidity
             </Button>
           </div>
         </div>
@@ -498,4 +498,4 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
   );
 };
 
-export default Swap;
+export default Liquidity;
