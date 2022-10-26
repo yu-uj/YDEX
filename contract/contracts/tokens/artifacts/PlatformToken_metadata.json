@@ -665,11 +665,11 @@
 			]
 		},
 		"contracts/tokens/PlatformToken.sol": {
-			"keccak256": "0x0b9a0ae3cec4190a3ba4d2c4d83ad43999a74e3c42acc8a59a9b70cd5485541c",
+			"keccak256": "0x95d5f66f78160d63616dd1d55d730c1108d556b1373ec8dec1d7d6fbd291d797",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://ba75fc654374873cefae0c3fe6f33e23b7960d306e670b9fc31282451fe24f7a",
-				"dweb:/ipfs/QmSmEmtQiTpJBqK3qStfnxNgn7Hrf897PJ4duzM7QhUkhH"
+				"bzz-raw://39a7b2b793937a297004f8ffdcf135acc5c54905712503b2ddf5aa2368476072",
+				"dweb:/ipfs/QmaQG5gvmHLWdq1VixX9fvcab3yrVXydCwh6RYTcR566jx"
 			]
 		}
 	},
