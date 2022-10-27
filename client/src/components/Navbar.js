@@ -66,6 +66,30 @@ function Navigation() {
 							<Button component={Link} to="/dashboard" sx={{ my: 2, color: "white", display: "block" }} size="large">
 								DashBoard
 							</Button>
+							<Button
+								id="nft-button"
+								size="large"
+								sx={{ my: 2, color: "white", display: "block" }}
+								aria-controls={open ? 'nft-menu' : undefined}
+								aria-haspopup="true"
+								aria-expanded={open ? 'true' : undefined}
+								onClick={handleClick}
+							>
+								NFT
+							</Button>
+							<Menu
+								id="nft-menu"
+								MenuListProps={{
+									'aria-labelledby': 'fade-button',
+								}}
+								anchorEl={anchorEl}
+								open={open}
+								onClose={handleClose}
+								TransitionComponent={Fade}
+							>
+								<MenuItem component={Link} to="/nft/explore">NFT Explore</MenuItem>
+								<MenuItem component={Link} to="/nft/profile">NFT Profile</MenuItem>
+							</Menu>
 						</Box>
 						<CounterContainer />
 					</Toolbar>
