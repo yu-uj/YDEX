@@ -4,6 +4,8 @@ import { Home, MyToken, Swap, Staking, Liquidity, DashBoard, NotFound} from './p
 import { Navigation, Footer } from './components'
 import { Single, Pair } from './components/staking'
 import './assets/css/App.css';
+import NFTMain from './pages/NFTMain';
+import NFTProfile from './pages/NFTProfile';
 
 function App() {
   return (
@@ -22,6 +24,10 @@ function App() {
 
             <Route path="/staking/single" element={<Single />} />
             <Route path="/staking/pair" element={<Pair />} />
+            <Route path="nft">
+              <Route path="explore" element={<NFTMain/>}/>
+              <Route path="profile" element={<NFTProfile />}/>
+            </Route>
           </Routes>
         </div>
         <Footer />
