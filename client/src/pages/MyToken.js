@@ -162,8 +162,8 @@ function MyToken() {
             <TableRow>
               <TableCell component="th" scope="row"><strong className='myklay'>KLAY</strong></TableCell>
               <TableCell align="right"><strong className='mnum'>{Number(balance).toFixed(1)}</strong></TableCell>
-              <TableCell align="right"><Button variant="dark" onClick={handleShow1}>Transfer
-              </Button>
+              <TableCell align="right">
+                <Button variant="contained" onClick={handleShow1}>Transfer</Button>
               </TableCell>
             </TableRow>
             {tokendata.map((el) => (
@@ -172,23 +172,19 @@ function MyToken() {
                 <TableCell component="th" scope="row"><strong className='mytname'>{el.token_name}</strong></TableCell>
                 <TableCell align="right"><strong className='mnum'>{Number(el.token_amount).toFixed(1)}</strong></TableCell>
                 <TableCell align="right">
-                  <Button variant="secondary" onClick={() => handleShow(el)}>Transfer
+                  <Button variant="outlined" onClick={() => handleShow(el)}>Transfer
                   </Button>
                 </TableCell>
               </TableRow>
-
             ))
             }
           </TableBody>
-
         </Table>
       </TableContainer>
 
       <Modal open={show} onClose={handleClose}>
         <Box sx={style}>
-
           <Typography id="modal-modal-title" variant="h6" component="h2">Token Transfer</Typography>
-
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <Box
               component="form"
@@ -198,7 +194,6 @@ function MyToken() {
               noValidate
               autoComplete="off"
               >
-
                 <div>
                 <Typography sx={{ mt: 1 }}>받는 사람 주소</Typography>
                 <TextField fullWidth
@@ -212,11 +207,9 @@ function MyToken() {
                   onChange={(e) => handleInput1(e)}
                 />
                 </div>
-
               <div>
                 <Typography sx={{ mt: 1 }}>보낼 수량</Typography>
                 <TextField fullWidth id="outlined-basic" label="Amount" margin="dense" size="small" variant="outlined" onChange={(e) => handleInput2(e)} />
-                
               </div>
               <div>
               <Typography sx={{ mt: 1 }}>토큰 트랜잭션 주소</Typography>
@@ -233,10 +226,10 @@ function MyToken() {
               </div>
             </Box>
           </Typography>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="outlined" color="success" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleTransfer}>
+          <Button variant="contained" color="success" onClick={handleTransfer}>
             토큰 전송
           </Button>
         </Box>
@@ -275,10 +268,10 @@ function MyToken() {
             </Box>
           </Typography>
 
-          <Button variant="secondary" onClick={handleClose1}>
+          <Button variant="outlined" color="success" onClick={handleClose1}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleTransfer1}>
+          <Button variant="contained" color="success" onClick={handleTransfer1}>
             토큰 전송
           </Button>
 
