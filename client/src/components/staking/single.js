@@ -1,8 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Row, Col, Button, Modal, Form, InputGroup } from 'react-bootstrap';
-// import { Box, Card, CardActions, CardActionArea, CardContent, CardMedia, Typography, Grid, Button, Modal, Form, InputGroup } from '@mui/material';
-import '../../assets/css/Page.css';
+import { Box, Card, CardContent, Typography, Grid, Button, Modal, FormControl, OutlinedInput, InputLabel, InputAdornment, Stack } from '@mui/material';
+
 import { useSelector } from "react-redux";
+
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	p: 4,
+};
+
+const cardStyle = {
+	width: '100%',
+	border: '2px',
+	boxShadow: 24,
+	p: 2,
+	textAlign: 'center'
+};
 
 const Caver = require('caver-js');
 const caver = new Caver(window.klaytn);
@@ -187,49 +206,36 @@ function Single() {
 			</div>
 			<br />
 			<br />
-			<Row className="g-4">
-				<Col>
-					<Card
-						bg={'Secondary'}
-						key={'Secondary'}
-						text={'dark'}
-						border={'Secondary'}
-						className="mb-4"
-					>
-						<Row>
-							<Col sm={9}>
-								<Card.Body>
-									<Row>
-										<Col sm={3}>
-											<h6>[ KIP7 Token ]</h6>
-											<Card.Title><p className='tname'><h3>JdToken</h3></p></Card.Title>
-										</Col>
-										<Col sm={9}>
-											<Card.Text>
-												<b><p className='ap'>총 예치규모</p></b>
-												<h5><p className='num'>{totalstaked}</p></h5>
-											</Card.Text>
-										</Col>
-									</Row>
-								</Card.Body>
-							</Col>
-							<Col sm={3}>
-								<div className="d-grid gap-3">
-
-									<>
-										<Button variant="dark" onClick={depositShow} >Deposit</Button>
-										<Modal
-											show={depo}
-											onHide={depositClose}
-											backdrop="static"
-											keyboard={false}
-											aria-labelledby="example-modal-sizes-title-sm"
-										>
-											<Modal.Header closeButton>
-												{/* 선택한 카드의 풀 이름과 맵핑 */}
-												<Modal.Title>JdToken Deposit</Modal.Title>
-											</Modal.Header>
-											<Modal.Body>
+			<Stack spacing={1}>
+				<Card
+					key={'Secondary'}
+					sx={cardStyle}
+				>
+					<CardContent>
+						<Grid container>
+							<Grid xs={3}>
+								<Typography gutterBottom variant="h6">[ KIP7 Token ]</Typography>
+								<Typography gutterBottom variant="h5">JdToken</Typography>
+							</Grid>
+							<Grid xs={6}>
+								<Stack>
+									<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
+									<Typography variant="h5" component="h6">{totalstaked}</Typography>
+								</Stack>
+							</Grid>
+							<Grid xs={3}>
+								<Stack spacing={1}>
+									<Button variant="contained" onClick={depositShow} >Deposit</Button>
+									<Modal
+										open={depo}
+										onClose={depositClose}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											{/* 선택한 카드의 풀 이름과 맵핑 */}
+											<Typography id="modal-modal-title" variant="h6" component="h2">JdToken Deposit</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 												<div>
 													<h5>내 예치 자산</h5>
 													<strong>{mystaked}</strong>
@@ -242,44 +248,48 @@ function Single() {
 													<br />
 													<br />
 												</div>
-												<Form>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
 													{/* Deposit Input  */}
 													{/* 토큰 이름, 심볼, 매핑 필요  */}
-													<Form.Label as="h5">JdToken</Form.Label>
-													<InputGroup className="mb-3">
-														<Form.Control
+													<InputLabel component="h5">JdToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
 															type="text"
 															placeholder="예치할 토큰 수량"
 															autoFocus
 															aria-label="Default"
-															aria-describedby="inputGroup-sizing-default"
+															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
 															onChange={(e) => handleInput2(e)}
 														/>
-														<InputGroup.Text id="inputGroup-sizing-default">JD</InputGroup.Text>
-													</InputGroup>
-												</Form>
-											</Modal.Body>
-											<Modal.Footer>
-												<Button variant="secondary" onClick={depositClose}>
-													취소
-												</Button>
-												<Button type="submit" variant="primary" onClick={handleTransfer1}>확인</Button>
-											</Modal.Footer>
-										</Modal>
+													</FormControl>
+												</Box>
+											</Typography>
+											<Button variant="outlined" onClick={depositClose}>
+												취소
+											</Button>
+											<Button type="submit" variant="outlined" onClick={handleTransfer1}>확인</Button>
+										</Box>
+									</Modal>
 
-										<Button variant="outline-secondary" onClick={withdrawShow}>Withdraw</Button>
-										<Modal
-											show={widr}
-											onHide={withdrawClose}
-											backdrop="static"
-											keyboard={false}
-											aria-labelledby="example-modal-sizes-title-sm"
-										>
-											<Modal.Header closeButton>
-												{/* 선택한 카드의 풀 이름과 맵핑 */}
-												<Modal.Title>JdToken Withdraw</Modal.Title>
-											</Modal.Header>
-											<Modal.Body>
+									<Button variant="outlined" onClick={withdrawShow}>Withdraw</Button>
+									<Modal
+										open={widr}
+										onClose={withdrawClose}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											{/* 선택한 카드의 풀 이름과 맵핑 */}
+											<Typography id="modal-modal-title" variant="h6" component="h2">JdToken Withdraw</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 												<div>
 													<h5>내 예치 자산</h5>
 													<strong>{mystaked}</strong>
@@ -292,83 +302,71 @@ function Single() {
 													<br />
 													<br />
 												</div>
-												<Form>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
 													{/* Withdraw Input  */}
 													{/* 토큰 이름, 심볼, 매핑 필요  */}
-													<Form.Label as="h5">JdToken</Form.Label>
-													<InputGroup className="mb-3">
-														<Form.Control
+													<InputLabel component="h5">JdToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
 															type="text"
 															placeholder="출금할 토큰 수량"
 															autoFocus
 															aria-label="Default"
-															aria-describedby="inputGroup-sizing-default"
+															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
 															onChange={(e) => handleInput2(e)}
 														/>
-														<InputGroup.Text id="inputGroup-sizing-default">JD</InputGroup.Text>
-													</InputGroup>
-												</Form>
-											</Modal.Body>
+													</FormControl>
+												</Box>
+											</Typography>
+											<Button variant="outlined" onClick={withdrawClose}>
+												취소
+											</Button>
+											<Button type="submit" variant="outlined" onClick={handleTransfer2}>확인</Button>
+										</Box>
+									</Modal>
+								</Stack>
+							</Grid>
+						</Grid>
+					</CardContent>
+				</Card>
 
-											<Modal.Footer>
-												<Button variant="secondary" onClick={withdrawClose}>
-													취소
-												</Button>
-												<Button type="submit" variant="primary" onClick={handleTransfer2}>확인</Button>
-											</Modal.Footer>
-										</Modal>
-									</>
-								</div>
-							</Col>
-						</Row>
-					</Card>
-				</Col>
-			</Row>
-
-
-			<Row className="g-4">
-				<Col>
-					<Card
-						bg={'Secondary'}
-						key={'Secondary'}
-						text={'dark'}
-						border={'Secondary'}
-						className="mb-4"
-					>
-						<Row>
-							<Col sm={9}>
-								<Card.Body>
-									<Row>
-										<Col sm={3}>
-											<h6>[ KIP7 Token ]</h6>
-											<Card.Title><p className='tname'><h3>YUToken</h3></p></Card.Title>
-										</Col>
-										<Col sm={9}>
-											<Card.Text>
-												<b><p className='ap'>총 예치규모</p></b>
-												<h5><p className='num'>{totalstaked1}</p></h5>
-											</Card.Text>
-										</Col>
-									</Row>
-								</Card.Body>
-							</Col>
-							<Col sm={3}>
-								<div className="d-grid gap-3">
-
-									<>
-										<Button variant="dark" onClick={depositShow1} >Deposit</Button>
-										<Modal
-											show={depo1}
-											onHide={depositClose1}
-											backdrop="static"
-											keyboard={false}
-											aria-labelledby="example-modal-sizes-title-sm"
-										>
-											<Modal.Header closeButton>
-												{/* 선택한 카드의 풀 이름과 맵핑 */}
-												<Modal.Title>YUToken Deposit</Modal.Title>
-											</Modal.Header>
-											<Modal.Body>
+				<Card
+					key={'Secondary'}
+					sx={cardStyle}
+				>
+					<CardContent>
+						<Grid container>
+							<Grid xs={3}>
+								<Typography gutterBottom variant="h6">[ KIP7 Token ]</Typography>
+								<Typography gutterBottom variant="h5">YUToken</Typography>
+							</Grid>
+							<Grid xs={6}>
+								<Stack>
+									<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
+									<Typography variant="h5" component="h6">{totalstaked1}</Typography>
+								</Stack>
+							</Grid>
+							<Grid xs={3}>
+								<Stack spacing={1}>
+									<Button variant="contained" onClick={depositShow1} >Deposit</Button>
+									<Modal
+										open={depo1}
+										onClose={depositClose1}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											{/* 선택한 카드의 풀 이름과 맵핑 */}
+											<Typography id="modal-modal-title" variant="h6" component="h2">YUToken Deposit</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 												<div>
 													<h5>내 예치 자산</h5>
 													<strong>{mystaked1}</strong>
@@ -381,44 +379,48 @@ function Single() {
 													<br />
 													<br />
 												</div>
-												<Form>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
 													{/* Deposit Input  */}
 													{/* 토큰 이름, 심볼, 매핑 필요  */}
-													<Form.Label as="h5">YUToken</Form.Label>
-													<InputGroup className="mb-3">
-														<Form.Control
+													<InputLabel component="h5">YUToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
 															type="text"
 															placeholder="예치할 토큰 수량"
 															autoFocus
 															aria-label="Default"
-															aria-describedby="inputGroup-sizing-default"
+															endAdornment={<InputAdornment position="end">YU</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
 															onChange={(e) => handleInput2(e)}
 														/>
-														<InputGroup.Text id="inputGroup-sizing-default">YU</InputGroup.Text>
-													</InputGroup>
-												</Form>
-											</Modal.Body>
-											<Modal.Footer>
-												<Button variant="secondary" onClick={depositClose1}>
-													취소
-												</Button>
-												<Button type="submit" variant="primary" onClick={handleTransfer3}>확인</Button>
-											</Modal.Footer>
-										</Modal>
+													</FormControl>
+												</Box>
+											</Typography>
+											<Button variant="outlined" onClick={depositClose1}>
+												취소
+											</Button>
+											<Button type="submit" variant="outlined" onClick={handleTransfer3}>확인</Button>
+										</Box>
+									</Modal>
 
-										<Button variant="secondary" onClick={withdrawShow1}>Withdraw</Button>
-										<Modal
-											show={widr1}
-											onHide={withdrawClose1}
-											backdrop="static"
-											keyboard={false}
-											aria-labelledby="example-modal-sizes-title-sm"
-										>
-											<Modal.Header closeButton>
-												{/* 선택한 카드의 풀 이름과 맵핑 */}
-												<Modal.Title>YUToken Withdraw</Modal.Title>
-											</Modal.Header>
-											<Modal.Body>
+									<Button variant="outlined" onClick={withdrawShow1}>Withdraw</Button>
+									<Modal
+										open={widr1}
+										onClose={withdrawClose1}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											{/* 선택한 카드의 풀 이름과 맵핑 */}
+											<Typography id="modal-modal-title" variant="h6" component="h2">YUToken Withdraw</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 												<div>
 													<h5>내 예치 자산</h5>
 													<strong>{mystaked1}</strong>
@@ -431,83 +433,71 @@ function Single() {
 													<br />
 													<br />
 												</div>
-												<Form>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
 													{/* Withdraw Input  */}
 													{/* 토큰 이름, 심볼, 매핑 필요  */}
-													<Form.Label as="h5">YUToken</Form.Label>
-													<InputGroup className="mb-3">
-														<Form.Control
+													<InputLabel component="h5">YUToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
 															type="text"
 															placeholder="출금할 토큰 수량"
 															autoFocus
 															aria-label="Default"
-															aria-describedby="inputGroup-sizing-default"
+															endAdornment={<InputAdornment position="end">YU</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
 															onChange={(e) => handleInput2(e)}
 														/>
-														<InputGroup.Text id="inputGroup-sizing-default">YU</InputGroup.Text>
-													</InputGroup>
-												</Form>
-											</Modal.Body>
+													</FormControl>
+												</Box>
+											</Typography>
+											<Button variant="outlined" onClick={withdrawClose1}>
+												취소
+											</Button>
+											<Button type="submit" variant="outlined" onClick={handleTransfer4}>확인</Button>
+										</Box>
+									</Modal>
+								</Stack>
+							</Grid>
+						</Grid>
+					</CardContent>
+				</Card>
 
-											<Modal.Footer>
-												<Button variant="secondary" onClick={withdrawClose1}>
-													취소
-												</Button>
-												<Button type="submit" variant="primary" onClick={handleTransfer4}>확인</Button>
-											</Modal.Footer>
-										</Modal>
-									</>
-								</div>
-							</Col>
-						</Row>
-					</Card>
-				</Col>
-			</Row>
-
-
-			<Row className="g-4">
-				<Col>
-					<Card
-						bg={'Secondary'}
-						key={'Secondary'}
-						text={'dark'}
-						border={'Secondary'}
-						className="mb-4"
-					>
-						<Row>
-							<Col sm={9}>
-								<Card.Body>
-									<Row>
-										<Col sm={3}>
-											<h6>[ KIP7 Token ]</h6>
-											<Card.Title><p className='tname'><h3>YKToken</h3></p></Card.Title>
-										</Col>
-										<Col sm={9}>
-											<Card.Text>
-												<b><p className='ap'>총 예치규모</p></b>
-												<h5><p className='num'>{totalstaked2}</p></h5>
-											</Card.Text>
-										</Col>
-									</Row>
-								</Card.Body>
-							</Col>
-							<Col sm={3}>
-								<div className="d-grid gap-3">
-
-									<>
-										<Button variant="dark" onClick={depositShow2}>Deposit</Button>
-										<Modal
-											show={depo2}
-											onHide={depositClose2}
-											backdrop="static"
-											keyboard={false}
-											aria-labelledby="example-modal-sizes-title-sm"
-										>
-											<Modal.Header closeButton>
-												{/* 선택한 카드의 풀 이름과 맵핑 */}
-												<Modal.Title>YKToken Deposit</Modal.Title>
-											</Modal.Header>
-											<Modal.Body>
+				<Card
+					key={'Secondary'}
+					sx={cardStyle}
+				>
+					<CardContent>
+						<Grid container>
+							<Grid xs={3}>
+								<Typography gutterBottom variant="h6" component="div">[ KIP7 Token ]</Typography>
+								<Typography gutterBottom variant="h5" component="div">YKToken</Typography>
+							</Grid>
+							<Grid xs={6}>
+								<Stack>
+									<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
+									<Typography variant="h5" component="h6">{totalstaked2}</Typography>
+								</Stack>
+							</Grid>
+							<Grid xs={3}>
+								<Stack spacing={1}>
+									<Button variant="contained" onClick={depositShow2}>Deposit</Button>
+									<Modal
+										open={depo2}
+										onClose={depositClose2}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											{/* 선택한 카드의 풀 이름과 맵핑 */}
+											<Typography id="modal-modal-title" variant="h6" component="h2">YKToken Deposit</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 												<div>
 													<h5>내 예치 자산</h5>
 													<strong>{mystaked2}</strong>
@@ -520,44 +510,48 @@ function Single() {
 													<br />
 													<br />
 												</div>
-												<Form>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
 													{/* Deposit Input  */}
 													{/* 토큰 이름, 심볼, 매핑 필요  */}
-													<Form.Label as="h5">YKToken</Form.Label>
-													<InputGroup className="mb-3">
-														<Form.Control
+													<InputLabel component="h5">YKToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
 															type="text"
 															placeholder="예치할 토큰 수량"
 															autoFocus
 															aria-label="Default"
-															aria-describedby="inputGroup-sizing-default"
+															endAdornment={<InputAdornment position="end">YKT</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
 															onChange={(e) => handleInput2(e)}
 														/>
-														<InputGroup.Text id="inputGroup-sizing-default">YKT</InputGroup.Text>
-													</InputGroup>
-												</Form>
-											</Modal.Body>
-											<Modal.Footer>
-												<Button variant="secondary" onClick={depositClose2}>
-													취소
-												</Button>
-												<Button type="submit" variant="primary" onClick={handleTransfer5}>확인</Button>
-											</Modal.Footer>
-										</Modal>
+													</FormControl>
+												</Box>
+											</Typography>
+											<Button variant="outlined" onClick={depositClose2}>
+												취소
+											</Button>
+											<Button type="submit" variant="outlined" onClick={handleTransfer5}>확인</Button>
+										</Box>
+									</Modal>
 
-										<Button variant="secondary" onClick={withdrawShow2}>Withdraw</Button>
-										<Modal
-											show={widr2}
-											onHide={withdrawClose1}
-											backdrop="static"
-											keyboard={false}
-											aria-labelledby="example-modal-sizes-title-sm"
-										>
-											<Modal.Header closeButton>
-												{/* 선택한 카드의 풀 이름과 맵핑 */}
-												<Modal.Title>YKToken Withdraw</Modal.Title>
-											</Modal.Header>
-											<Modal.Body>
+									<Button variant="outlined" onClick={withdrawShow2}>Withdraw</Button>
+									<Modal
+										open={widr2}
+										onClose={withdrawClose1}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											{/* 선택한 카드의 풀 이름과 맵핑 */}
+											<Typography id="modal-modal-title" variant="h6" component="h2">YKToken Withdraw</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 												<div>
 													<h5>내 예치 자산</h5>
 													<strong>{mystaked2}</strong>
@@ -570,39 +564,42 @@ function Single() {
 													<br />
 													<br />
 												</div>
-												<Form>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
 													{/* Withdraw Input  */}
 													{/* 토큰 이름, 심볼, 매핑 필요  */}
-													<Form.Label as="h5">YKToken</Form.Label>
-													<InputGroup className="mb-3">
-														<Form.Control
+													<InputLabel component="h5">YKToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
 															type="text"
 															placeholder="출금할 토큰 수량"
 															autoFocus
 															aria-label="Default"
-															aria-describedby="inputGroup-sizing-default"
+															endAdornment={<InputAdornment position="end">YTK</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
 															onChange={(e) => handleInput2(e)}
 														/>
-														<InputGroup.Text id="inputGroup-sizing-default">YKT</InputGroup.Text>
-													</InputGroup>
-												</Form>
-											</Modal.Body>
-
-											<Modal.Footer>
-												<Button variant="secondary" onClick={withdrawClose2}>
-													취소
-												</Button>
-												<Button type="submit" variant="primary" onClick={handleTransfer6}>확인</Button>
-											</Modal.Footer>
-										</Modal>
-									</>
-								</div>
-							</Col>
-						</Row>
-					</Card>
-				</Col>
-			</Row>
-
+													</FormControl>
+												</Box>
+											</Typography>
+											<Button variant="outlined" onClick={withdrawClose2}>
+												취소
+											</Button>
+											<Button type="submit" variant="outlined" onClick={handleTransfer6}>확인</Button>
+										</Box>
+									</Modal>
+								</Stack>
+							</Grid>
+						</Grid>
+					</CardContent>
+				</Card>
+			</Stack>
 
 		</div>
 

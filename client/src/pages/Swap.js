@@ -254,10 +254,10 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
               <Grid item xs={6}><h4 className="st">제공</h4></Grid>
               <Grid item xs={6}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                  <Button variant="secondary" onClick={handleInputquarter}>25%</Button>
-                  <Button variant="secondary" onClick={handleInputhalf}>50%</Button>
-                  <Button variant="secondary" onClick={handleInputthreequarters}>75%</Button>
-                  <Button variant="secondary" onClick={handleInputMax}>최대치</Button>
+                  <Button variant="contained" onClick={handleInputquarter}>25%</Button>
+                  <Button variant="contained" onClick={handleInputhalf}>50%</Button>
+                  <Button variant="contained" onClick={handleInputthreequarters}>75%</Button>
+                  <Button variant="contained" onClick={handleInputMax}>최대치</Button>
                 </ButtonGroup>
               </Grid>
             </Grid>
@@ -269,9 +269,9 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
           <Box sx={{ flexGrow: 1 }} className="form-wrap">
 
             <Grid container spacing={3}>
-              <Grid item xs={9}>
+              <Grid item={true} xs={9}>
                 <>
-                  <Button variant="primary" onClick={handleCreate}>
+                  <Button variant="contained" onClick={handleCreate}>
                     토큰
                   </Button>
 
@@ -306,13 +306,13 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
                         </Box>
 
                         <Button
-                          variant="secondary"
+                          variant="contained"
                           onClick={() => createClose({ isSave: false })}
                         >
                           Close
                         </Button>
                         <Button
-                          variant="primary"
+                          variant="contained"
                           onClick={() => createClose({ isSave: true })}
                         >
                           Save Changes
@@ -322,12 +322,12 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
                   </Modal>
                 </>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item={true} xs={3}>
                 <h3 className="about">{choice1}</h3>
               </Grid>
             </Grid>
             <Grid container spacing={3}>
-              <Grid item className="about" xs={12}>
+              <Grid item={true} className="about" xs={12}>
                 <h3>
                   <input
                     className="number"
@@ -345,8 +345,8 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
             </Grid>
 
             <Grid container spacing={3}>
-              <Grid item xs={4}><b className="swapInfo">잔액</b></Grid>
-              <Grid item className="about" xs={8}>
+              <Grid item={true} xs={4}><b className="swapInfo">잔액</b></Grid>
+              <Grid item={true} className="about" xs={8}>
                 {Number(tokenAmount1).toFixed(3)}
               </Grid>
             </Grid>
@@ -356,7 +356,7 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
 
         <section className="todoo-wrapper">
           {todoo}
-          <Button variant="secondary">
+          <Button variant="contained">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
@@ -374,22 +374,7 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
           {todo}
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={3}>
-              <Grid item xs={12}><h4 className="st">수령</h4></Grid>
-              {/* <Col sm={4}>
-                <Form>
-                  {["checkbox"].map((type) => (
-                    <div key={`inline-${type}`} className="mb-3">
-                      <Form.Check
-                        inline
-                        label="수수료포함"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                      />
-                    </div>
-                  ))}
-                </Form>
-              </Col> */}
+              <Grid item={true} xs={12}><h4 className="st">수령</h4></Grid>
             </Grid>
           </Box>
         </section>
@@ -399,9 +384,9 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
           <Box sx={{ flexGrow: 1 }} className="todos-wrap">
 
             <Grid container spacing={3}>
-              <Grid item xs={9}>
+              <Grid item={true} xs={9}>
                 <>
-                  <Button variant="primary" onClick={handleShow}>
+                  <Button variant="contained" onClick={handleShow}>
                     토큰
                   </Button>
 
@@ -435,13 +420,13 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
                         </Box>
 
                         <Button
-                          variant="secondary"
+                          variant="contained"
                           onClick={() => handleClose({ isSave: false })}
                         >
                           Close
                         </Button>
                         <Button
-                          variant="primary"
+                          variant="contained"
                           onClick={() => handleClose({ isSave: true })}
                         >
                           Save Changes
@@ -451,14 +436,14 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
                   </Modal>
                 </>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item={true} xs={3}>
                 <h3 className="about">{choice2}</h3>
               </Grid>
 
             </Grid>
 
             <Grid container spacing={3}>
-              <Grid item className="about" xs={12}>
+              <Grid item={true} className="about" xs={12}>
                 <h3>
                   <input
                     className="number"
@@ -475,8 +460,8 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
             </Grid>
 
             <Grid container spacing={3}>
-              <Grid item xs={4}><b className="swapInfo">잔액</b></Grid>
-              <Grid item className="about" xs={8}>
+              <Grid item={true} xs={4}><b className="swapInfo">잔액</b></Grid>
+              <Grid item={true} className="about" xs={8}>
                 {Number(tokenAmount2).toFixed(3)}
               </Grid>
             </Grid>
@@ -487,7 +472,7 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
           {teacher}
           <br />
           <div className="d-grid gap-2">
-            <Button variant="dark" size="lg" onClick={swap}>
+            <Button variant="contained" size="lg" onClick={swap}>
               Swap
             </Button>
           </div>
