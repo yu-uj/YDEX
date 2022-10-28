@@ -93,8 +93,8 @@ function Navigation() {
 								onClose={handleClose1}
 								TransitionComponent={Fade}
 							>
-								<MenuItem component={Link} to="/nft/allnft">ALL NFT</MenuItem>
-								<MenuItem component={Link} to="/nft/mynft">MY NFT</MenuItem>
+								<MenuItem component={Link} to="/nft/explore">NFT Explore</MenuItem>
+								<MenuItem component={Link} to="/nft/profile">NFT Profile</MenuItem>
 							</Menu>
 							<Button component={Link} to="/dashboard" sx={{ my: 2, color: "white", display: "block" }} size="large">
 								DashBoard

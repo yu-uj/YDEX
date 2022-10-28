@@ -22,10 +22,13 @@ const Caver = require("caver-js");
 const caver = new Caver(window.klaytn);
 
 const KIP7ABI = require("../contract/KIP7.json");
+const Farmingabi = require('../contract/farming.json');
 const DexRouterabi = require('../contract/router.json');
 
+const farmingAddress = '0x3E62CB2A987F0Dc750541f092bA46EbF08020648';
 const RouterAddress = '0x63e3cB8C959068DD947c3FadF7455044B5C36b8f';
 
+const FarmingContract = new caver.klay.Contract(Farmingabi, farmingAddress);
 const DexRouterContract = new caver.klay.Contract(DexRouterabi, RouterAddress);
 
 const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
@@ -47,6 +50,8 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
   const [tokenAmount2, setTokenAmount2] = useState("");
 
   const [save, setSave] = useState("");
+
+  const [selectPair, setSelectPair] = useState([]);
 
   const address = useSelector((state) => state.counter);
   const deadline = parseInt('' + new Date().getTime() / 1000) + 100000;
