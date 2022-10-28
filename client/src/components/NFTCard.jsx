@@ -24,6 +24,7 @@ export default function NFTCard({ item }) {
 
     const handleOpen = () => {
       setOpen(true);
+      
     };
   
     const handleClose = () => {
@@ -52,7 +53,7 @@ export default function NFTCard({ item }) {
           <Typography style={{ fontWeight: "bold" }}>{item.title}</Typography>
         </CardContent>
       </NFTCardBox>
-      <NFTModal open={open} handleClose={handleClose} />
+      <NFTModal open={open} handleClose={handleClose} item={item}/>
     </>
   );
 }
