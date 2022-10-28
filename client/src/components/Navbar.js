@@ -63,6 +63,30 @@ function Navigation() {
 								<MenuItem component={Link} to="/staking/single">Single</MenuItem>
 								<MenuItem component={Link} to="/staking/pair">Pair</MenuItem>
 							</Menu>
+							<Button
+								id="fade-button"
+								size="large"
+								sx={{ my: 2, color: "white", display: "block" }}
+								aria-controls={open ? 'fade-menu' : undefined}
+								aria-haspopup="true"
+								aria-expanded={open ? 'true' : undefined}
+								onClick={handleClick}
+							>
+								NFT
+							</Button>
+							<Menu
+								id="fade-menu"
+								MenuListProps={{
+									'aria-labelledby': 'fade-button',
+								}}
+								anchorEl={anchorEl}
+								open={open}
+								onClose={handleClose}
+								TransitionComponent={Fade}
+							>
+								<MenuItem component={Link} to="/nft/allnft">ALL NFT</MenuItem>
+								<MenuItem component={Link} to="/nft/mynft">MY NFT</MenuItem>
+							</Menu>
 							<Button component={Link} to="/dashboard" sx={{ my: 2, color: "white", display: "block" }} size="large">
 								DashBoard
 							</Button>
