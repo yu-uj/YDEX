@@ -64,7 +64,7 @@ function Counter(props) {
 
     return (
         <>
-            <Button size="small" variant="contained" color="info" onClick={modalOpen}>{number}</Button>
+            <Button size="small" variant="contained" color="info" onClick={modalOpen}>{number.slice(0, 5) + "..." + number.slice(38, 42)}</Button>
             <Modal
                 open={modalIsOpen}
                 onClose={modalClose}

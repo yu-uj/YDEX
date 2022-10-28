@@ -3,16 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../assets/css/Swap.css";
 import {
-  Modal,
-  Button,
-  FormControl,
-  Typography,
-  Box,
-  MenuItem,
-  Grid,
-  Paper,
-  Select,
-  ButtonGroup,
+  Modal, Button, FormControl, Typography, Box, MenuItem, Grid, Paper, Select 
 } from "@mui/material";
 
 const style = {
@@ -31,10 +22,13 @@ const Caver = require("caver-js");
 const caver = new Caver(window.klaytn);
 
 const KIP7ABI = require("../contract/KIP7.json");
+const Farmingabi = require('../contract/farming.json');
 const DexRouterabi = require('../contract/router.json');
 
+const farmingAddress = '0x3E62CB2A987F0Dc750541f092bA46EbF08020648';
 const RouterAddress = '0x63e3cB8C959068DD947c3FadF7455044B5C36b8f';
 
+const FarmingContract = new caver.klay.Contract(Farmingabi, farmingAddress);
 const DexRouterContract = new caver.klay.Contract(DexRouterabi, RouterAddress);
 
 const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
@@ -56,6 +50,8 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
   const [tokenAmount2, setTokenAmount2] = useState("");
 
   const [save, setSave] = useState("");
+
+  const [selectPair, setSelectPair] = useState([]);
 
   const address = useSelector((state) => state.counter);
   const deadline = parseInt('' + new Date().getTime() / 1000) + 100000;
@@ -90,7 +86,6 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
     setShow(false);
   };
 
-
   const dummydata = {
     token_address: "0xa7AdB3953C03Ee7Cca887cEFE35266a0b5F1e45d1",
   };
@@ -109,47 +104,103 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
     setTokenAmount2(caver.utils.fromPeb(Tokenbalance2)) //-> 예시로 usestate사용해 토큰 잔액 넣고 불러와서 사용하면 될듯 
   }
 
-  const swap = async () => {
+  // 페어풀 조회
+	// kip7 pair
 
-    const kip7 = new caver.klay.KIP7(tokenAddress1);
+	const [Kip7Data, setKip7Data] = useState([{ token_address: '0xa7AdB3953C03Ee7Cca887cEFE35266a0b5F1e45d1' }]);
+	const [Kip7Pool, setKip7Pool] = useState([dummydata]);
+	const getKip7Pool = async () => {
+		await axios.get(`http://localhost:4000/staking/kip7pool/`)
+			.then((res) => {
+				setKip7Pool(() => {
+					return res.data['data']
+				})
+			})
+	};
+	// console.log(Kip7Pool);
 
-    const allowed = await kip7.allowance(address.number, RouterAddress);
-    if (allowed <= tokenAmount1) {
-      try {
-        await kip7.approve(RouterAddress, caver.utils.toPeb("100000000"), {
-          from: address.number,
-          gas: 2000000,
-        });
-      } catch (err) {
-        console.log(err);
-      }
+	useEffect(() => {
+		getKip7Pool();
+	}, []);
+
+	const Kip7_Pool = async (list) => {
+		let arr = [];
+		for (let i = 0; i < list.length; i++) {
+			let el = list[i];
+
+			let obj = {
+				pair_name: el.pair_name,
+				pair_address: el.pair_address,
+				tokenA_address: el.tokenA_address,
+				tokenB_address: el.tokenB_address,
+				token_amount: '토큰 수량',
+				token_price: "가격",
+				pid: el.pid,
+			}
+			arr.push(obj);
+		}
+		setKip7Data(arr);
+	}
+	useEffect(() => {
+		Kip7_Pool(Kip7Pool);
+	}, [Kip7Pool])
+
+  const addLiquid = async () => {
+    const kip7_1 = new caver.klay.KIP7(tokenAddress1);
+    const kip7_2 = new caver.klay.KIP7(tokenAddress2);
+    // 내가 소유한 입력받은 두 토큰의 페어쌍 존재하는지 유효성 검사 필요
+    const kip7one = new caver.klay.KIP7(selectPair.tokenA_address);
+		const kip7two = new caver.klay.KIP7(selectPair.tokenB_address);
+
+    const allowedA = await kip7one.allowance(address.number, RouterAddress);
+		const allowedB = await kip7two.allowance(address.number, RouterAddress);
+
+    if (allowedA <= tokenAmount1) {
+      const approve1 = await kip7one.approve(RouterAddress, caver.utils.toPeb(tokenAmount1, "KLAY"), {
+				from: address.number,
+			});
     }
-    let a = await DexRouterContract.methods.swapExactTokensForTokens(caver.utils.toPeb(amount, "KLAY"), 0, [tokenAddress1, tokenAddress2], address.number, deadline).send(
-      {
-        from: address.number,
-        gas: 200000000
-      });
-    console.log(a);
+    if (allowedB <= tokenAmount2) {
+			const approve2 = await kip7two.approve(RouterAddress, caver.utils.toPeb(tokenAmount2, "KLAY"), {
+				from: address.number,
+			});
+		}
+
+    let addliquidity = await DexRouterContract.methods.addLiquidity(selectPair.tokenA_address, selectPair.tokenB_address, tokenAmount1, tokenAmount2, 0, 0, address.number, deadline).send(
+			{
+				from: address.number,
+				gas: 50000000,
+			}
+		)
+		let tokenAmount = caver.utils.toBN((addliquidity.events[4].raw.data));
+
+		const kip7pair = new caver.klay.KIP7(selectPair.pair_address);
+		const allowed = await kip7pair.allowance(address.number, farmingAddress);
+		if (allowed <= tokenAmount) {
+			const approve = await kip7pair.approve(farmingAddress, caver.utils.toPeb(10000000000000, "KLAY"), {
+				from: address.number,
+			});
+		}
   };
 
-  const [swapData, setSwapData] = useState([
+  const [liquidData, setLiquidData] = useState([
     { token_address: "0xa7AdB3953C03Ee7Cca887cEFE35266a0b5F1e45d1" },
   ]);
 
-  const [SwapToken, setSwapToken] = useState([dummydata]);
-  const getSwapToken = async () => {
+  const [LiquidToken, setLiquidToken] = useState([dummydata]);
+  const getLiquidToken = async () => {
     await axios.get(`http://localhost:4000/mytoken/`).then((res) => {
-      setSwapToken(() => {
+      setLiquidToken(() => {
         return res.data["data"];
       });
     });
   };
 
   useEffect(() => {
-    getSwapToken();
+    getLiquidToken();
   }, []);
 
-  const Swap_Token = async (list) => {
+  const Liquid_Token = async (list) => {
     let arr = [];
     for (let i = 0; i < list.length; i++) {
       let el = list[i];
@@ -170,12 +221,12 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
       };
       arr.push(obj);
     }
-    setSwapData(arr);
+    setLiquidData(arr);
   };
 
   useEffect(() => {
-    Swap_Token(SwapToken);
-  }, [SwapToken]);
+    Liquid_Token(LiquidToken);
+  }, [LiquidToken]);
 
   useEffect(() => {
     getToken1();
@@ -187,7 +238,7 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
     GetAmountsOut();
   }, [tokenAddress2])
 
-  const options1 = swapData.map((el) => {
+  const options1 = liquidData.map((el) => {
     return (
       <MenuItem value={el.token_name} key={el.token_name}>
         {el.token_name}
@@ -195,7 +246,7 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
     );
   });
 
-  const options2 = swapData.map((el) => {
+  const options2 = liquidData.map((el) => {
     return (
       <MenuItem value={el.token_name} key={el.token_name}>
         {el.token_name}
@@ -203,35 +254,24 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
     );
   });
 
-  const handleSwap1 = (e) => {
+  const handleLiquid1 = (e) => {
     setSelected1(e.target.value);
   };
 
-  const handleSwap2 = (e) => {
+  const handleLiquid2 = (e) => {
     setSelected2(e.target.value);
   };
 
   useEffect(() => {
-    const targetToken1 = SwapToken.find((el) => el.token_name === choice1);
+    const targetToken1 = LiquidToken.find((el) => el.token_name === choice1);
     setTokenAddress1(targetToken1?.token_address);
   }, [choice1]);
+
   useEffect(() => {
-    const targetToken2 = SwapToken.find((el) => el.token_name === choice2);
+    const targetToken2 = LiquidToken.find((el) => el.token_name === choice2);
     setTokenAddress2(targetToken2?.token_address);
   }, [choice2]);
 
-  const handleInputquarter = async () => {
-    const kip7 = new caver.klay.KIP7(tokenAddress1);
-    setAmount(Number(caver.utils.fromPeb(await kip7.balanceOf(address.number)) / 4).toFixed(3))
-  }
-  const handleInputhalf = async () => {
-    const kip7 = new caver.klay.KIP7(tokenAddress1);
-    setAmount(Number(caver.utils.fromPeb(await kip7.balanceOf(address.number)) / 2).toFixed(3))
-  }
-  const handleInputthreequarters = async () => {
-    const kip7 = new caver.klay.KIP7(tokenAddress1);
-    setAmount(Number(caver.utils.fromPeb(await kip7.balanceOf(address.number)) * 3 / 4).toFixed(3))
-  }
   const handleInputMax = async () => {
     const kip7 = new caver.klay.KIP7(tokenAddress1);
     setAmount(Number(caver.utils.fromPeb(await kip7.balanceOf(address.number))).toFixed(3))
@@ -251,14 +291,9 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
           {former}
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={3}>
-              <Grid item xs={6}><h4 className="st">투입</h4></Grid>
-              <Grid item xs={6}>
-                <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                  <Button variant="contained" onClick={handleInputquarter}>25%</Button>
-                  <Button variant="contained" onClick={handleInputhalf}>50%</Button>
-                  <Button variant="contained" onClick={handleInputthreequarters}>75%</Button>
-                  <Button variant="contained" onClick={handleInputMax}>최대치</Button>
-                </ButtonGroup>
+              <Grid item xs={10}><h4 className="st">투입</h4></Grid>
+              <Grid item xs={2}>
+              <Button variant="contained" onClick={handleInputMax}>MAX</Button>
               </Grid>
             </Grid>
           </Box>
@@ -269,7 +304,7 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
           <Box sx={{ flexGrow: 1 }} className="form-wrap">
 
             <Grid container spacing={3}>
-              <Grid item xs={9}>
+              <Grid item={true} xs={9}>
                 <>
                   <Button variant="contained" onClick={handleCreate}>
                     토큰
@@ -295,7 +330,7 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
 
                             <Select
                               sx={{ mt: 1 }}
-                              onChange={handleSwap1}
+                              onChange={handleLiquid1}
                               value={selected1}
                               displayEmpty
                             >
@@ -322,12 +357,12 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
                   </Modal>
                 </>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item={true} xs={3}>
                 <h3 className="about">{choice1}</h3>
               </Grid>
             </Grid>
             <Grid container spacing={3}>
-              <Grid item className="about" xs={12}>
+              <Grid item={true} className="about" xs={12}>
                 <h3>
                   <input
                     className="number"
@@ -374,22 +409,10 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
           {todo}
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={3}>
-              <Grid item xs={12}><h4 className="st">투입</h4></Grid>
-              {/* <Col sm={4}>
-                <Form>
-                  {["checkbox"].map((type) => (
-                    <div key={`inline-${type}`} className="mb-3">
-                      <Form.Check
-                        inline
-                        label="수수료포함"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                      />
-                    </div>
-                  ))}
-                </Form>
-              </Col> */}
+              <Grid item={true} xs={10}><h4 className="st">투입</h4></Grid>
+              <Grid item={true} xs={2}>
+              <Button variant="contained" onClick={handleInputMax}>MAX</Button>
+              </Grid>
             </Grid>
           </Box>
         </section>
@@ -399,7 +422,7 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
           <Box sx={{ flexGrow: 1 }} className="todos-wrap">
 
             <Grid container spacing={3}>
-              <Grid item xs={9}>
+              <Grid item={true} xs={9}>
                 <>
                   <Button variant="contained" onClick={handleShow}>
                     토큰
@@ -424,7 +447,7 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
                             <Typography>Token Select</Typography>
                             <Select
                               sx={{ mt: 1 }}
-                              onChange={handleSwap2}
+                              onChange={handleLiquid2}
                               value={selected2}
                               displayEmpty
                             >
@@ -451,14 +474,14 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
                   </Modal>
                 </>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item={true} xs={3}>
                 <h3 className="about">{choice2}</h3>
               </Grid>
 
             </Grid>
 
             <Grid container spacing={3}>
-              <Grid item className="about" xs={12}>
+              <Grid item={true} className="about" xs={12}>
                 <h3>
                   <input
                     className="number"
@@ -475,8 +498,8 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
             </Grid>
 
             <Grid container spacing={3}>
-              <Grid item xs={4}><b className="swapInfo">잔액</b></Grid>
-              <Grid item className="about" xs={8}>
+              <Grid item={true} xs={4}><b className="swapInfo">잔액</b></Grid>
+              <Grid item={true} className="about" xs={8}>
                 {Number(tokenAmount2).toFixed(3)}
               </Grid>
             </Grid>
@@ -487,7 +510,7 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
           {teacher}
           <br />
           <div className="d-grid gap-2">
-            <Button variant="contained" size="lg" onClick={swap}>
+            <Button variant="contained" size="lg" onClick={addLiquid}>
               Add Liquidity
             </Button>
           </div>
