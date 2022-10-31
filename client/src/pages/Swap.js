@@ -33,7 +33,7 @@ const caver = new Caver(window.klaytn);
 const KIP7ABI = require("../contract/KIP7.json");
 const DexRouterabi = require('../contract/router.json');
 
-const RouterAddress = '0x63e3cB8C959068DD947c3FadF7455044B5C36b8f';
+const RouterAddress = '0x9ED98841EE2A8E5cD28b5B54B54b992502be8216';
 
 const DexRouterContract = new caver.klay.Contract(DexRouterabi, RouterAddress);
 
