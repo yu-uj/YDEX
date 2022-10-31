@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity =0.8.12;
 
 import "@klaytn/contracts/KIP/token/KIP7/IKIP7.sol";
 import "@klaytn/contracts/KIP/token/KIP17/KIP17.sol";
@@ -10,7 +10,7 @@ import "@klaytn/contracts/KIP/token/KIP17/extensions/KIP17URIStorage.sol";
 contract YDEXNFT is KIP17, Ownable, KIP17URIStorage {
     using Counters for Counters.Counter;
     IKIP7 public tokenAddress;
-    uint256 public rate = 25 * 10 ** 18;
+    uint256 public rate = 25 * 10**18;
 
     Counters.Counter private _tokenIdCounter;
 
@@ -27,13 +27,21 @@ contract YDEXNFT is KIP17, Ownable, KIP17URIStorage {
     }
 
     function withdrawToken() public onlyOwner {
-        tokenAddress.transfer(msg.sender, tokenAddress.balanceOf(address(this)));
+        tokenAddress.transfer(
+            msg.sender,
+            tokenAddress.balanceOf(address(this))
+        );
     }
-    function tokenURI(uint256 tokenId) public view override(KIP17, KIP17URIStorage)
+
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(KIP17, KIP17URIStorage)
         returns (string memory)
     {
         return super.tokenURI(tokenId);
     }
+
     function _burn(uint256 tokenId) internal override(KIP17, KIP17URIStorage) {
         super._burn(tokenId);
     }

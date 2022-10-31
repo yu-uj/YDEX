@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.12;
+pragma solidity =0.8.12;
 
 import "./YDEXNFT.sol";
 import "@klaytn/contracts/security/ReentrancyGuard.sol";
@@ -19,9 +19,9 @@ contract Marketplace is ReentrancyGuard {
     }
 
     event Offered(
-        uint itemId,
-        uint tokenId,
-        uint price,
+        uint256 itemId,
+        uint256 tokenId,
+        uint256 price,
         address indexed seller
     );
 
@@ -41,10 +41,7 @@ contract Marketplace is ReentrancyGuard {
         nftCollection = YDEXNFT(_nftCollection);
     }
 
-    function makeItem(
-        uint256 _tokenId,
-        uint256 _price
-    ) external nonReentrant {
+    function makeItem(uint256 _tokenId, uint256 _price) external nonReentrant {
         require(_price > 0, "Price must be greater than zero");
         itemCount++;
         nftCollection.transferFrom(msg.sender, address(this), _tokenId);
@@ -76,16 +73,10 @@ contract Marketplace is ReentrancyGuard {
         item.sold = true;
 
         nftCollection.transferFrom(address(this), msg.sender, item.tokenId);
-        emit Bought(
-            _itemId,
-            item.tokenId,
-            item.price,
-            item.seller,
-            msg.sender
-        );
-        
+        emit Bought(_itemId, item.tokenId, item.price, item.seller, msg.sender);
     }
-    function getTotalPrice(uint _itemId) view public returns(uint) {
-        return(items[_itemId].price*(100 + feePercent/100));
+
+    function getTotalPrice(uint256 _itemId) public view returns (uint256) {
+        return (items[_itemId].price * (100 + feePercent / 100));
     }
 }
