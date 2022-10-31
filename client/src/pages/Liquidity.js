@@ -264,12 +264,12 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
 
   useEffect(() => {
     const targetToken1 = LiquidToken.find((el) => el.token_name === choice1);
-    setTokenAddress1(targetToken1?.token_address);
+    setTokenAddress1(targetToken1.token_address);
   }, [choice1]);
 
   useEffect(() => {
     const targetToken2 = LiquidToken.find((el) => el.token_name === choice2);
-    setTokenAddress2(targetToken2?.token_address);
+    setTokenAddress2(targetToken2.token_address);
   }, [choice2]);
 
   const handleInputMax = async () => {

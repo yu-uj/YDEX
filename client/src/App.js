@@ -6,6 +6,7 @@ import { Single, Pair } from './components/staking'
 import './assets/css/App.css';
 import NFTMain from './pages/NFTMain';
 import NFTProfile from './pages/NFTProfile';
+import NFTMint from './components/NFTMint'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="nft">
               <Route path="explore" element={<NFTMain/>}/>
               <Route path="profile" element={<NFTProfile />}/>
+              <Route path="nftmint" element={<NFTMint />}/>
             </Route>
           </Routes>
         </div>
