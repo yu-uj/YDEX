@@ -1,0 +1,1347 @@
+{
+	"compiler": {
+		"version": "0.8.12+commit.f00d7308"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_factory",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_WKLAY",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "ExcessiveInputAmount",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Expired",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "InsufficientAmount",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "InvalidPath",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "WKLAY",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "tokenA",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "tokenB",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountADesired",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountBDesired",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountAMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountBMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "addLiquidity",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountA",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountB",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountTokenDesired",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountTokenMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountKLAYMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "addLiquidityKLAY",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountToken",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountKLAY",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "factory",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountOut",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reserveIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reserveOut",
+						"type": "uint256"
+					}
+				],
+				"name": "getAmountIn",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountIn",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reserveIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reserveOut",
+						"type": "uint256"
+					}
+				],
+				"name": "getAmountOut",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountOut",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountOut",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					}
+				],
+				"name": "getAmountsIn",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					}
+				],
+				"name": "getAmountsOut",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountA",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reserveA",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reserveB",
+						"type": "uint256"
+					}
+				],
+				"name": "quote",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountB",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "tokenA",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "tokenB",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountAMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountBMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "removeLiquidity",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountA",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountB",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountTokenMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountKLAYMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "removeLiquidityKLAY",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountToken",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountKLAY",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountTokenMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountKLAYMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "removeLiquidityKLAYSupportingFeeOnTransferTokens",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountKLAY",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountTokenMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountKLAYMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "approveMax",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "v",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "r",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "s",
+						"type": "bytes32"
+					}
+				],
+				"name": "removeLiquidityKLAYWithPermit",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountToken",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountKLAY",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountTokenMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountKLAYMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "approveMax",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "v",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "r",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "s",
+						"type": "bytes32"
+					}
+				],
+				"name": "removeLiquidityKLAYWithPermitSupportingFeeOnTransferTokens",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountKLAY",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "tokenA",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "tokenB",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountAMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountBMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "approveMax",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "v",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "r",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "s",
+						"type": "bytes32"
+					}
+				],
+				"name": "removeLiquidityWithPermit",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountA",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountB",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountOutMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "swapExactKLAYForTokens",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountOutMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "swapExactKLAYForTokensSupportingFeeOnTransferTokens",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountOutMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "swapExactTokensForKLAY",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountOutMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "swapExactTokensForKLAYSupportingFeeOnTransferTokens",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountOutMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "swapExactTokensForTokens",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountOutMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "swapExactTokensForTokensSupportingFeeOnTransferTokens",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountOut",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "swapKLAYForExactTokens",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountOut",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountInMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "swapTokensForExactKLAY",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amountOut",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountInMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "path",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "swapTokensForExactTokens",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)": {
+					"details": "To cover all possible scenarios, msg.sender should have already given the router an allowance of at least amountADesired/amountBDesired on tokenA/tokenB. Always adds assets at the ideal ratio, according to the price when the transaction is executed. If a pool for the passed tokens does not exists, one is created automatically, and exactly amountADesired/amountBDesired tokens are added.",
+					"params": {
+						"amountADesired": "The amount of tokenA to add as liquidity if the B/A price is <= amountBDesired/amountADesired (A depreciates).",
+						"amountAMin": "Bounds the extent to which the B/A price can go up before the transaction reverts. Must be <= amountADesired.",
+						"amountBDesired": "The amount of tokenB to add as liquidity if the A/B price is <= amountADesired/amountBDesired (B depreciates).",
+						"amountBMin": "Bounds the extent to which the A/B price can go up before the transaction reverts. Must be <= amountBDesired.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"to": "Recipient of the liquidity tokens.",
+						"tokenA": "A pool token.",
+						"tokenB": "A pool token."
+					},
+					"returns": {
+						"amountA": "The amount of tokenA sent to the pool.",
+						"amountB": "The amount of tokenB sent to the pool.",
+						"liquidity": "The amount of liquidity tokens minted."
+					}
+				},
+				"addLiquidityKLAY(address,uint256,uint256,uint256,address,uint256)": {
+					"details": "To cover all possible scenarios, msg.sender should have already given the router an allowance of at least amountTokenDesired on token. Always adds assets at the ideal ratio, according to the price when the transaction is executed. msg.value is treated as a amountKLAYDesired. Leftover KLAY, if any, is returned to msg.sender. If a pool for the passed token and WKLAY does not exists, one is created automatically, and exactly amountTokenDesired/msg.value tokens are added.",
+					"params": {
+						"amountKLAYMin": "Bounds the extent to which the token/WKLAY price can go up before the transaction reverts. Must be <= msg.value.",
+						"amountTokenDesired": "The amount of token to add as liquidity if the WKLAY/token price is <= msg.value/amountTokenDesired (token depreciates).",
+						"amountTokenMin": "Bounds the extent to which the WKLAY/token price can go up before the transaction reverts. Must be <= amountTokenDesired.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"to": "Recipient of the liquidity tokens.",
+						"token": "A pool token."
+					},
+					"returns": {
+						"amountKLAY": "The amount of KLAY converted to WKLAY and sent to the pool.",
+						"amountToken": "The amount of token sent to the pool.",
+						"liquidity": "The amount of liquidity tokens minted."
+					}
+				},
+				"getAmountIn(uint256,uint256,uint256)": {
+					"details": "Returns the minimum input asset amount required to buy the given  output asset amount (accounting for fees) given reserves. Used in getAmountsIn. "
+				},
+				"getAmountOut(uint256,uint256,uint256)": {
+					"details": "Given an input asset amount, returns the maximum output amount  of the other asset (accounting for fees) given reserves. Used in getAmountsOut."
+				},
+				"getAmountsIn(uint256,address[])": {
+					"details": "Given an output asset amount and an array of token addresses, calculates all preceding  minimum input token amounts by calling getReserves for each pair of token addresses in the  path in turn, and using these to call getAmountIn. Useful for calculating optimal token amounts before calling swap."
+				},
+				"getAmountsOut(uint256,address[])": {
+					"details": "Given an input asset amount and an array of token addresses, calculates all subsequent maximum output token amounts by calling getReserves for each pair of token addresses in the  path in turn, and using these to call getAmountOut. Useful for calculating optimal token amounts before calling swap."
+				},
+				"quote(uint256,uint256,uint256)": {
+					"details": "Given some asset amount and reserves, returns an amount of the  other asset representing equivalent value. Useful for calculating optimal token amounts before calling mint."
+				},
+				"removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)": {
+					"details": "To cover all possible scenarios, msg.sender should have already given the router an allowance of at least liquidity on the pool.",
+					"params": {
+						"amountAMin": "The minimum amount of tokenA that must be received for the transaction not to revert.",
+						"amountBMin": "The minimum amount of tokenB that must be received for the transaction not to revert.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"liquidity": "The amount of liquidity tokens to remove.",
+						"to": "Recipient of the underlying assets.",
+						"tokenA": "A pool token.",
+						"tokenB": "A pool token."
+					},
+					"returns": {
+						"amountA": "The amount of tokenA received from the pool.",
+						"amountB": "The amount of tokenB received from the pool."
+					}
+				},
+				"removeLiquidityKLAY(address,uint256,uint256,uint256,address,uint256)": {
+					"details": "To cover all possible scenarios, msg.sender should have already given the router an allowance of at least liquidity on the pool.",
+					"params": {
+						"amountKLAYMin": "The minimum amount of KLAY that must be received for the transaction not to revert.",
+						"amountTokenMin": "The minimum amount of token that must be received for the transaction not to revert.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"liquidity": "The amount of liquidity tokens to remove.",
+						"to": "Recipient of the underlying assets.",
+						"token": "A pool token."
+					},
+					"returns": {
+						"amountKLAY": "The amount of KLAY received from the pool.",
+						"amountToken": "The amount of token received from the pool."
+					}
+				},
+				"removeLiquidityKLAYSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256)": {
+					"details": "Identical to removeLiquidityKLAY, but succeeds for tokens that take a fee on transfer. msg.sender should have already given the router an allowance of at least liquidity on the pool. "
+				},
+				"removeLiquidityKLAYWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)": {
+					"details": "Removes liquidity from an ERC20⇄WKLAY/KIP7⇄WKLAY pool and receive KLAY without pre-approval "
+				},
+				"removeLiquidityKLAYWithPermitSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)": {
+					"details": "Identical to removeLiquidityKLAYWithPermit, but succeeds for tokens that take a fee on transfer. "
+				},
+				"removeLiquidityWithPermit(address,address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)": {
+					"details": "Removes liquidity from an ERC20⇄ERC20/KIP7⇄KIP7/KIP7⇄ERC20 pool without pre-approval. "
+				},
+				"swapExactKLAYForTokens(uint256,address[],address,uint256)": {
+					"params": {
+						"amountOutMin": "The minimum amount of output tokens that must be received for the transaction not to revert.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"path": "An array of token addresses. path.length must be >= 2. Pools for each consecutive pair of addresses must exist and have liquidity.",
+						"to": "Recipient of the output tokens."
+					},
+					"returns": {
+						"amounts": "The input token amount and all subsequent output token amounts."
+					}
+				},
+				"swapExactKLAYForTokensSupportingFeeOnTransferTokens(uint256,address[],address,uint256)": {
+					"details": "Identical to swapExactKLAYForTokens, but succeeds for tokens that take a fee on transfer."
+				},
+				"swapExactTokensForKLAY(uint256,uint256,address[],address,uint256)": {
+					"details": "If the to address is a smart contract, it must have the ability to receive KLAY.",
+					"params": {
+						"amountIn": "The amount of input tokens to send.",
+						"amountOutMin": "The minimum amount of output tokens that must be received for the transaction not to revert.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"path": "An array of token addresses. path.length must be >= 2. Pools for each consecutive pair of addresses must exist and have liquidity.",
+						"to": "Recipient of the output tokens."
+					},
+					"returns": {
+						"amounts": "The input token amount and all subsequent output token amounts."
+					}
+				},
+				"swapExactTokensForKLAYSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)": {
+					"details": "Identical to swapExactTokensForKLAY, but succeeds for tokens that take a fee on transfer. If the to address is a smart contract, it must have the ability to receive KLAY."
+				},
+				"swapExactTokensForTokens(uint256,uint256,address[],address,uint256)": {
+					"details": "msg.sender should have already given the router an allowance of at least amountIn on the input token.",
+					"params": {
+						"amountIn": "The amount of input tokens to send.",
+						"amountOutMin": "The minimum amount of output tokens that must be received for the transaction not to revert.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"path": "An array of token addresses. path.length must be >= 2. Pools for each consecutive pair of addresses must exist and have liquidity.",
+						"to": "Recipient of the output tokens."
+					},
+					"returns": {
+						"amounts": "The input token amount and all subsequent output token amounts."
+					}
+				},
+				"swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)": {
+					"details": "Identical to swapExactTokensForTokens, but succeeds for tokens that take a fee on transfer."
+				},
+				"swapKLAYForExactTokens(uint256,address[],address,uint256)": {
+					"details": "Leftover KLAY, if any, is returned to msg.sender.",
+					"params": {
+						"amountOut": "The amount of tokens to receive.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"path": "An array of token addresses. path.length must be >= 2. Pools for each consecutive pair of addresses must exist and have liquidity.",
+						"to": "Recipient of the output tokens."
+					},
+					"returns": {
+						"amounts": "The input token amount and all subsequent output token amounts."
+					}
+				},
+				"swapTokensForExactKLAY(uint256,uint256,address[],address,uint256)": {
+					"details": "msg.sender should have already given the router an allowance of at least amountInMax on the input token. If the to address is a smart contract, it must have the ability to receive KLAY.",
+					"params": {
+						"amountInMax": "The maximum amount of input tokens that can be required before the transaction reverts.",
+						"amountOut": "The amount of KLAY to receive.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"path": "An array of token addresses. path.length must be >= 2. Pools for each consecutive pair of addresses must exist and have liquidity.",
+						"to": "Recipient of the output tokens."
+					},
+					"returns": {
+						"amounts": "The input token amount and all subsequent output token amounts."
+					}
+				},
+				"swapTokensForExactTokens(uint256,uint256,address[],address,uint256)": {
+					"details": "msg.sender should have already given the router an allowance of at least amountInMax on the input token.",
+					"params": {
+						"amountInMax": "The maximum amount of input tokens that can be required before the transaction reverts.",
+						"amountOut": "The amount of output tokens to receive.",
+						"deadline": "Unix timestamp after which the transaction will revert.",
+						"path": "An array of token addresses. path.length must be >= 2. Pools for each consecutive pair of addresses must exist and have liquidity.",
+						"to": "Recipient of the output tokens."
+					},
+					"returns": {
+						"amounts": "The input token amount and all subsequent output token amounts."
+					}
+				}
+			},
+			"stateVariables": {
+				"WKLAY": {
+					"details": "Returns the WKLAY address"
+				},
+				"factory": {
+					"details": "Returns factory address."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)": {
+					"notice": "Adds liquidity to an ERC20⇄ERC20/KIP7⇄KIP7/ERC20⇄KIP7 pool."
+				},
+				"addLiquidityKLAY(address,uint256,uint256,uint256,address,uint256)": {
+					"notice": "Adds liquidity to an ERC20⇄WKLAY/KIP7⇄WKLAY pool with KLAY."
+				},
+				"removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)": {
+					"notice": "Removes liquidity from an ERC20⇄ERC20/KIP7⇄KIP7/ERC20⇄KIP7 pool."
+				},
+				"removeLiquidityKLAY(address,uint256,uint256,uint256,address,uint256)": {
+					"notice": "Removes liquidity from an ERC20⇄WKLAY/KIP7⇄WKLAY pool and receive KLAY."
+				},
+				"swapExactKLAYForTokens(uint256,address[],address,uint256)": {
+					"notice": "Swaps an exact amount of KLAY for as many output tokens as possible, along the route determined by the path. The first element of path must be WKLAY, the last is the output token, and any intermediate elements represent intermediate pairs to trade through (if, for example, a direct pair does not exist)."
+				},
+				"swapExactTokensForKLAY(uint256,uint256,address[],address,uint256)": {
+					"notice": "Swaps an exact amount of tokens for as much KLAY as possible, along the route determined by the path. The first element of path is the input token, the last must be WKLAY, and any intermediate elements represent intermediate pairs to trade through (if, for example, a direct pair does not exist)."
+				},
+				"swapExactTokensForTokens(uint256,uint256,address[],address,uint256)": {
+					"notice": "Swaps an exact amount of input tokens for as many output tokens as possible, along the route determined by the path. The first element of path is the input token, the last is the output token, and any intermediate elements represent intermediate pairs to trade through (if, for example, a direct pair does not exist)."
+				},
+				"swapKLAYForExactTokens(uint256,address[],address,uint256)": {
+					"notice": "Receive an exact amount of tokens for as little KLAY as possible, along the route determined by the path. The first element of path must be WKLAY, the last is the output token and any intermediate elements represent intermediate pairs to trade through (if, for example, a direct pair does not exist)."
+				},
+				"swapTokensForExactKLAY(uint256,uint256,address[],address,uint256)": {
+					"notice": "Receive an exact amount of KLAY for as few input tokens as possible, along the route determined by the path. The first element of path is the input token, the last must be WKLAY, and any intermediate elements represent intermediate pairs to trade through (if, for example, a direct pair does not exist)."
+				},
+				"swapTokensForExactTokens(uint256,uint256,address[],address,uint256)": {
+					"notice": "Receive an exact amount of output tokens for as few input tokens as possible, along the route determined by the path. The first element of path is the input token, the last is the output token, and any intermediate elements represent intermediate tokens to trade through (if, for example, a direct pair does not exist)."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/swap/DexRouter.sol": "DexRouter"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/IDexFactory.sol": {
+			"keccak256": "0x140269cf47872c1307e3feeb3d38dd1d998c536d06cd1bf10293ac4bd8f3bb89",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9a73742e25fa1c88957cb605ba2dee751e14c0c0b688c2475e697c82898b36bc",
+				"dweb:/ipfs/Qmc3pMYzh3Bu7dUJZwn3x13wnKqi1MYTWw6cKbjGVAYxms"
+			]
+		},
+		"contracts/interfaces/IDexKIP7.sol": {
+			"keccak256": "0x8c1d02db5d95890a753f8939dfdb080da7605f22bb2f2e2511b3c2c9a3371913",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5815bbd550619b73e7b454dd2f00bfefdb5d5f9f19117b20dcaf43c5210615c7",
+				"dweb:/ipfs/QmaFsfiy1HZhLZfgEDvTrWr1p7S2NKvq81QKTqZPWLDEfs"
+			]
+		},
+		"contracts/interfaces/IDexPair.sol": {
+			"keccak256": "0x8ed5bd49ab395486a56c9091754d24e97f2379b17cb22c870636100e8929496e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c299d9ca0b5eefcef749a53638baec061999a337d86299da5b5e400d4eb751b9",
+				"dweb:/ipfs/QmTQoziMn6MqcUMdjqT37MtyZo43p7dkYCicxqa2aozjft"
+			]
+		},
+		"contracts/interfaces/IDexRouter.sol": {
+			"keccak256": "0x93027451b1ba92ca2d2331f5fd2130dd749e8d80c248dd23b3ba4329a370f914",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://e035e57f01150ffb9a7d1222060c3fce39741ab755c83cc2161bb398ed8df877",
+				"dweb:/ipfs/QmcgqgHjiQkNWXNaHWPbVmptKctyWFbmRWMN5zYJK7Z9o5"
+			]
+		},
+		"contracts/interfaces/IKIP13.sol": {
+			"keccak256": "0x7a14f5f26986bd1ff8cdac9f1892594714898f6bc30e27f8630fdd0420813df8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b9d87ce0ca1975862d0f34202578f2dbb1d9057f2d9fd27672703fcb7ababf6f",
+				"dweb:/ipfs/QmdTEHGuYcKN5Upp7gy7bHkcRGu7iDzsFJrxuPSStR9DLz"
+			]
+		},
+		"contracts/interfaces/IKIP7.sol": {
+			"keccak256": "0xa76bc0f996e8e475cae3f756dce521d0fab8f1b1e49b33fc79b096f86606463d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://08b3808724b9a02d3d4fd911446579c4b42fcc76dd07795e74875acb22115537",
+				"dweb:/ipfs/Qmf7HU4DTj7NFSdWac22P3Lp8Dgo7a4DotvdGLJDLzmKk1"
+			]
+		},
+		"contracts/interfaces/IKIP7Metadata.sol": {
+			"keccak256": "0xdb54e2f401900e6e7b57cc5dddebd23e9176fe897dcd477f4c6ab471ace71c80",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://14471a04027df9ca5b804a2b76f75220e835f410c661f8640a499aa4e273bff6",
+				"dweb:/ipfs/QmcHqJKHa2WuDmTQyuCZpuw6NBfKABe8FZjtNR6t6vfQbv"
+			]
+		},
+		"contracts/interfaces/IWKLAY.sol": {
+			"keccak256": "0x6c8e6bd84b3d9059e964825f4bd5e44691f056281a406249ba7689ce88ae22f4",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://6866df8721acf34d61b41f000d6f096b463ec1dd3ec720102f277711a88fd326",
+				"dweb:/ipfs/QmbfBagGvTgbXw9a1sAyCVf48tPoBGq1p7orUgssDUz5vc"
+			]
+		},
+		"contracts/libraries/DexLibrary.sol": {
+			"keccak256": "0xd512b328e8ab19b04bc78335d98af47f0c5d395556dba01ccf7ccd5cead9006b",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://ea19c9df0f75107042c489a0af426a3087f794071d32299ac82686f7c30ad3c8",
+				"dweb:/ipfs/QmZBd5HyLxGg2C3DgpuqnYukRacS3g3gvsrqjXhHFuUCGW"
+			]
+		},
+		"contracts/libraries/TransferHelper.sol": {
+			"keccak256": "0xad84dd9dd682cb4c347267f2472ac63e87855e6a036164e726568de2a5908f39",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://3be02fab4d9f1e80002a04076ff285a959636fe371f9540c02344050db41006e",
+				"dweb:/ipfs/QmUCcVYfsHsPdWX6Wfpb2CeZXFEzos1k67Jb1oAGPAygaN"
+			]
+		},
+		"contracts/swap/DexRouter.sol": {
+			"keccak256": "0xbdf81e5d280363a230666a7ae642cd3de1019cf7476a53c08f1107dbde7bf55d",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://c64ab0930ed441199d820d338f89ba6bbf4ce8f6b98eb7e54aead87de4c75af2",
+				"dweb:/ipfs/Qmcez3dkKju9xGCMgas6C53YMHPgPdsE6gseSHKAipVVQB"
+			]
+		},
+		"contracts/swap/Errors.sol": {
+			"keccak256": "0x03a72d32a65c0b9a4ae5690cd0e0466ef281abe6f125ba7b53b8288796ccf095",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://cb67fdff14bee344b8d6a0704175bdb81fdd74358db53f6c4cb28c8280dc5cd5",
+				"dweb:/ipfs/Qmbi4EkKfSGpYL4uisJkTKCtdLGnq3b1y7HykY5i6vguRS"
+			]
+		}
+	},
+	"version": 1
+}
