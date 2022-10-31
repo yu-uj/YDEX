@@ -28,7 +28,7 @@ import { ethers } from "ethers";
 
 const Caver = require("caver-js");
 const caver = new Caver(window.klaytn);
-const Artifact = require('../contract/artifacts/YDEXNFT.json')
+// const Artifact = require('../contract/artifacts/YDEXNFT.json')
 
 const MuiSwitchLarge = styled(Switch)(({ theme }) => ({
   width: 70,
