@@ -47,6 +47,9 @@ function Single() {
 	const [depo2, setDeposit2] = useState(false);
 	const [widr2, setWithdraw2] = useState(false);
 
+	const [lend, setLend] = useState(false);
+	const [repay, setRepay] = useState(false);
+
 	const [totalstaked, setTotalstaked] = useState('');
 	const [totalstaked1, setTotalstaked1] = useState('');
 	const [totalstaked2, setTotalstaked2] = useState('');
@@ -72,6 +75,12 @@ function Single() {
 
 	const withdrawShow2 = () => setWithdraw2(true);
 	const withdrawClose2 = () => setWithdraw2(false);
+
+	const lendShow = () => setLend(true);
+	const lendClose = () => setLend(false);
+
+	const repayShow = () => setRepay(true);
+	const repayClose = () => setRepay(false);
 
 	const JdToken_Address = "0xE807326D86f631495Bb9c1F8888604879c18E5BB";
 
@@ -217,15 +226,15 @@ function Single() {
 								<Typography gutterBottom variant="h6">[ KIP7 Token ]</Typography>
 								<Typography gutterBottom variant="h5">JdToken</Typography>
 							</Grid>
-							<Grid xs={6}>
+							<Grid xs={5}>
 								<Stack>
 									<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
 									<Typography variant="h5" component="h6">{totalstaked}</Typography>
 								</Stack>
 							</Grid>
-							<Grid xs={3}>
-								<Stack spacing={1}>
-									<Button variant="contained" onClick={depositShow} >Deposit</Button>
+							<Grid xs={4}>
+								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+									<Button fullWidth variant="contained" onClick={depositShow} >Deposit</Button>
 									<Modal
 										open={depo}
 										onClose={depositClose}
@@ -272,14 +281,17 @@ function Single() {
 													</FormControl>
 												</Box>
 											</Typography>
-											<Button variant="outlined" onClick={depositClose}>
-												취소
-											</Button>
-											<Button type="submit" variant="outlined" onClick={handleTransfer1}>확인</Button>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={depositClose}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer1}>확인</Button>
+											</Stack>
 										</Box>
 									</Modal>
 
-									<Button variant="outlined" onClick={withdrawShow}>Withdraw</Button>
+									<Button fullWidth variant="outlined" onClick={withdrawShow}>Withdraw</Button>
 									<Modal
 										open={widr}
 										onClose={withdrawClose}
@@ -310,7 +322,6 @@ function Single() {
 													noValidate
 													autoComplete="off">
 													{/* Withdraw Input  */}
-													{/* 토큰 이름, 심볼, 매핑 필요  */}
 													<InputLabel component="h5">JdToken</InputLabel>
 													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
 														<OutlinedInput fullWidth
@@ -326,17 +337,125 @@ function Single() {
 													</FormControl>
 												</Box>
 											</Typography>
-											<Button variant="outlined" onClick={withdrawClose}>
-												취소
-											</Button>
-											<Button type="submit" variant="outlined" onClick={handleTransfer2}>확인</Button>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={withdrawClose}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer2}>확인</Button>
+											</Stack>
 										</Box>
 									</Modal>
 								</Stack>
+
+								{/* 대출!!!!! */}
+								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+									<Button fullWidth variant="contained" onClick={lendShow} >Lend</Button>
+									<Modal
+										open={lend}
+										onClose={lendClose}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											<Typography id="modal-modal-title" variant="h6" component="h2">JdToken Deposit</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+												<div>
+													<h5>내 예치 자산</h5>
+													<strong>{mystaked}</strong>
+													<span> JD</span>
+													
+												</div>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
+													{/* Lending Input  */}
+													{/* 토큰 이름, 심볼, 매핑 필요  */}
+													<InputLabel component="h5">JdToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
+															type="text"
+															placeholder="대출할 토큰 수량"
+															autoFocus
+															aria-label="Default"
+															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
+															// onChange={(e) => handleInput2(e)}
+														/>
+													</FormControl>
+												</Box>
+											</Typography>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={lendClose}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer1}>확인</Button>
+											</Stack>
+										</Box>
+									</Modal>
+
+									<Button fullWidth variant="outlined" onClick={repayShow}>Repay</Button>
+									<Modal
+										open={repay}
+										onClose={repayClose}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											{/* 선택한 카드의 풀 이름과 맵핑 */}
+											<Typography id="modal-modal-title" variant="h6" component="h2">JdToken Withdraw</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+												<div>
+													<h5>내 대출 금액</h5>
+													<strong>{mystaked}</strong>
+													<span> JD</span>
+													
+												</div>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
+													{/* Repay Input  */}
+													<InputLabel component="h5">JdToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
+															type="text"
+															placeholder="상환할 토큰 수량"
+															autoFocus
+															aria-label="Default"
+															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
+															// onChange={(e) => handleInput2(e)}
+														/>
+													</FormControl>
+												</Box>
+											</Typography>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={repayClose}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer2}>확인</Button>
+											</Stack>
+										</Box>
+									</Modal>
+								</Stack>
+
 							</Grid>
 						</Grid>
 					</CardContent>
 				</Card>
+
 
 				<Card
 					key={'Secondary'}
@@ -348,15 +467,15 @@ function Single() {
 								<Typography gutterBottom variant="h6">[ KIP7 Token ]</Typography>
 								<Typography gutterBottom variant="h5">YUToken</Typography>
 							</Grid>
-							<Grid xs={6}>
+							<Grid xs={5}>
 								<Stack>
 									<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
 									<Typography variant="h5" component="h6">{totalstaked1}</Typography>
 								</Stack>
 							</Grid>
-							<Grid xs={3}>
-								<Stack spacing={1}>
-									<Button variant="contained" onClick={depositShow1} >Deposit</Button>
+							<Grid xs={4}>
+								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+									<Button fullWidth variant="contained" onClick={depositShow1} >Deposit</Button>
 									<Modal
 										open={depo1}
 										onClose={depositClose1}
@@ -403,14 +522,17 @@ function Single() {
 													</FormControl>
 												</Box>
 											</Typography>
-											<Button variant="outlined" onClick={depositClose1}>
-												취소
-											</Button>
-											<Button type="submit" variant="outlined" onClick={handleTransfer3}>확인</Button>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={depositClose1}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer3}>확인</Button>
+											</Stack>
 										</Box>
 									</Modal>
 
-									<Button variant="outlined" onClick={withdrawShow1}>Withdraw</Button>
+									<Button fullWidth variant="outlined" onClick={withdrawShow1}>Withdraw</Button>
 									<Modal
 										open={widr1}
 										onClose={withdrawClose1}
@@ -418,7 +540,6 @@ function Single() {
 										keyboard={false}
 									>
 										<Box sx={style}>
-											{/* 선택한 카드의 풀 이름과 맵핑 */}
 											<Typography id="modal-modal-title" variant="h6" component="h2">YUToken Withdraw</Typography>
 											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 												<div>
@@ -441,7 +562,6 @@ function Single() {
 													noValidate
 													autoComplete="off">
 													{/* Withdraw Input  */}
-													{/* 토큰 이름, 심볼, 매핑 필요  */}
 													<InputLabel component="h5">YUToken</InputLabel>
 													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
 														<OutlinedInput fullWidth
@@ -457,13 +577,120 @@ function Single() {
 													</FormControl>
 												</Box>
 											</Typography>
-											<Button variant="outlined" onClick={withdrawClose1}>
-												취소
-											</Button>
-											<Button type="submit" variant="outlined" onClick={handleTransfer4}>확인</Button>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={withdrawClose1}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer4}>확인</Button>
+											</Stack>
 										</Box>
 									</Modal>
 								</Stack>
+
+								{/* 대출!!!!! */}
+								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+									<Button fullWidth variant="contained" onClick={lendShow} >Lend</Button>
+									<Modal
+										open={lend}
+										onClose={lendClose}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											<Typography id="modal-modal-title" variant="h6" component="h2">JdToken Deposit</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+												<div>
+													<h5>내 예치 자산</h5>
+													<strong>{mystaked}</strong>
+													<span> JD</span>
+													
+												</div>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
+													{/* Lending Input  */}
+													{/* 토큰 이름, 심볼, 매핑 필요  */}
+													<InputLabel component="h5">JdToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
+															type="text"
+															placeholder="대출할 토큰 수량"
+															autoFocus
+															aria-label="Default"
+															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
+															// onChange={(e) => handleInput2(e)}
+														/>
+													</FormControl>
+												</Box>
+											</Typography>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={lendClose}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer1}>확인</Button>
+											</Stack>
+										</Box>
+									</Modal>
+
+									<Button fullWidth variant="outlined" onClick={repayShow}>Repay</Button>
+									<Modal
+										open={repay}
+										onClose={repayClose}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											{/* 선택한 카드의 풀 이름과 맵핑 */}
+											<Typography id="modal-modal-title" variant="h6" component="h2">JdToken Withdraw</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+												<div>
+													<h5>내 대출 금액</h5>
+													<strong>{mystaked}</strong>
+													<span> JD</span>
+													
+												</div>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
+													{/* Repay Input  */}
+													<InputLabel component="h5">JdToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
+															type="text"
+															placeholder="상환할 토큰 수량"
+															autoFocus
+															aria-label="Default"
+															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
+															// onChange={(e) => handleInput2(e)}
+														/>
+													</FormControl>
+												</Box>
+											</Typography>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={repayClose}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer2}>확인</Button>
+											</Stack>
+										</Box>
+									</Modal>
+								</Stack>
+
 							</Grid>
 						</Grid>
 					</CardContent>
@@ -479,15 +706,15 @@ function Single() {
 								<Typography gutterBottom variant="h6" component="div">[ KIP7 Token ]</Typography>
 								<Typography gutterBottom variant="h5" component="div">YKToken</Typography>
 							</Grid>
-							<Grid xs={6}>
+							<Grid xs={5}>
 								<Stack>
 									<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
 									<Typography variant="h5" component="h6">{totalstaked2}</Typography>
 								</Stack>
 							</Grid>
-							<Grid xs={3}>
-								<Stack spacing={1}>
-									<Button variant="contained" onClick={depositShow2}>Deposit</Button>
+							<Grid xs={4}>
+								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+									<Button fullWidth variant="contained" onClick={depositShow2}>Deposit</Button>
 									<Modal
 										open={depo2}
 										onClose={depositClose2}
@@ -495,7 +722,6 @@ function Single() {
 										keyboard={false}
 									>
 										<Box sx={style}>
-											{/* 선택한 카드의 풀 이름과 맵핑 */}
 											<Typography id="modal-modal-title" variant="h6" component="h2">YKToken Deposit</Typography>
 											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 												<div>
@@ -518,7 +744,6 @@ function Single() {
 													noValidate
 													autoComplete="off">
 													{/* Deposit Input  */}
-													{/* 토큰 이름, 심볼, 매핑 필요  */}
 													<InputLabel component="h5">YKToken</InputLabel>
 													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
 														<OutlinedInput fullWidth
@@ -534,14 +759,17 @@ function Single() {
 													</FormControl>
 												</Box>
 											</Typography>
-											<Button variant="outlined" onClick={depositClose2}>
-												취소
-											</Button>
-											<Button type="submit" variant="outlined" onClick={handleTransfer5}>확인</Button>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={depositClose2}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer5}>확인</Button>
+											</Stack>
 										</Box>
 									</Modal>
 
-									<Button variant="outlined" onClick={withdrawShow2}>Withdraw</Button>
+									<Button fullWidth variant="outlined" onClick={withdrawShow2}>Withdraw</Button>
 									<Modal
 										open={widr2}
 										onClose={withdrawClose1}
@@ -588,13 +816,117 @@ function Single() {
 													</FormControl>
 												</Box>
 											</Typography>
-											<Button variant="outlined" onClick={withdrawClose2}>
-												취소
-											</Button>
-											<Button type="submit" variant="outlined" onClick={handleTransfer6}>확인</Button>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={withdrawClose2}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer6}>확인</Button>
+											</Stack>
 										</Box>
 									</Modal>
 								</Stack>
+
+								{/* 대출!!!!! */}
+								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+									<Button fullWidth variant="contained" onClick={lendShow} >Lend</Button>
+									<Modal
+										open={lend}
+										onClose={lendClose}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											<Typography id="modal-modal-title" variant="h6" component="h2">JdToken Deposit</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+												<div>
+													<h5>내 예치 자산</h5>
+													<strong>{mystaked}</strong>
+													<span> JD</span>
+												</div>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
+													{/* Lending Input  */}
+													<InputLabel component="h5">JdToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
+															type="text"
+															placeholder="대출할 토큰 수량"
+															autoFocus
+															aria-label="Default"
+															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
+															// onChange={(e) => handleInput2(e)}
+														/>
+													</FormControl>
+												</Box>
+											</Typography>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={lendClose}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer1}>확인</Button>
+											</Stack>
+										</Box>
+									</Modal>
+
+									<Button fullWidth variant="outlined" onClick={repayShow}>Repay</Button>
+									<Modal
+										open={repay}
+										onClose={repayClose}
+										backdrop="static"
+										keyboard={false}
+									>
+										<Box sx={style}>
+											<Typography id="modal-modal-title" variant="h6" component="h2">JdToken Withdraw</Typography>
+											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+												<div>
+													<h5>내 대출 금액</h5>
+													<strong>{mystaked}</strong>
+													<span> JD</span>
+													
+												</div>
+												<Box
+													component="form"
+													sx={{
+														'& > :not(style)': { width: 500, maxWidth: '100%' },
+													}}
+													noValidate
+													autoComplete="off">
+													{/* Repay Input  */}
+													<InputLabel component="h5">JdToken</InputLabel>
+													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+														<OutlinedInput fullWidth
+															margin="dense"
+															type="text"
+															placeholder="상환할 토큰 수량"
+															autoFocus
+															aria-label="Default"
+															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
+															aria-describedby="outlined-weight-helper-text"
+															// onChange={(e) => handleInput2(e)}
+														/>
+													</FormControl>
+												</Box>
+											</Typography>
+											<br />
+											<Stack direction="row" justifyContent="flex-end" spacing={2}>
+												<Button variant="outlined" onClick={repayClose}>
+													취소
+												</Button>
+												<Button type="submit" variant="outlined" onClick={handleTransfer2}>확인</Button>
+											</Stack>
+										</Box>
+									</Modal>
+								</Stack>
+
 							</Grid>
 						</Grid>
 					</CardContent>
