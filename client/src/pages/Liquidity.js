@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../assets/css/Swap.css";
 import {
-  Modal, Button, FormControl, Typography, Box, MenuItem, Grid, Paper, Select, ButtonGroup
+  Modal, Button, FormControl, Typography, Box, MenuItem, Grid, Paper, Select 
 } from "@mui/material";
 
 const style = {
