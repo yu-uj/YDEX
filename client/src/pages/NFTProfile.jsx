@@ -2,6 +2,8 @@ import { Avatar, Box, Button, Stack, styled, Typography } from "@mui/material";
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useCallback } from "react";
+import CounterContainer from '../redux/CounterContainer';
+import { useDispatch } from "react-redux";
 import NFTCard from "../components/NFTCard";
 
 const nftSamples = [
@@ -100,7 +102,12 @@ const StyledButton = styled(Button)({
   marginTop: 10,
 });
 
-export default function NFTProfile() {
+export default function NFTProfile(props) {
+  const { number, number1 } = props;
+  const dispatch = useDispatch();
+  const dispatchSetCW = (cw) => dispatch({ type: "SET_CW", number: cw });
+  const dispatchSetCtk = (cw) => dispatch({ type: "SET_CTK", number1: cw });
+
   const handleMintNFT = useCallback(() => {
     // mint NFT logic here ...
   });
