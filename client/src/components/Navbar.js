@@ -76,17 +76,10 @@ function Navigation() {
 								id="fade-button"
 								size="large"
 								sx={{ my: 2, color: "white", display: "block" }}
-<<<<<<< HEAD
-								aria-controls={open ? 'fade-menu' : undefined}
-								aria-haspopup="true"
-								aria-expanded={open ? 'true' : undefined}
-								onClick={handleClick}
-=======
 								aria-controls={open1 ? 'fade-menu' : undefined}
 								aria-haspopup="true"
 								aria-expanded={open1 ? 'true' : undefined}
 								onClick={handleClick1}
->>>>>>> team
 							>
 								NFT
 							</Button>
@@ -95,15 +88,6 @@ function Navigation() {
 								MenuListProps={{
 									'aria-labelledby': 'fade-button',
 								}}
-<<<<<<< HEAD
-								anchorEl={anchorEl}
-								open={open}
-								onClose={handleClose}
-								TransitionComponent={Fade}
-							>
-								<MenuItem component={Link} to="/nft/allnft">ALL NFT</MenuItem>
-								<MenuItem component={Link} to="/nft/mynft">MY NFT</MenuItem>
-=======
 								anchorEl={anchorEl1}
 								open={open1}
 								onClose={handleClose1}
@@ -111,7 +95,6 @@ function Navigation() {
 							>
 								<MenuItem component={Link} to="/nft/explore">NFT Explore</MenuItem>
 								<MenuItem component={Link} to="/nft/profile">NFT Profile</MenuItem>
->>>>>>> team
 							</Menu>
 							<Button component={Link} to="/dashboard" sx={{ my: 2, color: "white", display: "block" }} size="large">
 								DashBoard
