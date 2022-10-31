@@ -44,24 +44,6 @@ function Counter(props) {
         }
     };
 
-    // const address = ([{number}]) => {
-    //     let number2 = [number];
-    //     let sliceAddressEnd = number2.to.slice(-8);
-    //     let sliceAddressStart = number2.to.slice(0,6);
-    //     let num = sliceAddressStart + "..." + sliceAddressEnd;
-    //     return num;
-    //     console.log(num);
-    // } 
-    // console.log(address)
-    
-    
-    // const num = [number1];
-    //     const sliceAddressEnd = num.to.slice(-8);
-    //     const sliceAddressStart = num.to.slice(0,6);
-    //     if (num.length ==! 0){
-    //         return sliceAddressStart + "..." + sliceAddressEnd;
-    //     }
-
     return (
         <>
             <Button size="small" variant="contained" color="info" onClick={modalOpen}>{number.slice(0, 5) + "..." + number.slice(38, 42)}</Button>

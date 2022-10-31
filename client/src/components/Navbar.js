@@ -14,6 +14,15 @@ function Navigation() {
 		setAnchorEl(null);
 	};
 
+	const [anchorEl1, setAnchorEl1] = React.useState(null);
+	const open1 = Boolean(anchorEl1);
+	const handleClick1 = (event) => {
+		setAnchorEl1(event.currentTarget);
+	};
+	const handleClose1 = () => {
+		setAnchorEl1(null);
+	};
+
 	return (
 		<div className="Navbar">
 			<AppBar position="static">
@@ -67,10 +76,17 @@ function Navigation() {
 								id="fade-button"
 								size="large"
 								sx={{ my: 2, color: "white", display: "block" }}
+<<<<<<< HEAD
 								aria-controls={open ? 'fade-menu' : undefined}
 								aria-haspopup="true"
 								aria-expanded={open ? 'true' : undefined}
 								onClick={handleClick}
+=======
+								aria-controls={open1 ? 'fade-menu' : undefined}
+								aria-haspopup="true"
+								aria-expanded={open1 ? 'true' : undefined}
+								onClick={handleClick1}
+>>>>>>> team
 							>
 								NFT
 							</Button>
@@ -79,6 +95,7 @@ function Navigation() {
 								MenuListProps={{
 									'aria-labelledby': 'fade-button',
 								}}
+<<<<<<< HEAD
 								anchorEl={anchorEl}
 								open={open}
 								onClose={handleClose}
@@ -86,6 +103,15 @@ function Navigation() {
 							>
 								<MenuItem component={Link} to="/nft/allnft">ALL NFT</MenuItem>
 								<MenuItem component={Link} to="/nft/mynft">MY NFT</MenuItem>
+=======
+								anchorEl={anchorEl1}
+								open={open1}
+								onClose={handleClose1}
+								TransitionComponent={Fade}
+							>
+								<MenuItem component={Link} to="/nft/explore">NFT Explore</MenuItem>
+								<MenuItem component={Link} to="/nft/profile">NFT Profile</MenuItem>
+>>>>>>> team
 							</Menu>
 							<Button component={Link} to="/dashboard" sx={{ my: 2, color: "white", display: "block" }} size="large">
 								DashBoard

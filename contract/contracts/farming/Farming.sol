@@ -136,6 +136,10 @@ contract Farming is Ownable, ReentrancyGuard {
 
     /**
      * @notice Adds a new LP farming pool.
+<<<<<<< HEAD
+=======
+     * @dev Can only be called by the multisig contract.
+>>>>>>> team
      * @param _allocPoint Number of allocation points for the new pool.
      * @param _lpToken Address of the LP KIP7 token.
      * @param _withUpdate Whether call "massUpdatePools" operation.
@@ -180,6 +184,10 @@ contract Farming is Ownable, ReentrancyGuard {
 
     /**
      * @notice Update the given pool's PTN allocation point.
+<<<<<<< HEAD
+=======
+     * @dev Can only be called by the multisig contract.
+>>>>>>> team
      * @param _pid The id of the pool. See `poolInfo`.
      * @param _allocPoint New number of allocation points for the pool.
      * @param _withUpdate Whether call "massUpdatePools" operation.
