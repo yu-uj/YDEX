@@ -4,6 +4,11 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import NFTCard from "../components/NFTCard";
+import NFTMint from "../components/NFTMint";
+import { Link } from "react-router-dom";
+
+const Caver = require("caver-js");
+const caver = new Caver(window.klaytn);
 
 const nftSamples = [
   {
@@ -101,9 +106,8 @@ const StyledButton = styled(Button)({
   marginTop: 10,
 });
 
-export default function NFTProfile(props) {
+export default function NFTProfile() {
   
-
   const handleMintNFT = useCallback(() => {
     // mint NFT logic here ...
   });
@@ -132,7 +136,8 @@ export default function NFTProfile(props) {
               0x123...abcd
             </Typography>
 
-            <StyledButton onClick={handleMintNFT}>Mint NFT</StyledButton>
+            <StyledButton component={Link} to="/nft/nftMint">Mint NFT</StyledButton>
+            
           </Box>
         </UpperBox>
         <LowerBox>
