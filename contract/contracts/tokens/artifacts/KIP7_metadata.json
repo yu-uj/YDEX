@@ -1,0 +1,552 @@
+{
+	"compiler": {
+		"version": "0.8.12+commit.f00d7308"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name_",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "symbol_",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					}
+				],
+				"name": "allowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "subtractedValue",
+						"type": "uint256"
+					}
+				],
+				"name": "decreaseAllowance",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "addedValue",
+						"type": "uint256"
+					}
+				],
+				"name": "increaseAllowance",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransfer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransfer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Implementation of the {IKIP7} interface. This implementation is agnostic to the way tokens are created. This means that a supply mechanism has to be added in a derived contract using {_mint}. For a generic mechanism see {KIP7PresetMinterPauser}. We have followed general OpenZeppelin Contracts guidelines: functions revert instead returning `false` on failure. This behavior is nonetheless conventional and does not conflict with the expectations of KIP7 applications. Additionally, an {Approval} event is emitted on calls to {transferFrom}. This allows applications to reconstruct the allowance for all accounts just by listening to said events. Other implementations of the EIP may not emit these events, as it isn't required by the specification. Finally, the non-standard {decreaseAllowance} and {increaseAllowance} functions have been added to mitigate the well-known issues around setting allowances. See {IKIP7-approve}. See http://kips.klaytn.com/KIPs/kip-7-fungible_token",
+			"kind": "dev",
+			"methods": {
+				"allowance(address,address)": {
+					"details": "See {IKIP7-allowance}."
+				},
+				"approve(address,uint256)": {
+					"details": "See {IKIP7-approve}. NOTE: If `amount` is the maximum `uint256`, the allowance is not updated on `transferFrom`. This is semantically equivalent to an infinite approval. Requirements: - `spender` cannot be the zero address."
+				},
+				"balanceOf(address)": {
+					"details": "See {IKIP7-balanceOf}."
+				},
+				"constructor": {
+					"details": "Sets the values for {name} and {symbol}. The default value of {decimals} is 18. To select a different value for {decimals} you should overload it. All two of these values are immutable: they can only be set once during construction."
+				},
+				"decimals()": {
+					"details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5.05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {KIP7} uses, unless this function is overridden; NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IKIP7-balanceOf} and {IKIP7-transfer}."
+				},
+				"decreaseAllowance(address,uint256)": {
+					"details": "Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IKIP7-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`."
+				},
+				"increaseAllowance(address,uint256)": {
+					"details": "Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IKIP7-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address."
+				},
+				"name()": {
+					"details": "Returns the name of the token."
+				},
+				"safeTransfer(address,uint256)": {
+					"details": "See {IKIP7-safeTransfer}. Emits a {Transfer} event Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`. - if `recipient` is a smart contract, it must implement {IKIP7Receiver}"
+				},
+				"safeTransfer(address,uint256,bytes)": {
+					"details": "Same as {xref-KIP7-safeTransfer-address-uint256-}[`safeTransfer`], with an additional `_data` parameter which is forwarded in {IKIP7Receiver-onKIP7Received} to contract recipients. Emits a {Transfer} event"
+				},
+				"safeTransferFrom(address,address,uint256)": {
+					"details": "See {IKIP7-safeTransferFrom}. Emits a {Transfer} event Emits an {Approval} event indicating the updated allowance. This is not required by the KIP. See the note at the beginning of {KIP7}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`. - if `recipient` is a smart contract, it must implement {IKIP7Receiver}"
+				},
+				"safeTransferFrom(address,address,uint256,bytes)": {
+					"details": "Same as {xref-KIP7-safeTransferFrom-address-uint256-}[`safeTransferFrom`], with an additional `_data` parameter which is forwarded in {IKIP7Receiver-onKIP7Received} to contract recipients. Emits a {Transfer} event Emits an {Approval} event indicating the updated allowance."
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IKIP13-supportsInterface}."
+				},
+				"symbol()": {
+					"details": "Returns the symbol of the token, usually a shorter version of the name."
+				},
+				"totalSupply()": {
+					"details": "See {IKIP7-totalSupply}."
+				},
+				"transfer(address,uint256)": {
+					"details": "See {IKIP7-transfer}. Requirements: - `to` cannot be the zero address. - the caller must have a balance of at least `amount`."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "See {IKIP7-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {KIP7}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `amount`. - the caller must have allowance for ``from``'s tokens of at least `amount`."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/tokens/KIP7.sol": "KIP7"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/IKIP13.sol": {
+			"keccak256": "0x7a14f5f26986bd1ff8cdac9f1892594714898f6bc30e27f8630fdd0420813df8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b9d87ce0ca1975862d0f34202578f2dbb1d9057f2d9fd27672703fcb7ababf6f",
+				"dweb:/ipfs/QmdTEHGuYcKN5Upp7gy7bHkcRGu7iDzsFJrxuPSStR9DLz"
+			]
+		},
+		"contracts/interfaces/IKIP7.sol": {
+			"keccak256": "0xa76bc0f996e8e475cae3f756dce521d0fab8f1b1e49b33fc79b096f86606463d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://08b3808724b9a02d3d4fd911446579c4b42fcc76dd07795e74875acb22115537",
+				"dweb:/ipfs/Qmf7HU4DTj7NFSdWac22P3Lp8Dgo7a4DotvdGLJDLzmKk1"
+			]
+		},
+		"contracts/interfaces/IKIP7Metadata.sol": {
+			"keccak256": "0xdb54e2f401900e6e7b57cc5dddebd23e9176fe897dcd477f4c6ab471ace71c80",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://14471a04027df9ca5b804a2b76f75220e835f410c661f8640a499aa4e273bff6",
+				"dweb:/ipfs/QmcHqJKHa2WuDmTQyuCZpuw6NBfKABe8FZjtNR6t6vfQbv"
+			]
+		},
+		"contracts/interfaces/IKIP7Receiver.sol": {
+			"keccak256": "0x4ce5a3da376b3f6e0be2a02d0e1fd784918029dadf456fff55a9ab6cd256259c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b631bcfe96e35e9d19fd523d35a995a028ce1cb903016a6e1994797e5530aaf0",
+				"dweb:/ipfs/QmShJ3v7PAwDEjkHkWfCbH5hAmbCBYfsNXdJAZmGz2f8TV"
+			]
+		},
+		"contracts/tokens/KIP7.sol": {
+			"keccak256": "0x1b58e3df3f1d39bc9663869134e79215615642d58d9d0e2385f5cf73b766997c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a9f554968784953aa69167d9787171a59cae753d592abbb15ea60ea109c36c5c",
+				"dweb:/ipfs/QmYDZBiKAeJ7ZSDZ7t2e69wu9cCubXzNpgWi1FAAQc99Ws"
+			]
+		},
+		"contracts/utils/Address.sol": {
+			"keccak256": "0xb57dabefc531c2208339cfaae62c123c2794a4a74072c6e7c52f139d559385b4",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://4e9101d24081d872d994172bd11e5993d2d19c18a82b839d6c0b1220117addfd",
+				"dweb:/ipfs/Qmdtdktp8wD72pnowdvGQJ6JPaM9DJNfzjb8JdBrWVuqjd"
+			]
+		},
+		"contracts/utils/Context.sol": {
+			"keccak256": "0x2d9821ede311a3c16183811be8bdc666e88c69d9d50321e3dff025fe7630d373",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3719bc7fe267a79e84641b88901b10dbc58d27edaea65b7811d39ca7d2a3e409",
+				"dweb:/ipfs/QmRDDpaByM3MhWs61gXmfaxoygifCJhLvguEFDGahhWMfX"
+			]
+		},
+		"contracts/utils/KIP13.sol": {
+			"keccak256": "0xcfb579da54601f708c12c73288c2ecca9991470fb934364f99441c95da81ae9f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://16104bfba377935222fa7fb317cb7260c4fc46f6080e1cdcc5f40eb99ec00e84",
+				"dweb:/ipfs/QmQGU3mzZwLBq5xDu8MUiTfhv2MTHoDVTCq7tQJuv2Gwi6"
+			]
+		}
+	},
+	"version": 1
+}

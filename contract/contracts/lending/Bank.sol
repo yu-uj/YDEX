@@ -322,6 +322,11 @@ contract Bank {
         return repayKlay;
     }
 
+    function myDeposit(address token) public view returns (uint256) {
+        uint256 mydeposit = accounts[msg.sender][token].deposit;
+        return mydeposit;
+    }
+
     function _balance(address token, address account)
         private
         view

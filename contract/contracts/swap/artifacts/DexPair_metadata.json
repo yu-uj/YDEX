@@ -1,0 +1,1074 @@
+{
+	"compiler": {
+		"version": "0.8.12+commit.f00d7308"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "InsufficientAmount",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "InsufficientLiquidity",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "InvalidAddressParameters",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Locked",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Overflow",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "Unauthorized",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount0",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount1",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "Burn",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount0",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount1",
+						"type": "uint256"
+					}
+				],
+				"name": "Mint",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount0In",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount1In",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount0Out",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount1Out",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "Swap",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint112",
+						"name": "reserve0",
+						"type": "uint112"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint112",
+						"name": "reserve1",
+						"type": "uint112"
+					}
+				],
+				"name": "Sync",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "DOMAIN_SEPARATOR",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "MINIMUM_LIQUIDITY",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "PERMIT_TYPEHASH",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "allowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "burn",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount0",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount1",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "factory",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getReserves",
+				"outputs": [
+					{
+						"internalType": "uint112",
+						"name": "_reserve0",
+						"type": "uint112"
+					},
+					{
+						"internalType": "uint112",
+						"name": "_reserve1",
+						"type": "uint112"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_blockTimestampLast",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_token0",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_token1",
+						"type": "address"
+					}
+				],
+				"name": "initialize",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "kLast",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "mint",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "nonces",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "v",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "r",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "s",
+						"type": "bytes32"
+					}
+				],
+				"name": "permit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "price0CumulativeLast",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "price1CumulativeLast",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransfer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransfer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "skim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount0Out",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount1Out",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "swap",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sync",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token0",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token1",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"approve(address,uint256)": {
+					"details": "See {IKIP7-approve}. NOTE: If `amount` is the maximum `uint256`, the allowance is not updated on `transferFrom`. This is semantically equivalent to an infinite approval. Requirements: - `spender` cannot be the zero address."
+				},
+				"burn(address)": {
+					"details": "this low-level function should be called from a contract which performs important safety checks",
+					"params": {
+						"to": "token0 and token1 recipient address after LP tokens are destroyed"
+					}
+				},
+				"initialize(address,address)": {
+					"details": "called once by the factory at time of deployment. Initializes pair contract with corresponding tokens",
+					"params": {
+						"_token0": "Address of the token with the lower sort order.",
+						"_token1": "Address of the token with the higher sort order."
+					}
+				},
+				"mint(address)": {
+					"details": "this low-level function should be called from a contract which performs important safety checks",
+					"params": {
+						"to": "Address of LP tokens recipient."
+					}
+				},
+				"permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": {
+					"details": "See {IKIP7Permit-permit}. Sets `value` as the allowance of `spender` over ``owner``'s tokens, given ``owner``'s signed approval. IMPORTANT: The same issues {IKIP7-approve} has related to transaction ordering also apply here. Emits an {Approval} event. Requirements: - `spender` cannot be the zero address. - `deadline` must be a timestamp in the future. - `v`, `r` and `s` must be a valid `secp256k1` signature from `owner` over the EIP712-formatted function arguments. - the signature must use ``owner``'s current nonce (see {nonces}). For more information on the signature format, see the https://eips.ethereum.org/EIPS/eip-2612#specification[relevant EIP section]."
+				},
+				"safeTransfer(address,uint256)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`."
+				},
+				"safeTransfer(address,uint256,bytes)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`."
+				},
+				"safeTransferFrom(address,address,uint256)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance."
+				},
+				"safeTransferFrom(address,address,uint256,bytes)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance."
+				},
+				"skim(address)": {
+					"details": "skim() functions as a recovery mechanism in case enough tokens are sent to an pair to overflow the two uint112 storage slots for reserves, which could otherwise cause trades to fail. skim() allows a user to withdraw the difference between the current balance of the pair and 2112 − 1 to the caller, if that difference is greater than 0."
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IKIP13-supportsInterface}."
+				},
+				"swap(uint256,uint256,address,bytes)": {
+					"details": "this low-level function should be called from a contract which performs important safety checks Emits Swap, Sync events.",
+					"params": {
+						"amount0Out": "Amount of token0 to be sent to the `to` recipient.",
+						"amount1Out": "Amount of token1 to be sent to the `to` recipient.",
+						"data": "Arbitary length data to be passed to the `uniswapV2Call` callback function. Used in case of flash swap.",
+						"to": "Address of tokens recipient. If data.length is greater than 0, the contract transfers the tokens and then calls the `uniswapV2Call` callback function on the `to` address"
+					}
+				},
+				"sync()": {
+					"details": "sync() functions as a recovery mechanism in the case that a token asynchronously deflates the balance of a pair. In this case, trades will receive sub-optimal rates, and if no liquidity provider is willing to rectify the situation, the pair is stuck. sync() exists to set the reserves of the contract to the current balances, providing a somewhat graceful recovery from this situation."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"Sync(uint112,uint112)": {
+					"notice": "Emitted each time reserves are updated via `mint`, `burn`, `swap`, or `sync` functions."
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"allowance(address,address)": {
+					"notice": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default."
+				},
+				"balanceOf(address)": {
+					"notice": "Returns the amount of tokens owned by `account`."
+				},
+				"burn(address)": {
+					"notice": "Destroys pool LP tokens. Emits `Burn`, `Sync`, `Transfer` events."
+				},
+				"factory()": {
+					"notice": "Returns the factory address."
+				},
+				"getReserves()": {
+					"notice": "Returns the reserves of token0 and token1 used to price trades and distribute liquidity. Also returns the block.timestamp (mod 2**32) of the last block during which an interaction occured for the pair."
+				},
+				"kLast()": {
+					"notice": "Returns the product of the reserves as of the most recent liquidity event."
+				},
+				"mint(address)": {
+					"notice": "Creates pool LP tokens. Emits `Mint`, `Sync`, `Transfer` events."
+				},
+				"skim(address)": {
+					"notice": "force balances to match reserves"
+				},
+				"swap(uint256,uint256,address,bytes)": {
+					"notice": "Swaps tokens. For regular swaps, data.length must be 0."
+				},
+				"sync()": {
+					"notice": "force reserves to match balances"
+				},
+				"token0()": {
+					"notice": "Returns the address of the pair token with the lower sort order."
+				},
+				"token1()": {
+					"notice": "Returns the address of the pair token with the higher sort order."
+				},
+				"totalSupply()": {
+					"notice": "Returns the amount of tokens in existence."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/swap/DexPair.sol": "DexPair"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/IDexCallee.sol": {
+			"keccak256": "0xd8b1dfddde31dd97ed0459a34bf2adeb8c72e993e1ec61a6feb73f2bc75c64d5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1472adb551bdf4fff82e8f9265272368870797c0d5ac6b5ae7cce594c9b2b420",
+				"dweb:/ipfs/QmTN3Xr8QrwUJz2AofDpEnJmK1LV9UsN2Svv1m1LeF2hPt"
+			]
+		},
+		"contracts/interfaces/IDexFactory.sol": {
+			"keccak256": "0x140269cf47872c1307e3feeb3d38dd1d998c536d06cd1bf10293ac4bd8f3bb89",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9a73742e25fa1c88957cb605ba2dee751e14c0c0b688c2475e697c82898b36bc",
+				"dweb:/ipfs/Qmc3pMYzh3Bu7dUJZwn3x13wnKqi1MYTWw6cKbjGVAYxms"
+			]
+		},
+		"contracts/interfaces/IDexKIP7.sol": {
+			"keccak256": "0x8c1d02db5d95890a753f8939dfdb080da7605f22bb2f2e2511b3c2c9a3371913",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5815bbd550619b73e7b454dd2f00bfefdb5d5f9f19117b20dcaf43c5210615c7",
+				"dweb:/ipfs/QmaFsfiy1HZhLZfgEDvTrWr1p7S2NKvq81QKTqZPWLDEfs"
+			]
+		},
+		"contracts/interfaces/IDexPair.sol": {
+			"keccak256": "0x8ed5bd49ab395486a56c9091754d24e97f2379b17cb22c870636100e8929496e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c299d9ca0b5eefcef749a53638baec061999a337d86299da5b5e400d4eb751b9",
+				"dweb:/ipfs/QmTQoziMn6MqcUMdjqT37MtyZo43p7dkYCicxqa2aozjft"
+			]
+		},
+		"contracts/interfaces/IKIP13.sol": {
+			"keccak256": "0x7a14f5f26986bd1ff8cdac9f1892594714898f6bc30e27f8630fdd0420813df8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b9d87ce0ca1975862d0f34202578f2dbb1d9057f2d9fd27672703fcb7ababf6f",
+				"dweb:/ipfs/QmdTEHGuYcKN5Upp7gy7bHkcRGu7iDzsFJrxuPSStR9DLz"
+			]
+		},
+		"contracts/interfaces/IKIP7.sol": {
+			"keccak256": "0xa76bc0f996e8e475cae3f756dce521d0fab8f1b1e49b33fc79b096f86606463d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://08b3808724b9a02d3d4fd911446579c4b42fcc76dd07795e74875acb22115537",
+				"dweb:/ipfs/Qmf7HU4DTj7NFSdWac22P3Lp8Dgo7a4DotvdGLJDLzmKk1"
+			]
+		},
+		"contracts/interfaces/IKIP7Metadata.sol": {
+			"keccak256": "0xdb54e2f401900e6e7b57cc5dddebd23e9176fe897dcd477f4c6ab471ace71c80",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://14471a04027df9ca5b804a2b76f75220e835f410c661f8640a499aa4e273bff6",
+				"dweb:/ipfs/QmcHqJKHa2WuDmTQyuCZpuw6NBfKABe8FZjtNR6t6vfQbv"
+			]
+		},
+		"contracts/interfaces/IKIPReciever.sol": {
+			"keccak256": "0x3706d09b9c27a68a6edf53672ce27bd0294e3086ebaa7422469787d5fba33cb3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3110b5ec8e13a2a743b7953e3abc4053069aec6318c6e1846167dda7b8a0c11e",
+				"dweb:/ipfs/QmUWDaHCXioaMvwfZiEjAT8V48n8DmCrbiADtKzR7ciYp3"
+			]
+		},
+		"contracts/libraries/Math.sol": {
+			"keccak256": "0x17e91f2ff6751d47d2addec00767fb0d5ce4b7b7991677c1942f11fabe6c338e",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://12d648600dd5e3b48c98ca7800decf2f773a97454f6b957ad459d3687b888c9d",
+				"dweb:/ipfs/QmdFbcStJ4FKQMMZZJVBU5THwabSSZMWmin6zumAwdhkpS"
+			]
+		},
+		"contracts/libraries/UQ112x112.sol": {
+			"keccak256": "0x33b30199f66af4a53ea537da5b331a7ff6cccf31a3fe0faedea375f9c14a56e0",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://014e58e9bfbd6deb76891d4458e6090c6d98f31c7c633e904bd498a306dff0d6",
+				"dweb:/ipfs/QmZTh3knA6iwvs5ewC1cCfDCTMswNY4MjWZAgu4VuAeE6P"
+			]
+		},
+		"contracts/swap/DexKIP7.sol": {
+			"keccak256": "0xbca294d9df50c4e70f480b37b01d9bbfb74bb8d15beced95db836ab91d388223",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://ed7b0e47e9342ff0f92e8222919a61a70763323fcb1b94cd5052260f7ea09997",
+				"dweb:/ipfs/QmZ2tpiJupEUP9qgPekChB8B1uiLPMQFADcPMGGQEjRk4s"
+			]
+		},
+		"contracts/swap/DexPair.sol": {
+			"keccak256": "0xb93cd58137ceb67c35fb4292ba850e8e9299dcfb9acea65a3f61d1c4fe4e5239",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://91ff80ff09f8246c30f8333f3d648d633b2afe7175595ab7b4ec46bdd2bcd609",
+				"dweb:/ipfs/QmfJ4mKcCc6sepKeT6RgqFR8KeRfoDqfjKCnN4SYmZAMr3"
+			]
+		},
+		"contracts/swap/Errors.sol": {
+			"keccak256": "0x03a72d32a65c0b9a4ae5690cd0e0466ef281abe6f125ba7b53b8288796ccf095",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://cb67fdff14bee344b8d6a0704175bdb81fdd74358db53f6c4cb28c8280dc5cd5",
+				"dweb:/ipfs/Qmbi4EkKfSGpYL4uisJkTKCtdLGnq3b1y7HykY5i6vguRS"
+			]
+		},
+		"contracts/utils/Address.sol": {
+			"keccak256": "0xb57dabefc531c2208339cfaae62c123c2794a4a74072c6e7c52f139d559385b4",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://4e9101d24081d872d994172bd11e5993d2d19c18a82b839d6c0b1220117addfd",
+				"dweb:/ipfs/Qmdtdktp8wD72pnowdvGQJ6JPaM9DJNfzjb8JdBrWVuqjd"
+			]
+		},
+		"contracts/utils/KIP13.sol": {
+			"keccak256": "0xcfb579da54601f708c12c73288c2ecca9991470fb934364f99441c95da81ae9f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://16104bfba377935222fa7fb317cb7260c4fc46f6080e1cdcc5f40eb99ec00e84",
+				"dweb:/ipfs/QmQGU3mzZwLBq5xDu8MUiTfhv2MTHoDVTCq7tQJuv2Gwi6"
+			]
+		}
+	},
+	"version": 1
+}

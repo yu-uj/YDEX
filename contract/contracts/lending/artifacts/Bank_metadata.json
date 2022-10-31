@@ -306,6 +306,25 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "myDeposit",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "priceOracle",
 				"outputs": [
@@ -486,7 +505,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -501,11 +520,11 @@
 			]
 		},
 		"contracts/lending/Bank.sol": {
-			"keccak256": "0x2cb1b743213c3e1f366a62f9174991840340e4da69f15fc26d45aa190abbab7d",
+			"keccak256": "0x4f9c1cc1db1757fd816f82b7f7b8c742cc5ff9b24439eef89e34c475bc8b60e7",
 			"license": "Unlicense",
 			"urls": [
-				"bzz-raw://09c61b6ca8673f6589a8e36fb2ef1a8b202a41f93ed56736cfaf5d1d5156bffe",
-				"dweb:/ipfs/QmfQLXudakKwHJB7xQFECcGrm9TZFEPG2weEiLUrPVXmn2"
+				"bzz-raw://21b56d6dd53d5b7f56cda0c0d0427afbebe993e08cd41cb5f4dd50f87b6f568f",
+				"dweb:/ipfs/QmPR3qVGohFXJFaxjVKGZ7o1XR5waHUucmZgLYarQa6CEx"
 			]
 		},
 		"contracts/lending/interfaces/IPriceOracle.sol": {
