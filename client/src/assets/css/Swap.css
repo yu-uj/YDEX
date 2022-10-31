@@ -1,0 +1,81 @@
+.box-model {
+
+  width: 650px;
+  margin: 0 auto; /* 페이지 중앙 정렬 */
+  margin-top: 4rem;
+  border: 3rem solid #9a9ca4;
+  border-radius: 11%;
+  background: #9a9ca4;
+}
+
+.former-wrapper{
+
+  min-height: 2.5rem;
+  background: #9a9ca4;
+  text-align: left;
+  padding-bottom: 13px;
+}
+
+.form-wrapper {
+  color: black;
+  background: white;
+  min-height: 10rem;
+  border-radius: 13px;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.todoo-wrapper {
+  min-height: 3rem;
+  background: #9a9ca4;
+  padding: 20px 0;
+}
+
+.todo-wrapper {
+  min-height: 1rem;
+  background: #9a9ca4;
+  text-align: left;
+  padding-bottom: 13px;
+}
+
+.todos-wrapper {
+  color: black;
+  background: white;
+  min-height: 10rem;
+  border-radius: 13px;
+  text-align: justify;
+}
+
+.button-wrapper {
+  min-height: 2.8rem;
+  background: #9a9ca4;
+}
+
+.todos-wrap {
+  padding: 20px;
+}
+.form-wrap {
+  padding: 20px;
+}
+.number {
+ text-align: right;
+ border: 0px;
+}
+.about {
+ text-align: right;
+}
+
+.swapPageInfo {
+  text-align: center;
+  font-size: 13px;
+}
+
+.swapInfo {
+  padding-left: 15px;
+  font-size: 14px;
+}
+
+.st {
+  /* color: rgb(56, 86, 207); */
+  font-style: italic;
+}
