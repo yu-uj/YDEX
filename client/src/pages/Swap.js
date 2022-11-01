@@ -3,17 +3,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../assets/css/Swap.css";
 import {
-  Modal,
-  Button,
-  FormControl,
-  Typography,
-  Box,
-  MenuItem,
-  Grid,
-  Paper,
-  Select,
-  ButtonGroup,
+  Modal, Button, FormControl, Typography, Box, MenuItem, Grid, Paper, Select, Stack, ButtonGroup
 } from "@mui/material";
+import ArrowDropDownCircleRoundedIcon from '@mui/icons-material/ArrowDropDownCircleRounded';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { indigo, blueGrey, grey } from '@mui/material/colors';
 
 const style = {
   position: 'absolute',
@@ -26,6 +20,21 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+const theme = createTheme({
+  palette: {
+    info: {
+      main: grey[600],
+      contrastText: '#fff',
+    },
+    primary: {
+      light: indigo[200],
+      main: indigo[400],
+      darker: indigo[800],
+      contrastText: '#fff'
+    },
+  },
+});
 
 const Caver = require("caver-js");
 const caver = new Caver(window.klaytn);
@@ -246,238 +255,244 @@ const Swap = ({ form, former, children, todo, todoo, teacher }) => {
         <p>보유하고 있는 <b>JDEX 토큰</b>과 <b>KIP7 토큰</b>을 <br /> 원하는 다른 토큰과 <b>스왑</b> 할 수 있습니다.</p>
       </div>
 
-      <div className="box-model">
-        <div className="former-wrapper">
-          {former}
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={6}><h4 className="st">제공</h4></Grid>
-              <Grid item xs={6}>
-                <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                  <Button variant="contained" onClick={handleInputquarter}>25%</Button>
-                  <Button variant="contained" onClick={handleInputhalf}>50%</Button>
-                  <Button variant="contained" onClick={handleInputthreequarters}>75%</Button>
-                  <Button variant="contained" onClick={handleInputMax}>최대치</Button>
-                </ButtonGroup>
+      <ThemeProvider theme={theme}>
+        <div className="box-model">
+          <div className="former-wrapper">
+            {former}
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={3}>
+                <Grid item xs={6}><h4 className="st">제공</h4></Grid>
+                <Grid item xs={6}>
+                  <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                    <Button variant="contained" onClick={handleInputquarter}>25%</Button>
+                    <Button variant="contained" onClick={handleInputhalf}>50%</Button>
+                    <Button variant="contained" onClick={handleInputthreequarters}>75%</Button>
+                    <Button variant="contained" onClick={handleInputMax}>최대치</Button>
+                  </ButtonGroup>
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
-        </div>
+            </Box>
+          </div>
 
-        <section className="form-wrapper">
-          {form}
-          <Box sx={{ flexGrow: 1 }} className="form-wrap">
+          <section className="form-wrapper">
+            {form}
+            <Box sx={{ flexGrow: 1 }} className="form-wrap">
 
-            <Grid container spacing={3}>
-              <Grid item={true} xs={9}>
-                <>
-                  <Button variant="contained" onClick={handleCreate}>
-                    토큰
-                  </Button>
+              <Grid container spacing={3}>
+                <Grid item={true} xs={9}>
+                  <>
+                    <Button variant="contained" onClick={handleCreate}>
+                      토큰
+                    </Button>
 
-                  <Modal
-                    open={create}
-                    onClose={() => createClose({ isSave: false })}
-                  >
-                    <Box sx={style}>
-                      <Typography id="modal-modal-title" variant="h6" component="h2">제공 토큰</Typography>
+                    <Modal
+                      open={create}
+                      onClose={() => createClose({ isSave: false })}
+                    >
+                      <Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">제공 토큰</Typography>
 
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        <Box
-                          component="form"
-                          sx={{
-                            '& > :not(style)': { width: 500, maxWidth: '100%' },
-                          }}
-                          noValidate
-                          autoComplete="off">
-                          <FormControl fullWidth size="small" margin="dense">
-                            <Typography>Token Select</Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                          <Box
+                            component="form"
+                            sx={{
+                              '& > :not(style)': { width: 500, maxWidth: '100%' },
+                            }}
+                            noValidate
+                            autoComplete="off">
+                            <FormControl fullWidth size="small" margin="dense">
+                              <Typography>Token Select</Typography>
 
-                            <Select
-                              sx={{ mt: 1 }}
-                              onChange={handleSwap1}
-                              value={selected1}
-                              displayEmpty
+                              <Select
+                                sx={{ mt: 1 }}
+                                onChange={handleSwap1}
+                                value={selected1}
+                                displayEmpty
+                              >
+                                <MenuItem value=""><em>---토큰 선택---</em></MenuItem>
+                                {options1}
+                              </Select>
+                            </FormControl>
+                          </Box>
+
+                          <br />
+                          <Stack direction="row" justifyContent="flex-end" spacing={2}>
+                            <Button
+                              variant="contained"
+                              color="info"
+                              onClick={() => createClose({ isSave: false })}
                             >
-                              <MenuItem value=""><em>---토큰 선택---</em></MenuItem>
-                              {options1}
-                            </Select>
-                          </FormControl>
-                        </Box>
-
-                        <Button
-                          variant="contained"
-                          onClick={() => createClose({ isSave: false })}
-                        >
-                          Close
-                        </Button>
-                        <Button
-                          variant="contained"
-                          onClick={() => createClose({ isSave: true })}
-                        >
-                          Save Changes
-                        </Button>
-                      </Typography>
-                    </Box>
-                  </Modal>
-                </>
-              </Grid>
-              <Grid item={true} xs={3}>
-                <h3 className="about">{choice1}</h3>
-              </Grid>
-            </Grid>
-            <Grid container spacing={3}>
-              <Grid item={true} className="about" xs={12}>
-                <h3>
-                  <input
-                    className="number"
-                    placeholder="0.0000"
-                    onChange={(e) => setAmount(e.target.value)}
-                    onKeyPress={(event) => {
-                      if (!/[0-9]/.test(event.key)) {
-                        event.preventDefault();
-                      }
-                    }}
-                    value={(amount)}
-                  />
-                </h3>
-              </Grid>
-            </Grid>
-
-            <Grid container spacing={3}>
-              <Grid item={true} xs={4}><b className="swapInfo">잔액</b></Grid>
-              <Grid item={true} className="about" xs={8}>
-                {Number(tokenAmount1).toFixed(3)}
-              </Grid>
-            </Grid>
-          </Box>
-        </section>
-        <br />
-
-        <section className="todoo-wrapper">
-          {todoo}
-          <Button variant="contained">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
-              fill="currentColor"
-              className="bi bi-arrow-down-circle-fill"
-              viewBox="0 0 16 16"
-            >
-              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-            </svg>
-          </Button>
-        </section>
-
-        <section className="todo-wrapper">
-          {todo}
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={3}>
-              <Grid item={true} xs={12}><h4 className="st">수령</h4></Grid>
-            </Grid>
-          </Box>
-        </section>
-
-        <section className="todos-wrapper">
-          {children}
-          <Box sx={{ flexGrow: 1 }} className="todos-wrap">
-
-            <Grid container spacing={3}>
-              <Grid item={true} xs={9}>
-                <>
-                  <Button variant="contained" onClick={handleShow}>
-                    토큰
-                  </Button>
-
-                  <Modal
-                    open={show}
-                    onClose={() => handleClose({ isSave: false })}
-                  >
-                    <Box sx={style}>
-                      <Typography id="modal-modal-title" variant="h6" component="h2">수령 토큰</Typography>
-
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        <Box
-                          component="form"
-                          sx={{
-                            '& > :not(style)': { width: 500, maxWidth: '100%' },
-                          }}
-                          noValidate
-                          autoComplete="off">
-                          <FormControl fullWidth size="small" margin="dense">
-                            <Typography>Token Select</Typography>
-                            <Select
-                              sx={{ mt: 1 }}
-                              onChange={handleSwap2}
-                              value={selected2}
-                              displayEmpty
+                              Close
+                            </Button>
+                            <Button
+                              variant="contained"
+                              color="info"
+                              onClick={() => createClose({ isSave: true })}
                             >
-                              <MenuItem value=""><em>---토큰 선택---</em></MenuItem>
-                              {options2}
-                            </Select>
-                          </FormControl>
-                        </Box>
+                              Save Changes
+                            </Button>
+                          </Stack>
 
-                        <Button
-                          variant="contained"
-                          onClick={() => handleClose({ isSave: false })}
-                        >
-                          Close
-                        </Button>
-                        <Button
-                          variant="contained"
-                          onClick={() => handleClose({ isSave: true })}
-                        >
-                          Save Changes
-                        </Button>
-                      </Typography>
-                    </Box>
-                  </Modal>
-                </>
+                        </Typography>
+                      </Box>
+                    </Modal>
+                  </>
+                </Grid>
+                <Grid item={true} xs={3}>
+                  <h3 className="about">{choice1}</h3>
+                </Grid>
               </Grid>
-              <Grid item={true} xs={3}>
-                <h3 className="about">{choice2}</h3>
+              <Grid container spacing={3}>
+                <Grid item={true} className="about" xs={12}>
+                  <h3>
+                    <input
+                      className="number"
+                      placeholder="0.0000"
+                      onChange={(e) => setAmount(e.target.value)}
+                      onKeyPress={(event) => {
+                        if (!/[0-9]/.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }}
+                      value={(amount)}
+                    />
+                  </h3>
+                </Grid>
               </Grid>
 
-            </Grid>
-
-            <Grid container spacing={3}>
-              <Grid item={true} className="about" xs={12}>
-                <h3>
-                  <input
-                    className="number"
-                    value={Number(save).toFixed(5)}
-                    placeholder="0.0000"
-                    onKeyPress={(event) => {
-                      if (!/[0-9]/.test(event.key)) {
-                        event.preventDefault();
-                      }
-                    }}
-                  />
-                </h3>
+              <Grid container spacing={3}>
+                <Grid item={true} xs={4}><b className="swapInfo">잔액</b></Grid>
+                <Grid item={true} className="about" xs={8}>
+                  {Number(tokenAmount1).toFixed(3)}
+                </Grid>
               </Grid>
-            </Grid>
-
-            <Grid container spacing={3}>
-              <Grid item={true} xs={4}><b className="swapInfo">잔액</b></Grid>
-              <Grid item={true} className="about" xs={8}>
-                {Number(tokenAmount2).toFixed(3)}
-              </Grid>
-            </Grid>
-          </Box>
-        </section>
-
-        <div className="button-wrapper">
-          {teacher}
+            </Box>
+          </section>
           <br />
-          <div className="d-grid gap-2">
-            <Button variant="contained" size="lg" onClick={swap}>
-              Swap
+
+          <section className="todoo-wrapper">
+            {todoo}
+            <Button variant="contained">
+              <ArrowDropDownCircleRoundedIcon fontSize="large" />
             </Button>
+          </section>
+
+          <section className="todo-wrapper">
+            {todo}
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={3}>
+                <Grid item={true} xs={12}><h4 className="st">수령</h4></Grid>
+              </Grid>
+            </Box>
+          </section>
+
+          <section className="todos-wrapper">
+            {children}
+            <Box sx={{ flexGrow: 1 }} className="todos-wrap">
+
+              <Grid container spacing={3}>
+                <Grid item={true} xs={9}>
+                  <>
+                    <Button variant="contained" onClick={handleShow}>
+                      토큰
+                    </Button>
+
+                    <Modal
+                      open={show}
+                      onClose={() => handleClose({ isSave: false })}
+                    >
+                      <Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">수령 토큰</Typography>
+
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                          <Box
+                            component="form"
+                            sx={{
+                              '& > :not(style)': { width: 500, maxWidth: '100%' },
+                            }}
+                            noValidate
+                            autoComplete="off">
+                            <FormControl fullWidth size="small" margin="dense">
+                              <Typography>Token Select</Typography>
+                              <Select
+                                sx={{ mt: 1 }}
+                                onChange={handleSwap2}
+                                value={selected2}
+                                displayEmpty
+                              >
+                                <MenuItem value=""><em>---토큰 선택---</em></MenuItem>
+                                {options2}
+                              </Select>
+                            </FormControl>
+                          </Box>
+
+                          <br />
+                          <Stack direction="row" justifyContent="flex-end" spacing={2}>
+                            <Button
+                              variant="contained"
+                              color="info"
+                              onClick={() => handleClose({ isSave: false })}
+                            >
+                              Close
+                            </Button>
+                            <Button
+                              variant="contained"
+                              color="info"
+                              onClick={() => handleClose({ isSave: true })}
+                            >
+                              Save Changes
+                            </Button>
+                          </Stack>
+
+                        </Typography>
+                      </Box>
+                    </Modal>
+                  </>
+                </Grid>
+                <Grid item={true} xs={3}>
+                  <h3 className="about">{choice2}</h3>
+                </Grid>
+
+              </Grid>
+
+              <Grid container spacing={3}>
+                <Grid item={true} className="about" xs={12}>
+                  <h3>
+                    <input
+                      className="number"
+                      value={Number(save).toFixed(5)}
+                      placeholder="0.0000"
+                      onKeyPress={(event) => {
+                        if (!/[0-9]/.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }}
+                    />
+                  </h3>
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={3}>
+                <Grid item={true} xs={4}><b className="swapInfo">잔액</b></Grid>
+                <Grid item={true} className="about" xs={8}>
+                  {Number(tokenAmount2).toFixed(3)}
+                </Grid>
+              </Grid>
+            </Box>
+          </section>
+
+          <div className="button-wrapper">
+            {teacher}
+            <br />
+            <div className="d-grid gap-2">
+              <Button variant="contained" size="lg" onClick={swap}>
+                Swap
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      </ThemeProvider>
+
     </div>
 
   );

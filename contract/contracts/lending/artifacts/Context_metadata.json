@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.12+commit.f00d7308"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/lending/PriceOracle.sol": "Context"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/lending/PriceOracle.sol": {
+			"keccak256": "0x44cb4aeac539b5b94abf01acd5203235b1ab026269a7281a3c2c2509e7ad0d99",
+			"license": "Unlicense",
+			"urls": [
+				"bzz-raw://cc7d681e7ad0043393783949f58ec24a8500816993d5b3370d92c3a25f497a1b",
+				"dweb:/ipfs/QmQzsuxGZuuZJHzCgTy6385KTF3TkvRquqaPyZE39SgveE"
+			]
+		}
+	},
+	"version": 1
+}
