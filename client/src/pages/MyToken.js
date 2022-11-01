@@ -1,8 +1,10 @@
-import { Button, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Typography, TextField } from '@mui/material';
+import { Button, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Typography, TextField, Stack } from '@mui/material';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import '../assets/css/Page.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { indigo, blueGrey, grey } from '@mui/material/colors';
 
 const style = {
   position: 'absolute',
@@ -15,6 +17,21 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+const theme = createTheme({
+  palette: {
+    info: {
+      main: grey[600],
+      contrastText: '#fff',
+    },
+    primary: {
+      light: indigo[200],
+      main: indigo[400],
+      darker: indigo[800],
+      contrastText: '#fff'
+    },
+  },
+});
 
 const Caver = require('caver-js');
 const caver = new Caver(window.klaytn);
@@ -149,135 +166,141 @@ function MyToken() {
       </div>
       <br />
       <br />
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="caption table">
-          <TableHead>
-            <TableRow>
-              <TableCell><strong className='mlp'>Token name</strong></TableCell>
-              <TableCell align="right"><strong className='mlp'>Amount</strong></TableCell>
-              <TableCell align="right"><strong className='mlp'>Transfer</strong></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell component="th" scope="row"><strong className='myklay'>KLAY</strong></TableCell>
-              <TableCell align="right"><strong className='mnum'>{Number(balance).toFixed(1)}</strong></TableCell>
-              <TableCell align="right">
-                <Button variant="contained" onClick={handleShow1}>Transfer</Button>
-              </TableCell>
-            </TableRow>
-            {tokendata.map((el) => (
-
-              <TableRow key={el.token_name}>
-                <TableCell component="th" scope="row"><strong className='mytname'>{el.token_name}</strong></TableCell>
-                <TableCell align="right"><strong className='mnum'>{Number(el.token_amount).toFixed(1)}</strong></TableCell>
+      <ThemeProvider theme={theme}>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="caption table">
+            <TableHead>
+              <TableRow>
+                <TableCell><strong className='mlp'>Token name</strong></TableCell>
+                <TableCell align="right"><strong className='mlp'>Amount</strong></TableCell>
+                <TableCell align="right"><strong className='mlp'>Transfer</strong></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell component="th" scope="row"><strong className='myklay'>KLAY</strong></TableCell>
+                <TableCell align="right"><strong className='mnum'>{Number(balance).toFixed(1)}</strong></TableCell>
                 <TableCell align="right">
-                  <Button variant="outlined" onClick={() => handleShow(el)}>Transfer
-                  </Button>
+                  <Button variant="contained" onClick={handleShow1}>Transfer</Button>
                 </TableCell>
               </TableRow>
-            ))
-            }
-          </TableBody>
-        </Table>
-      </TableContainer>
+              {tokendata.map((el) => (
 
-      <Modal open={show} onClose={handleClose}>
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">Token Transfer</Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Box
-              component="form"
-              sx={{
-                '& > :not(style)': { width: 500, maxWidth: '100%' },
-              }}
-              noValidate
-              autoComplete="off"
+                <TableRow key={el.token_name}>
+                  <TableCell component="th" scope="row"><strong className='mytname'>{el.token_name}</strong></TableCell>
+                  <TableCell align="right"><strong className='mnum'>{Number(el.token_amount).toFixed(1)}</strong></TableCell>
+                  <TableCell align="right">
+                    <Button variant="outlined" onClick={() => handleShow(el)}>Transfer
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <Modal open={show} onClose={handleClose}>
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">Token Transfer</Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <Box
+                component="form"
+                sx={{
+                  '& > :not(style)': { width: 500, maxWidth: '100%' },
+                }}
+                noValidate
+                autoComplete="off"
               >
                 <div>
-                <Typography sx={{ mt: 1 }}>받는 사람 주소</Typography>
-                <TextField fullWidth
-                  id="outlined-basic"
-                  label="To Address"
-                  margin="dense"
-                  size="small"
-                  variant="outlined"
-                  placeholder="0x..."
-                  autoFocus
-                  onChange={(e) => handleInput1(e)}
-                />
+                  <Typography sx={{ mt: 1 }}>받는 사람 주소</Typography>
+                  <TextField fullWidth
+                    id="outlined-basic"
+                    label="To Address"
+                    margin="dense"
+                    size="small"
+                    variant="outlined"
+                    placeholder="0x..."
+                    autoFocus
+                    onChange={(e) => handleInput1(e)}
+                  />
                 </div>
-              <div>
-                <Typography sx={{ mt: 1 }}>보낼 수량</Typography>
-                <TextField fullWidth id="outlined-basic" label="Amount" margin="dense" size="small" variant="outlined" onChange={(e) => handleInput2(e)} />
-              </div>
-              <div>
-              <Typography sx={{ mt: 1 }}>토큰 트랜잭션 주소</Typography>
-                <TextField fullWidth
-                  id="outlined-basic"
-                  label="Recent Transaction"
-                  margin="dense"
-                  size="small"
-                  variant="outlined"
-                  placeholder={currentTokenAddress}
-                  autoFocus
-                  onChange={(e) => handleInput1(e)}
-                />
-              </div>
-            </Box>
-          </Typography>
-          <Button variant="outlined" color="success" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="contained" color="success" onClick={handleTransfer}>
-            토큰 전송
-          </Button>
-        </Box>
-      </Modal>
+                <div>
+                  <Typography sx={{ mt: 1 }}>보낼 수량</Typography>
+                  <TextField fullWidth id="outlined-basic" label="Amount" margin="dense" size="small" variant="outlined" onChange={(e) => handleInput2(e)} />
+                </div>
+                <div>
+                  <Typography sx={{ mt: 1 }}>토큰 트랜잭션 주소</Typography>
+                  <TextField fullWidth
+                    id="outlined-basic"
+                    label="Recent Transaction"
+                    margin="dense"
+                    size="small"
+                    variant="outlined"
+                    placeholder={currentTokenAddress}
+                    autoFocus
+                    onChange={(e) => handleInput1(e)}
+                  />
+                </div>
+              </Box>
+            </Typography>
+            <br />
+            <Stack direction="row" justifyContent="flex-end" spacing={2}>
+              <Button variant="outlined" color="info" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="contained" color="info" onClick={handleTransfer}>
+                토큰 전송
+              </Button>
+            </Stack>
+          </Box>
+        </Modal>
 
-      <Modal open={show1} onClose={handleClose1}>
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">Token Transfer</Typography>
+        <Modal open={show1} onClose={handleClose1}>
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">Token Transfer</Typography>
 
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Box
-              component="form"
-              sx={{
-                '& > :not(style)': { width: 500, maxWidth: '100%' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <div>
-                <Typography sx={{ mt: 1 }}>받는 사람 주소</Typography>
-                <TextField fullWidth
-                  id="outlined-basic"
-                  label="To Address"
-                  margin="dense"
-                  size="small"
-                  variant="outlined"
-                  placeholder="0x..."
-                  autoFocus
-                  onChange={(e) => handleInput1(e)}
-                />
-              </div>
-              <div>
-                <Typography sx={{ mt: 1 }}>보낼 수량</Typography>
-                <TextField fullWidth id="outlined-basic" label="Amount" margin="dense" size="small" variant="outlined" onChange={(e) => handleInput2(e)} />
-              </div>
-            </Box>
-          </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <Box
+                component="form"
+                sx={{
+                  '& > :not(style)': { width: 500, maxWidth: '100%' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <div>
+                  <Typography sx={{ mt: 1 }}>받는 사람 주소</Typography>
+                  <TextField fullWidth
+                    id="outlined-basic"
+                    label="To Address"
+                    margin="dense"
+                    size="small"
+                    variant="outlined"
+                    placeholder="0x..."
+                    autoFocus
+                    onChange={(e) => handleInput1(e)}
+                  />
+                </div>
+                <div>
+                  <Typography sx={{ mt: 1 }}>보낼 수량</Typography>
+                  <TextField fullWidth id="outlined-basic" label="Amount" margin="dense" size="small" variant="outlined" onChange={(e) => handleInput2(e)} />
+                </div>
+              </Box>
+            </Typography>
+            <br />
+            <Stack direction="row" justifyContent="flex-end" spacing={2}>
+              <Button variant="outlined" color="info" onClick={handleClose1}>
+                Close
+              </Button>
+              <Button variant="contained" color="info" onClick={handleTransfer1}>
+                토큰 전송
+              </Button>
+            </Stack>
 
-          <Button variant="outlined" color="success" onClick={handleClose1}>
-            Close
-          </Button>
-          <Button variant="contained" color="success" onClick={handleTransfer1}>
-            토큰 전송
-          </Button>
-
-        </Box>
-
-      </Modal>
+          </Box>
+        </Modal>
+      </ThemeProvider>
 
     </>
   );
