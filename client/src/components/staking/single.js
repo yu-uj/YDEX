@@ -233,7 +233,7 @@ function Single() {
 								</Stack>
 							</Grid>
 							<Grid xs={4}>
-								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+								<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
 									<Button fullWidth variant="contained" onClick={depositShow} >Deposit</Button>
 									<Modal
 										open={depo}
@@ -349,7 +349,7 @@ function Single() {
 								</Stack>
 
 								{/* 대출!!!!! */}
-								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+								<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
 									<Button fullWidth variant="contained" onClick={lendShow} >Lend</Button>
 									<Modal
 										open={lend}
@@ -364,7 +364,7 @@ function Single() {
 													<h5>내 예치 자산</h5>
 													<strong>{mystaked}</strong>
 													<span> JD</span>
-													
+
 												</div>
 												<Box
 													component="form"
@@ -385,7 +385,7 @@ function Single() {
 															aria-label="Default"
 															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
 															aria-describedby="outlined-weight-helper-text"
-															// onChange={(e) => handleInput2(e)}
+														// onChange={(e) => handleInput2(e)}
 														/>
 													</FormControl>
 												</Box>
@@ -415,7 +415,7 @@ function Single() {
 													<h5>내 대출 금액</h5>
 													<strong>{mystaked}</strong>
 													<span> JD</span>
-													
+
 												</div>
 												<Box
 													component="form"
@@ -435,7 +435,7 @@ function Single() {
 															aria-label="Default"
 															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
 															aria-describedby="outlined-weight-helper-text"
-															// onChange={(e) => handleInput2(e)}
+														// onChange={(e) => handleInput2(e)}
 														/>
 													</FormControl>
 												</Box>
@@ -474,7 +474,7 @@ function Single() {
 								</Stack>
 							</Grid>
 							<Grid xs={4}>
-								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+								<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
 									<Button fullWidth variant="contained" onClick={depositShow1} >Deposit</Button>
 									<Modal
 										open={depo1}
@@ -589,7 +589,7 @@ function Single() {
 								</Stack>
 
 								{/* 대출!!!!! */}
-								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+								<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
 									<Button fullWidth variant="contained" onClick={lendShow} >Lend</Button>
 									<Modal
 										open={lend}
@@ -604,7 +604,7 @@ function Single() {
 													<h5>내 예치 자산</h5>
 													<strong>{mystaked}</strong>
 													<span> JD</span>
-													
+
 												</div>
 												<Box
 													component="form"
@@ -625,7 +625,7 @@ function Single() {
 															aria-label="Default"
 															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
 															aria-describedby="outlined-weight-helper-text"
-															// onChange={(e) => handleInput2(e)}
+														// onChange={(e) => handleInput2(e)}
 														/>
 													</FormControl>
 												</Box>
@@ -655,7 +655,7 @@ function Single() {
 													<h5>내 대출 금액</h5>
 													<strong>{mystaked}</strong>
 													<span> JD</span>
-													
+
 												</div>
 												<Box
 													component="form"
@@ -675,7 +675,7 @@ function Single() {
 															aria-label="Default"
 															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
 															aria-describedby="outlined-weight-helper-text"
-															// onChange={(e) => handleInput2(e)}
+														// onChange={(e) => handleInput2(e)}
 														/>
 													</FormControl>
 												</Box>
@@ -713,7 +713,7 @@ function Single() {
 								</Stack>
 							</Grid>
 							<Grid xs={4}>
-								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+								<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
 									<Button fullWidth variant="contained" onClick={depositShow2}>Deposit</Button>
 									<Modal
 										open={depo2}
@@ -828,7 +828,7 @@ function Single() {
 								</Stack>
 
 								{/* 대출!!!!! */}
-								<Stack direction="row" spacing={1} sx={{ p:0.5 }}>
+								<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
 									<Button fullWidth variant="contained" onClick={lendShow} >Lend</Button>
 									<Modal
 										open={lend}
@@ -862,7 +862,7 @@ function Single() {
 															aria-label="Default"
 															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
 															aria-describedby="outlined-weight-helper-text"
-															// onChange={(e) => handleInput2(e)}
+														// onChange={(e) => handleInput2(e)}
 														/>
 													</FormControl>
 												</Box>
@@ -891,7 +891,7 @@ function Single() {
 													<h5>내 대출 금액</h5>
 													<strong>{mystaked}</strong>
 													<span> JD</span>
-													
+
 												</div>
 												<Box
 													component="form"
@@ -911,7 +911,7 @@ function Single() {
 															aria-label="Default"
 															endAdornment={<InputAdornment position="end">JD</InputAdornment>}
 															aria-describedby="outlined-weight-helper-text"
-															// onChange={(e) => handleInput2(e)}
+														// onChange={(e) => handleInput2(e)}
 														/>
 													</FormControl>
 												</Box>
