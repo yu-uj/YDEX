@@ -1,8 +1,25 @@
 import React, { useState, useEffect } from 'react';
-// import { Card, Row, Col, Button, Modal, Form, InputGroup, Tab, Tabs } from 'react-bootstrap';
 import { Box, Card, CardContent, Typography, Grid, Button, Modal, FormControl, OutlinedInput, InputLabel, InputAdornment, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { indigo, blueGrey, grey } from '@mui/material/colors';
+
+const theme = createTheme({
+	palette: {
+		info: {
+			main: grey[600],
+			contrastText: '#fff',
+		},
+		primary: {
+			light: indigo[200],
+			main: indigo[400],
+			darker: indigo[800],
+			contrastText: '#fff'
+		},
+	},
+});
 
 const style = {
 	position: 'absolute',
@@ -195,170 +212,181 @@ function KlayPair() {
 	return (
 
 		<div>
-			<Stack>
-				{Array.from({ length: 1 }).map((_, idx) => (
-					<Stack spacing={1}>
-						{KlayData.map((el) => (
-							<Card
-								key={el.pid}
-								sx={cardStyle}
-							>
-								<CardContent>
-									<Grid container>
-										<Grid xs={3}>
-											<Typography gutterBottom variant="h6">[ KLAY PAIR ]</Typography>
-											<Typography gutterBottom variant="h5">{el.pair_name}</Typography>
-										</Grid>
-										<Grid xs={3}>
-											<Stack>
-												<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
-												<Typography variant="h5" component="h6">{el.totalStaked}</Typography>
-											</Stack>
-										</Grid>
-										<Grid xs={3}>
-											<Stack>
-												<Typography variant="body2" color="text.secondary">나의 예치한 양</Typography>
-												<Typography variant="h5" component="h6"><span className='num' key={el.pid}>{Number(el.depositedValue).toFixed(1)}</span><span className='lp'> {el.pair_name}</span></Typography>
-											</Stack>
-										</Grid>
-										<Grid xs={3}>
-											<Stack spacing={1}>
-												<Button variant="contained" onClick={() => depositShow(el)} >Deposit</Button>
-												<Modal
-													size="large"
-													open={depo}
-													onClose={depositClose}
-													backdrop="static"
-													keyboard={false}
-												>
-													<Box sx={style}>
-														{/* 선택한 카드의 풀 이름과 맵핑 */}
-														<Typography id="modal-modal-title" variant="h6" component="h2">{selectPair.pair_name} Deposit</Typography>
+			<ThemeProvider theme={theme}>
+				<Stack>
+					{Array.from({ length: 1 }).map((_, idx) => (
+						<Stack spacing={1}>
+							{KlayData.map((el) => (
+								<Card
+									key={el.pid}
+									sx={cardStyle}
+								>
+									<CardContent>
+										<Grid container>
+											<Grid xs={3}>
+												<Typography gutterBottom variant="h6">[ KLAY PAIR ]</Typography>
+												<Typography gutterBottom variant="h5">{el.pair_name}</Typography>
+											</Grid>
+											<Grid xs={3}>
+												<Stack>
+													<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
+													<Typography variant="h6" component="h6">{el.totalStaked}</Typography>
+												</Stack>
+											</Grid>
+											<Grid xs={3}>
+												<Stack>
+													<Typography variant="body2" color="text.secondary">나의 예치한 양</Typography>
+													<Typography variant="h5" component="h6"><span className='num' key={el.pid}>{Number(el.depositedValue).toFixed(1)}</span><span className='lp'> {el.pair_name}</span></Typography>
+												</Stack>
+											</Grid>
+											<Grid xs={3}>
+												<Stack spacing={1}>
+													<Button variant="contained" onClick={() => depositShow(el)} >Deposit</Button>
+													<Modal
+														size="large"
+														open={depo}
+														onClose={depositClose}
+														backdrop="static"
+														keyboard={false}
+													>
+														<Box sx={style}>
+															{/* 선택한 카드의 풀 이름과 맵핑 */}
+															<Typography id="modal-modal-title" variant="h6" component="h2">{selectPair.pair_name} Deposit</Typography>
 
-														<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-															<div>
-																<h5>내 예치 자산</h5>
-																<strong>{Number(depositedAmount).toFixed(2)}</strong>
-																<span>{/*[토큰심볼]*/}</span>
-																<br />
-																<br />
-																<h5>내 지분</h5>
-																<strong>[보유지분율]</strong>
-																<span>%</span>
-																<br />
-																<br />
-															</div>
-															<Box
-																component="form"
-																sx={{
-																	'& > :not(style)': { width: 500, maxWidth: '100%' },
-																}}
-																noValidate
-																autoComplete="off">
-																{/* Deposit Input  */}
-																{/* 토큰 이름, 심볼, 매핑 필요  */}
-																<InputLabel component="h5">KLAY</InputLabel>
-																<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-																	<OutlinedInput fullWidth
-																		margin="dense"
-																		type="text"
-																		placeholder="예치할 KLAY 수량"
-																		autoFocus
-																		aria-label="Default"
-																		endAdornment={<InputAdornment position="end">KLAY</InputAdornment>}
-																		aria-describedby="outlined-weight-helper-text"
-																		onChange={(e) => handleDepositInput1(e)}
-																	/>
-																</FormControl>
-																<InputLabel component="h5">Token2 Name</InputLabel>
-																<p>address: {selectPair.token_address}</p>
-																<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-																	<OutlinedInput fullWidth
-																		margin="dense"
-																		type="text"
-																		placeholder="예치할 토큰2 수량"
-																		autoFocus
-																		aria-label="Default"
-																		endAdornment={<InputAdornment position="end">KLAY[토큰2심볼]</InputAdornment>}
-																		aria-describedby="outlined-weight-helper-text"
-																		onChange={(e) => handleDepositInput2(e)}
-																	/>
-																</FormControl>
-															</Box>
-														</Typography>
-														<Button variant="outlined" onClick={depositClose}>
-															취소
-														</Button>
-														<Button type="submit" variant="outlined" onClick={Deposit}>확인</Button>
-													</Box>
-												</Modal>
+															<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+																<div>
+																	<h5>내 예치 자산</h5>
+																	<strong>{Number(depositedAmount).toFixed(2)}</strong>
+																	<span>{/*[토큰심볼]*/}</span>
+																	<br />
+																	<br />
+																	<h5>내 지분</h5>
+																	<strong>[보유지분율]</strong>
+																	<span>%</span>
+																	<br />
+																	<br />
+																</div>
+																<Box
+																	component="form"
+																	sx={{
+																		'& > :not(style)': { width: 500, maxWidth: '100%' },
+																	}}
+																	noValidate
+																	autoComplete="off">
+																	{/* Deposit Input  */}
+																	{/* 토큰 이름, 심볼, 매핑 필요  */}
+																	<InputLabel component="h5">KLAY</InputLabel>
+																	<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+																		<OutlinedInput fullWidth
+																			margin="dense"
+																			type="text"
+																			placeholder="예치할 KLAY 수량"
+																			autoFocus
+																			aria-label="Default"
+																			endAdornment={<InputAdornment position="end">KLAY</InputAdornment>}
+																			aria-describedby="outlined-weight-helper-text"
+																			onChange={(e) => handleDepositInput1(e)}
+																		/>
+																	</FormControl>
+																	<InputLabel component="h5">Token2 Name</InputLabel>
+																	<p>address: {selectPair.token_address}</p>
+																	<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+																		<OutlinedInput fullWidth
+																			margin="dense"
+																			type="text"
+																			placeholder="예치할 토큰2 수량"
+																			autoFocus
+																			aria-label="Default"
+																			endAdornment={<InputAdornment position="end">KLAY[토큰2심볼]</InputAdornment>}
+																			aria-describedby="outlined-weight-helper-text"
+																			onChange={(e) => handleDepositInput2(e)}
+																		/>
+																	</FormControl>
+																</Box>
+															</Typography>
+															<br />
+                          <Stack direction="row" justifyContent="flex-end" spacing={2}>
+														<Button variant="outlined" color='info' onClick={depositClose}>
+																취소
+															</Button>
+															<Button type="submit" color='info' variant="contained" onClick={Deposit}>확인</Button>
+													</Stack>
+															
+														</Box>
+													</Modal>
 
-												<Button variant="outlined" onClick={() => withdrawShow(el)}>Withdraw</Button>
-												<Modal
-													open={widr}
-													onClose={withdrawClose}
-													backdrop="static"
-													keyboard={false}
-												>
-													<Box sx={style}>
-														{/* 선택한 카드의 풀 이름과 맵핑 */}
-														<Typography id="modal-modal-title" variant="h6" component="h2">{selectPair.pair_name} Withdraw</Typography>
-														<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-															<div>
-																<h5>내 예치 자산</h5>
-																<strong>0{/*[예치한토큰갯수]*/}</strong>
-																<span>{/*[토큰심볼]*/}</span>
-																<br />
-																<br />
-																<h5>내 지분</h5>
-																<strong>[보유지분율]</strong>
-																<span>%</span>
-																<br />
-																<br />
-															</div>
-															<Box
-																component="form"
-																sx={{
-																	'& > :not(style)': { width: 500, maxWidth: '100%' },
-																}}
-																noValidate
-																autoComplete="off">
-																{/* Withdraw Input  */}
-																{/* 토큰 이름, 심볼, 매핑 필요  */}
-																<InputLabel component="h5">{selectPair.pair_name}</InputLabel>
-																<p>address: {selectPair.pair_address}</p>
-																<p>출금가능한 LP 토큰: {Number(depositedAmount).toFixed(2)}</p>
-																<p>수령가능한 리워드: {Number(RewardAmount).toFixed(2)}</p>
-																<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-																	<OutlinedInput fullWidth
-																		margin="dense"
-																		type="text"
-																		placeholder="출금할 토큰1 수량"
-																		autoFocus
-																		aria-label="Default"
-																		endAdornment={<InputAdornment position="end">KLAY[토큰1심볼]</InputAdornment>}
-																		aria-describedby="outlined-weight-helper-text"
-																		onChange={(e) => handleWithdrawInput(e)}
-																	/>
-																</FormControl>
-															</Box>
-														</Typography>
-														<Button variant="outlined" onClick={withdrawClose}>
-															취소
-														</Button>
-														<Button type="submit" variant="outlined" onClick={Withdraw}>확인</Button>
-													</Box>
-												</Modal>
-											</Stack>
+													<Button variant="outlined" onClick={() => withdrawShow(el)}>Withdraw</Button>
+													<Modal
+														open={widr}
+														onClose={withdrawClose}
+														backdrop="static"
+														keyboard={false}
+													>
+														<Box sx={style}>
+															{/* 선택한 카드의 풀 이름과 맵핑 */}
+															<Typography id="modal-modal-title" variant="h6" component="h2">{selectPair.pair_name} Withdraw</Typography>
+															<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+																<div>
+																	<h5>내 예치 자산</h5>
+																	<strong>0{/*[예치한토큰갯수]*/}</strong>
+																	<span>{/*[토큰심볼]*/}</span>
+																	<br />
+																	<br />
+																	<h5>내 지분</h5>
+																	<strong>[보유지분율]</strong>
+																	<span>%</span>
+																	<br />
+																	<br />
+																</div>
+																<Box
+																	component="form"
+																	sx={{
+																		'& > :not(style)': { width: 500, maxWidth: '100%' },
+																	}}
+																	noValidate
+																	autoComplete="off">
+																	{/* Withdraw Input  */}
+																	{/* 토큰 이름, 심볼, 매핑 필요  */}
+																	<InputLabel component="h5">{selectPair.pair_name}</InputLabel>
+																	<p>address: {selectPair.pair_address}</p>
+																	<p>출금가능한 LP 토큰: {Number(depositedAmount).toFixed(2)}</p>
+																	<p>수령가능한 리워드: {Number(RewardAmount).toFixed(2)}</p>
+																	<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+																		<OutlinedInput fullWidth
+																			margin="dense"
+																			type="text"
+																			placeholder="출금할 토큰1 수량"
+																			autoFocus
+																			aria-label="Default"
+																			endAdornment={<InputAdornment position="end">KLAY[토큰1심볼]</InputAdornment>}
+																			aria-describedby="outlined-weight-helper-text"
+																			onChange={(e) => handleWithdrawInput(e)}
+																		/>
+																	</FormControl>
+																</Box>
+															</Typography>
+															<br />
+                          <Stack direction="row" justifyContent="flex-end" spacing={2}>
+														<Button variant="outlined" color='info' onClick={withdrawClose}>
+																취소
+															</Button>
+															<Button type="submit" color='info' variant="contained" onClick={Withdraw}>확인</Button>
+													</Stack>
+															
+														</Box>
+													</Modal>
+												</Stack>
+											</Grid>
 										</Grid>
-									</Grid>
 
-								</CardContent>
-							</Card>
-						))}
-					</Stack>
-				))}
-			</Stack>
+									</CardContent>
+								</Card>
+							))}
+						</Stack>
+					))}
+				</Stack>
+			</ThemeProvider>
+
 		</div>
 
 	);

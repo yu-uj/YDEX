@@ -7,6 +7,23 @@ import Create from "./create";
 import KlayPair from './klaypair';
 import Kip7Pair from './kip7pair';
 import '../../assets/css/Page.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { indigo, blueGrey, grey } from '@mui/material/colors';
+
+const theme = createTheme({
+	palette: {
+		info: {
+			main: grey[600],
+			contrastText: '#fff',
+		},
+		primary: {
+			light: indigo[200],
+			main: indigo[400],
+			darker: indigo[800],
+			contrastText: '#fff'
+		},
+	},
+});
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -50,7 +67,7 @@ function Pair() {
 
 	return (
 		<div className='Pool'>
-			
+
 			<div className="pageInfo">
 				<h2>Pair Pool List</h2>
 				<p>KLAY와 KIP7 토큰의 <b>페어 풀</b> 목록을 확인하고, <br /> 원하는 풀에 <b>예치</b> 및 <b>출금</b> 할 수 있습니다.</p>
@@ -58,32 +75,35 @@ function Pair() {
 
 			<br />
 
-			<Stack spacing={2}>
-			<Box sx={{ width: '100%' }}>
-				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-					<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-						<Tab label="ALL PAIR" {...a11yProps(0)} />
-						<Tab label="KLAY PAIR" {...a11yProps(1)} />
-						<Tab label="KIP7 PAIR" {...a11yProps(2)} />
-					</Tabs>
-				</Box>
-				<br />
-				<TabPanel value={value} index={0}>
-					<Stack spacing={1}>
-						<KlayPair />
-						<Kip7Pair />
-					</Stack>
-				</TabPanel>
-				<TabPanel value={value} index={1}>
-					<KlayPair />
-				</TabPanel>
-				<TabPanel value={value} index={2}>
-					<Kip7Pair />
-				</TabPanel>
-			</Box>
+			<ThemeProvider theme={theme}>
+				<Stack spacing={2}>
+					<Box sx={{ width: '100%' }}>
+						<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+							<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+								<Tab label="ALL PAIR" {...a11yProps(0)} />
+								<Tab label="KLAY PAIR" {...a11yProps(1)} />
+								<Tab label="KIP7 PAIR" {...a11yProps(2)} />
+							</Tabs>
+						</Box>
+						<br />
+						<TabPanel value={value} index={0}>
+							<Stack spacing={1}>
+								<KlayPair />
+								<Kip7Pair />
+							</Stack>
+						</TabPanel>
+						<TabPanel value={value} index={1}>
+							<KlayPair />
+						</TabPanel>
+						<TabPanel value={value} index={2}>
+							<Kip7Pair />
+						</TabPanel>
+					</Box>
 
-			<Create />
-			</Stack>
+					<Create />
+				</Stack>
+			</ThemeProvider>
+
 		</div>
 
 	);

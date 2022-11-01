@@ -26,8 +26,8 @@ import { uploadJSONToIPFS, uploadFileToIPFS } from "../pinata";
 const Caver = require("caver-js");
 const caver = new Caver(window.klaytn);
 const NFTABI = require('../contract/ABI/marketplace/YDEXNFT.json');
-const NFTAdress = '0xdbBB949d14576B506DE819FC04CE57FfaFb7f506';
-// const contract = caver.Contract.create(NFTABI, NFTAdress);
+const NFTAddress = '0xdbBB949d14576B506DE819FC04CE57FfaFb7f506';
+const contract = new caver.klay.Contract(NFTABI, NFTAddress);
 
 const MuiSwitchLarge = styled(Switch)(({ theme }) => ({
   width: 70,
@@ -112,7 +112,7 @@ const NFTMint = (props) => {
     price: "",
   });
   const [isListing, setIslisting] = useState(false);
-  // const account = useSelector(state => state.counter);
+  const address = useSelector(state => state.counter);
 
   const handleFile = (event) => {
     const file = event.target.files[0];
@@ -191,16 +191,15 @@ const NFTMint = (props) => {
         }
       );
       await transaction.wait();
-
-      // const mint = await caver.klay.sendTransaction({
-      //   type: 'SMART_CONTRACT_EXECUTION',
-      //   from: account,
-      //   to: NFTAdress,
-      //   value: price,
-      //   data: contract.methods.mint(account).encodeABI(),
-      //   gas: 80000
-      // }).then((res)=>{console.log(res);})
-      // .catch((err) => {alert("Mint has failed.");});
+      const mint = await caver.klay.sendTransaction({
+        type: 'SMART_CONTRACT_EXECUTION',
+        from: address.number,
+        to: NFTAddress,
+        value: price,
+        data: contract.methods.safeMint(address.number).encodeABI(),
+        gas: 80000
+      }).then((res)=>{console.log(res);})
+      .catch((err) => {alert("Mint has failed.");});
 
 
       setTimeout(() => {

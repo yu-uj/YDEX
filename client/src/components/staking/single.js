@@ -1,7 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Card, CardContent, Typography, Grid, Button, Modal, FormControl, OutlinedInput, InputLabel, InputAdornment, Stack } from '@mui/material';
-
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { indigo, blueGrey, grey } from '@mui/material/colors';
 import { useSelector } from "react-redux";
+
+const theme = createTheme({
+	palette: {
+		info: {
+			main: grey[600],
+			contrastText: '#fff',
+		},
+		primary: {
+			light: indigo[200],
+			main: indigo[400],
+			darker: indigo[800],
+			contrastText: '#fff'
+		},
+	},
+});
 
 const style = {
 	position: 'absolute',
@@ -101,18 +118,18 @@ function Single() {
 
 	const handleBorrow = async () => {
 		await BankContract.methods.borrow('0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE', caver.utils.toPeb(amount))
-			.send({ from : address.number, gas: 200000000});
+			.send({ from: address.number, gas: 200000000 });
 		setLend(false);
 	}
 
 	const handleRepay = async () => {
 		await BankContract.methods.repay('0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE', caver.utils.toPeb(amount))
-			.send({ from : address.number, gas: 200000000, value: caver.utils.toPeb(amount)});
+			.send({ from: address.number, gas: 200000000, value: caver.utils.toPeb(amount) });
 		setRepay(false);
 	}
 
 	const RepayAmount = async () => {
-		const repay = await BankContract.methods.repayKlayAmount().call({from : address.number});
+		const repay = await BankContract.methods.repayKlayAmount().call({ from: address.number });
 		setmyRepay(caver.utils.fromPeb(repay));
 	}
 
@@ -126,245 +143,248 @@ function Single() {
 			</div>
 			<br />
 			<br />
-			<Stack spacing={1}>
-				<Card
-					key={'Secondary'}
-					sx={cardStyle}
-				>
-					<CardContent>
-						<Grid container>
-							<Grid xs={3}>
-								<Typography gutterBottom variant="h6">[ KIP7 Token ]</Typography>
-								<Typography gutterBottom variant="h5">YDEXToken</Typography>
+			<ThemeProvider theme={theme}>
+				<Stack spacing={1}>
+					<Card
+						key={'Secondary'}
+						sx={cardStyle}
+					>
+						<CardContent>
+							<Grid container>
+								<Grid xs={3}>
+									<Typography gutterBottom variant="h6">[ KIP7 Token ]</Typography>
+									<Typography gutterBottom variant="h5">YDEXToken</Typography>
+								</Grid>
+								<Grid xs={5}>
+									<Stack>
+										<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
+										<br />
+										<Typography variant="h5" component="h6">{totalstaked} YDEXT</Typography>
+									</Stack>
+								</Grid>
+								<Grid xs={4}>
+									<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
+										<Button fullWidth variant="contained" onClick={depositShow} >Deposit</Button>
+										<Modal
+											open={depo}
+											onClose={depositClose}
+											backdrop="static"
+											keyboard={false}
+										>
+											<Box sx={style}>
+												<Typography id="modal-modal-title" variant="h6" component="h2">YDEXToken Deposit</Typography>
+												<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+													<div>
+														<h5>내 예치 자산</h5>
+														<strong>{mystaked}</strong>
+														<span>YDEXToken</span>
+														<br />
+														<br />
+														<h5>내 지분</h5>
+														<strong>[보유지분율]</strong>
+														<span>%</span>
+														<br />
+														<br />
+													</div>
+													<Box
+														component="form"
+														sx={{
+															'& > :not(style)': { width: 500, maxWidth: '100%' },
+														}}
+														noValidate
+														autoComplete="off">
+														{/* Deposit Input  */}
+														{/* 토큰 이름, 심볼, 매핑 필요  */}
+														<InputLabel component="h5">YDEXToken</InputLabel>
+														<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+															<OutlinedInput fullWidth
+																margin="dense"
+																type="text"
+																placeholder="예치할 토큰 수량"
+																autoFocus
+																aria-label="Default"
+																endAdornment={<InputAdornment position="end">YDEX</InputAdornment>}
+																aria-describedby="outlined-weight-helper-text"
+																onChange={(e) => handleInput2(e)}
+															/>
+														</FormControl>
+													</Box>
+												</Typography>
+												<br />
+												<Stack direction="row" justifyContent="flex-end" spacing={2}>
+													<Button variant="outlined" onClick={depositClose}>
+														취소
+													</Button>
+													<Button type="submit" variant="outlined" onClick={handleDeposit}>확인</Button>
+												</Stack>
+											</Box>
+										</Modal>
+
+										<Button fullWidth variant="outlined" onClick={withdrawShow}>Withdraw</Button>
+										<Modal
+											open={widr}
+											onClose={withdrawClose}
+											backdrop="static"
+											keyboard={false}
+										>
+											<Box sx={style}>
+												{/* 선택한 카드의 풀 이름과 맵핑 */}
+												<Typography id="modal-modal-title" variant="h6" component="h2">YDEXToken Withdraw</Typography>
+												<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+													<div>
+														<h5>내 예치 자산</h5>
+														<strong>{mystaked}</strong>
+														<span>YDEXT</span>
+														<br />
+														<br />
+														<h5>내 지분</h5>
+														<strong>[보유지분율]</strong>
+														<span>%</span>
+														<br />
+														<br />
+													</div>
+													<Box
+														component="form"
+														sx={{
+															'& > :not(style)': { width: 500, maxWidth: '100%' },
+														}}
+														noValidate
+														autoComplete="off">
+														{/* Withdraw Input  */}
+														<InputLabel component="h5">YDEXToken</InputLabel>
+														<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+															<OutlinedInput fullWidth
+																margin="dense"
+																type="text"
+																placeholder="출금할 토큰 수량"
+																autoFocus
+																aria-label="Default"
+																endAdornment={<InputAdornment position="end">YDEX</InputAdornment>}
+																aria-describedby="outlined-weight-helper-text"
+																onChange={(e) => handleInput2(e)}
+															/>
+														</FormControl>
+													</Box>
+												</Typography>
+												<br />
+												<Stack direction="row" justifyContent="flex-end" spacing={2}>
+													<Button variant="outlined" onClick={withdrawClose}>
+														취소
+													</Button>
+													<Button type="submit" variant="outlined" onClick={handleWithdraw}>확인</Button>
+												</Stack>
+											</Box>
+										</Modal>
+									</Stack>
+
+									{/* 대출!!!!! */}
+									<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
+										<Button fullWidth variant="contained" onClick={lendShow} >Borrow</Button>
+										<Modal
+											open={lend}
+											onClose={lendClose}
+											backdrop="static"
+											keyboard={false}
+										>
+											<Box sx={style}>
+												<Typography id="modal-modal-title" variant="h6" component="h2">KLAY Borrow</Typography>
+												<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+													<div>
+														<strong>YDEXT를 예치하였을 경우 KLAY를 Borrow할 수 있습니다.</strong>
+														<br />
+														<br />
+													</div>
+													<Box
+														component="form"
+														sx={{
+															'& > :not(style)': { width: 500, maxWidth: '100%' },
+														}}
+														noValidate
+														autoComplete="off">
+														{/* Lending Input  */}
+														<InputLabel component="h5">최대 금액 : 예치한 YDEXT의 150%</InputLabel>
+														<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+															<OutlinedInput fullWidth
+																margin="dense"
+																type="text"
+																placeholder="대출할 토큰 수량"
+																autoFocus
+																aria-label="Default"
+																endAdornment={<InputAdornment position="end">KLAY</InputAdornment>}
+																aria-describedby="outlined-weight-helper-text"
+																onChange={(e) => handleInput2(e)}
+															/>
+														</FormControl>
+													</Box>
+												</Typography>
+												<br />
+												<Stack direction="row" justifyContent="flex-end" spacing={2}>
+													<Button variant="outlined" onClick={lendClose}>
+														취소
+													</Button>
+													<Button type="submit" variant="outlined" onClick={handleBorrow}>확인</Button>
+												</Stack>
+											</Box>
+										</Modal>
+
+										<Button fullWidth variant="outlined" onClick={repayShow}>Repay</Button>
+										<Modal
+											open={repay}
+											onClose={repayClose}
+											backdrop="static"
+											keyboard={false}
+										>
+											<Box sx={style}>
+												{/* 선택한 카드의 풀 이름과 맵핑 */}
+												<Typography id="modal-modal-title" variant="h6" component="h2">KLAY Repay</Typography>
+												<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+													<div>
+														<h5>내 대출 금액</h5>
+														<strong>{myrepay}</strong>
+														<span>KLAY</span>
+
+													</div>
+													<Box
+														component="form"
+														sx={{
+															'& > :not(style)': { width: 500, maxWidth: '100%' },
+														}}
+														noValidate
+														autoComplete="off">
+														{/* Repay Input  */}
+														<InputLabel component="h5">KLAY</InputLabel>
+														<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+															<OutlinedInput fullWidth
+																margin="dense"
+																type="text"
+																placeholder="상환할 토큰 수량"
+																autoFocus
+																aria-label="Default"
+																endAdornment={<InputAdornment position="end">KLAY</InputAdornment>}
+																aria-describedby="outlined-weight-helper-text"
+																onChange={(e) => handleInput2(e)}
+															/>
+														</FormControl>
+													</Box>
+												</Typography>
+												<br />
+												<Stack direction="row" justifyContent="flex-end" spacing={2}>
+													<Button variant="outlined" onClick={repayClose}>
+														취소
+													</Button>
+													<Button type="submit" variant="outlined" onClick={handleRepay}>확인</Button>
+												</Stack>
+											</Box>
+										</Modal>
+									</Stack>
+
+								</Grid>
 							</Grid>
-							<Grid xs={5}>
-								<Stack>
-									<Typography variant="body2" color="text.secondary">총 예치규모</Typography>
-									<br />
-									<Typography variant="h5" component="h6">{totalstaked} YDEXT</Typography>
-								</Stack>
-							</Grid>
-							<Grid xs={4}>
-								<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
-									<Button fullWidth variant="contained" onClick={depositShow} >Deposit</Button>
-									<Modal
-										open={depo}
-										onClose={depositClose}
-										backdrop="static"
-										keyboard={false}
-									>
-										<Box sx={style}>
-											<Typography id="modal-modal-title" variant="h6" component="h2">YDEXToken Deposit</Typography>
-											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-												<div>
-													<h5>내 예치 자산</h5>
-													<strong>{mystaked}</strong>
-													<span>YDEXToken</span>
-													<br />
-													<br />
-													<h5>내 지분</h5>
-													<strong>[보유지분율]</strong>
-													<span>%</span>
-													<br />
-													<br />
-												</div>
-												<Box
-													component="form"
-													sx={{
-														'& > :not(style)': { width: 500, maxWidth: '100%' },
-													}}
-													noValidate
-													autoComplete="off">
-													{/* Deposit Input  */}
-													{/* 토큰 이름, 심볼, 매핑 필요  */}
-													<InputLabel component="h5">YDEXToken</InputLabel>
-													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-														<OutlinedInput fullWidth
-															margin="dense"
-															type="text"
-															placeholder="예치할 토큰 수량"
-															autoFocus
-															aria-label="Default"
-															endAdornment={<InputAdornment position="end">YDEX</InputAdornment>}
-															aria-describedby="outlined-weight-helper-text"
-															onChange={(e) => handleInput2(e)}
-														/>
-													</FormControl>
-												</Box>
-											</Typography>
-											<br />
-											<Stack direction="row" justifyContent="flex-end" spacing={2}>
-												<Button variant="outlined" onClick={depositClose}>
-													취소
-												</Button>
-												<Button type="submit" variant="outlined" onClick={handleDeposit}>확인</Button>
-											</Stack>
-										</Box>
-									</Modal>
+						</CardContent>
+					</Card>
+				</Stack>
 
-									<Button fullWidth variant="outlined" onClick={withdrawShow}>Withdraw</Button>
-									<Modal
-										open={widr}
-										onClose={withdrawClose}
-										backdrop="static"
-										keyboard={false}
-									>
-										<Box sx={style}>
-											{/* 선택한 카드의 풀 이름과 맵핑 */}
-											<Typography id="modal-modal-title" variant="h6" component="h2">YDEXToken Withdraw</Typography>
-											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-												<div>
-													<h5>내 예치 자산</h5>
-													<strong>{mystaked}</strong>
-													<span>YDEXT</span>
-													<br />
-													<br />
-													<h5>내 지분</h5>
-													<strong>[보유지분율]</strong>
-													<span>%</span>
-													<br />
-													<br />
-												</div>
-												<Box
-													component="form"
-													sx={{
-														'& > :not(style)': { width: 500, maxWidth: '100%' },
-													}}
-													noValidate
-													autoComplete="off">
-													{/* Withdraw Input  */}
-													<InputLabel component="h5">YDEXToken</InputLabel>
-													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-														<OutlinedInput fullWidth
-															margin="dense"
-															type="text"
-															placeholder="출금할 토큰 수량"
-															autoFocus
-															aria-label="Default"
-															endAdornment={<InputAdornment position="end">YDEX</InputAdornment>}
-															aria-describedby="outlined-weight-helper-text"
-															onChange={(e) => handleInput2(e)}
-														/>
-													</FormControl>
-												</Box>
-											</Typography>
-											<br />
-											<Stack direction="row" justifyContent="flex-end" spacing={2}>
-												<Button variant="outlined" onClick={withdrawClose}>
-													취소
-												</Button>
-												<Button type="submit" variant="outlined" onClick={handleWithdraw}>확인</Button>
-											</Stack>
-										</Box>
-									</Modal>
-								</Stack>
-
-								{/* 대출!!!!! */}
-								<Stack direction="row" spacing={1} sx={{ p: 0.5 }}>
-									<Button fullWidth variant="contained" onClick={lendShow} >Borrow</Button>
-									<Modal
-										open={lend}
-										onClose={lendClose}
-										backdrop="static"
-										keyboard={false}
-									>
-										<Box sx={style}>
-											<Typography id="modal-modal-title" variant="h6" component="h2">KLAY Borrow</Typography>
-											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-												<div>
-													<strong>YDEXT를 예치하였을 경우 KLAY를 Borrow할 수 있습니다.</strong>
-													<br />
-													<br />
-												</div>
-												<Box
-													component="form"
-													sx={{
-														'& > :not(style)': { width: 500, maxWidth: '100%' },
-													}}
-													noValidate
-													autoComplete="off">
-													{/* Lending Input  */}
-													<InputLabel component="h5">최대 금액 : 예치한 YDEXT의 150%</InputLabel>
-													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-														<OutlinedInput fullWidth
-															margin="dense"
-															type="text"
-															placeholder="대출할 토큰 수량"
-															autoFocus
-															aria-label="Default"
-															endAdornment={<InputAdornment position="end">KLAY</InputAdornment>}
-															aria-describedby="outlined-weight-helper-text"
-														onChange={(e) => handleInput2(e)}
-														/>
-													</FormControl>
-												</Box>
-											</Typography>
-											<br />
-											<Stack direction="row" justifyContent="flex-end" spacing={2}>
-												<Button variant="outlined" onClick={lendClose}>
-													취소
-												</Button>
-												<Button type="submit" variant="outlined" onClick={handleBorrow}>확인</Button>
-											</Stack>
-										</Box>
-									</Modal>
-
-									<Button fullWidth variant="outlined" onClick={repayShow}>Repay</Button>
-									<Modal
-										open={repay}
-										onClose={repayClose}
-										backdrop="static"
-										keyboard={false}
-									>
-										<Box sx={style}>
-											{/* 선택한 카드의 풀 이름과 맵핑 */}
-											<Typography id="modal-modal-title" variant="h6" component="h2">KLAY Repay</Typography>
-											<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-												<div>
-													<h5>내 대출 금액</h5>
-													<strong>{myrepay}</strong>
-													<span>KLAY</span>
-
-												</div>
-												<Box
-													component="form"
-													sx={{
-														'& > :not(style)': { width: 500, maxWidth: '100%' },
-													}}
-													noValidate
-													autoComplete="off">
-													{/* Repay Input  */}
-													<InputLabel component="h5">KLAY</InputLabel>
-													<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-														<OutlinedInput fullWidth
-															margin="dense"
-															type="text"
-															placeholder="상환할 토큰 수량"
-															autoFocus
-															aria-label="Default"
-															endAdornment={<InputAdornment position="end">KLAY</InputAdornment>}
-															aria-describedby="outlined-weight-helper-text"
-														onChange={(e) => handleInput2(e)}
-														/>
-													</FormControl>
-												</Box>
-											</Typography>
-											<br />
-											<Stack direction="row" justifyContent="flex-end" spacing={2}>
-												<Button variant="outlined" onClick={repayClose}>
-													취소
-												</Button>
-												<Button type="submit" variant="outlined" onClick={handleRepay}>확인</Button>
-											</Stack>
-										</Box>
-									</Modal>
-								</Stack>
-
-							</Grid>
-						</Grid>
-					</CardContent>
-				</Card>
-			</Stack>
+			</ThemeProvider>
 
 		</div>
 

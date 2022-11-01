@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Stack, styled, Typography } from "@mui/material";
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import NFTCard from "../components/NFTCard";
 import NFTMint from "../components/NFTMint";
@@ -107,6 +107,8 @@ const StyledButton = styled(Button)({
 });
 
 export default function NFTProfile() {
+
+  const address = useSelector(state => state.counter);
   
   const handleMintNFT = useCallback(() => {
     // mint NFT logic here ...
@@ -127,13 +129,13 @@ export default function NFTProfile() {
               left: 250,
             }}
           >
-            <Typography>USERNAME</Typography>
+            {/* <Typography>USERNAME</Typography> */}
             <Typography>
               <img
                 src="https://avatars.githubusercontent.com/u/6250754?s=200&v=4"
                 width={50}
               />
-              0x123...abcd
+              {address.number}
             </Typography>
 
             <StyledButton component={Link} to="/nft/nftMint">Mint NFT</StyledButton>

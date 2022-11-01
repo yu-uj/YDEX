@@ -49,7 +49,7 @@ function Navigation() {
 								<Avatar
 									sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
 									alt="YDEX"
-									src={require("../assets/JDlogo.png")}
+									src={require("../assets/yd.png")}
 								/>
 							</IconButton>
 							<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>

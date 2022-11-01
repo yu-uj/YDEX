@@ -3,15 +3,15 @@
   width: 650px;
   margin: 0 auto; /* 페이지 중앙 정렬 */
   margin-top: 4rem;
-  border: 3rem solid #9a9ca4;
+  border: 3rem solid #9298b4c7;
   border-radius: 11%;
-  background: #9a9ca4;
+  background: #9298b4c7;
 }
 
 .former-wrapper{
 
   min-height: 2.5rem;
-  background: #9a9ca4;
+  background: #9298b4c7;
   text-align: left;
   padding-bottom: 13px;
 }
@@ -27,13 +27,13 @@
 
 .todoo-wrapper {
   min-height: 3rem;
-  background: #9a9ca4;
+  background: #9298b4c7;
   padding: 20px 0;
 }
 
 .todo-wrapper {
   min-height: 1rem;
-  background: #9a9ca4;
+  background: #9298b4c7;
   text-align: left;
   padding-bottom: 13px;
 }
@@ -48,7 +48,7 @@
 
 .button-wrapper {
   min-height: 2.8rem;
-  background: #9a9ca4;
+  background: #9298b4c7;
 }
 
 .todos-wrap {
