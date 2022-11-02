@@ -63,7 +63,7 @@ function Counter(props) {
 	return (
 		<>
 		<ThemeProvider theme={theme}>
-		<Button size="small" variant="contained" color="info" onClick={modalOpen}>{number.slice(0, 5) + "..." + number.slice(38, 42)}</Button>
+		<Button size="small" variant="contained" color="info" onClick={modalOpen}>{number.slice(0, 7) + "..." + number.slice(38, 42)}</Button>
 			<Modal
 				open={modalIsOpen}
 				onClose={modalClose}
@@ -88,7 +88,7 @@ function Counter(props) {
 						Connect Wallet
 					</Typography>
 					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-						You can start using JDex right away, using Kaikas.
+						You can start using YDex right away, using Kaikas.
 					</Typography>
 					<Button
 						className="metaConnect"
