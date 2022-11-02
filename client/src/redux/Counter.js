@@ -90,8 +90,10 @@ function Counter(props) {
 					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 						You can start using YDex right away, using Kaikas.
 					</Typography>
+					<br/>
 					<Button
 						className="metaConnect"
+						variant="contained"
 						color="info"
 						onClick={() => {
 							connectWallet();

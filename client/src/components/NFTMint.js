@@ -18,7 +18,6 @@ import {
 import UploadIcon from "@mui/icons-material/Upload";
 import styled from "@emotion/styled";
 import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
-import SellIcon from "@mui/icons-material/Sell";
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import { uploadJSONToIPFS, uploadFileToIPFS } from "../pinata";
@@ -27,34 +26,9 @@ const Caver = require("caver-js");
 const caver = new Caver(window.klaytn);
 const NFTABI = require('../contract/ABI/marketplace/YDEXNFT.json');
 const NFTAddress = '0xdbBB949d14576B506DE819FC04CE57FfaFb7f506';
+const PlatformTokenAddress = '0xf2d5a9b9E7eC682aF9f353c6715DDf6b6393EE34';
 const contract = new caver.klay.Contract(NFTABI, NFTAddress);
 
-const MuiSwitchLarge = styled(Switch)(({ theme }) => ({
-  width: 70,
-  height: 34,
-  padding: 8,
-  "& .MuiSwitch-switchBase": {
-    margin: 1,
-    padding: 0,
-    transform: "translateX(5px)",
-    "&.Mui-checked": {
-      transform: "translateX(35px)",
-    },
-  },
-  "& .MuiSwitch-thumb": {
-    width: 30,
-    height: 30,
-  },
-  "& .MuiSwitch-track": {
-    borderRadius: 5,
-  },
-  "& .MuiSwitch-switchBase.Mui-checked": {
-    color: "#00ADBF",
-  },
-  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-    backgroundColor: "#00ADBF",
-  },
-}));
 const Overlay = styled(Box)`
   :hover {
     background: rgba(0, 0, 0, 0.3);
@@ -109,9 +83,8 @@ const NFTMint = (props) => {
   const [metaData, setMetaData] = useState({
     name: "",
     description: "",
-    price: "",
+    price: "20",
   });
-  const [isListing, setIslisting] = useState(false);
   const address = useSelector(state => state.counter);
 
   const handleFile = (event) => {
@@ -122,9 +95,6 @@ const NFTMint = (props) => {
     } else setSelectedImage(file);
   };
 
-  const handleToggle = (event) => {
-    setIslisting(event.target.checked);
-  };
   const handleMetaData = (event) => {
     const { name, value } = event.target;
     setMetaData((prevState) => {
@@ -166,6 +136,7 @@ const NFTMint = (props) => {
       if (response.success) {
         return response.pinataURL;
       }
+      console.log(response.pinataURL)
     } catch (error) {
       console.log("error in meta data");
     }
@@ -175,29 +146,33 @@ const NFTMint = (props) => {
   const submit = async (event) => {
     event.preventDefault();
     try {
-      setOpen(true);
       const metaDataURI = await uploadMeta();
-      const _signer = props.caver.klay.provider.getSigner();
-      const contractInstance = props.caver.klay.contract.connect(_signer);
       const price = caver.utils.toPeb(metaData.price, "KLAY");
-      const listingPrice = await props.caver.klay.contract.getListingPrice();
-      const listingAmount = listingPrice.toString();
-      const transaction = await contractInstance.createToken(
-        metaDataURI,
-        price,
-        isListing,
-        {
-          value: listingAmount,
-        }
-      );
-      await transaction.wait();
+      // const price = caver.utils.toPeb(10000000, "KLAY");
+     
+      // const transaction = await caver.klay.sendTransaction({
+      //   type: 'SMART_CONTRACT_EXECUTION',
+      //   from: address.number,
+      //   to: NFTAddress,
+      //   value: price,
+      //   data: contract.methods.safeMint(address.number, metaDataURI).encodeABI(),
+      //   gas: 80000
+      // }).then((res)=>{console.log(res);})
+      // .catch((err) => {alert("Mint has failed.");
+      // });
+      // await transaction.wait();
+
+      const ydt = new caver.klay.KIP7(PlatformTokenAddress);
+      const approve = await ydt.approve(NFTAddress, caver.utils.toPeb(10000000000000, "KLAY"), {
+        from: address.number,
+      });
+
       const mint = await caver.klay.sendTransaction({
         type: 'SMART_CONTRACT_EXECUTION',
         from: address.number,
         to: NFTAddress,
-        value: price,
-        data: contract.methods.safeMint(address.number).encodeABI(),
-        gas: 80000
+        data: contract.methods.safeMint(metaDataURI).encodeABI(),
+        gas: 8000000
       }).then((res)=>{console.log(res);})
       .catch((err) => {alert("Mint has failed.");});
 
@@ -209,7 +184,6 @@ const NFTMint = (props) => {
           price: "",
         });
         setSelectedImage("");
-        setOpen(false);
         setOpenSnack(true);
       }, 2000);
     } catch (error) {
@@ -327,7 +301,7 @@ const NFTMint = (props) => {
                       helperText="The description will be included on the item's detail page underneath its image."
                       required
                     />
-                    <TextField
+                    {/* <TextField
                       name="price"
                       label="Price"
                       type="text"
@@ -344,37 +318,16 @@ const NFTMint = (props) => {
                       onChange={handleMetaData}
                       helperText="Set a price, for buyers(it should be in klay)"
                       required
-                    />
+                    /> */}
                   </ThemeProvider>
 
-                  <Stack spacing={1} direction="column"  >
-                    <Stack spacing={2} direction="row" sx={{ alignItems: "center" }} >
-                      <SellIcon sx={{ fontSize: "1cm", color: "primary.light" }} />
-                      <Typography variant="h6" color="primary.light" >
-                        SELL NFT ON THE MARKET
-                      </Typography>
-                      <MuiSwitchLarge
-                        checked={isListing}
-                        onChange={handleToggle}
-                        inputProps={{ "aria-label": "controlled" }}
-                      />
-                    </Stack>
-                    <Typography variant="body2" sx={{}}>
-                      Select Whether you wanted to list you NFT on the market
-                    </Typography>
-                  </Stack>
-                  <StyledButton type="submit">
+                  <StyledButton type="submit" >
                     Create NFT
                   </StyledButton>
                 </Stack>
               </Stack>
             </form>
-            <Backdrop
-              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              open={open}
-            >
-              <CircularProgress color="inherit" />
-            </Backdrop>
+           
             <Snackbar
               open={openSnack}
               autoHideDuration={3000}
