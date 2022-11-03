@@ -78,6 +78,7 @@ function Single() {
 	const address = useSelector((state) => state.counter);
 
 	const [amount, setAmount] = useState("");
+	const [Ybal, setYbal] = useState("0");
 
 	const handleInput2 = (e) => { setAmount(e.target.value) };
 
@@ -85,6 +86,12 @@ function Single() {
 		const kip7 = new caver.klay.KIP7(PlatformTokenAddress);
 		const bal = await kip7.balanceOf(bankAddress);
 		setTotalstaked(caver.utils.fromPeb(bal));
+	}
+
+	const YDEXbalance = async () => {
+		const YDEXkip7 = new caver.klay.KIP7(PlatformTokenAddress);
+		const Ybal = await YDEXkip7.balanceOf(address.number);
+		setYbal(caver.utils.fromPeb(Ybal))
 	}
 
 	const handleDeposit = async () => {
@@ -114,6 +121,7 @@ function Single() {
 	useEffect(() => {
 		TotalStaked();
 		RepayAmount();
+		YDEXbalance();
 	}, [totalstaked, myrepay]);
 
 	const handleBorrow = async () => {
@@ -180,9 +188,9 @@ function Single() {
 														<span>YDEXToken</span>
 														<br />
 														<br />
-														<h5>내 지분</h5>
-														<strong>[보유지분율]</strong>
-														<span>%</span>
+														<h5>예치 가능한 자산</h5>
+														<strong>{Number(Ybal).toFixed(2)}</strong>
+														<span> YDEXToken</span>
 														<br />
 														<br />
 													</div>
@@ -238,8 +246,8 @@ function Single() {
 														<br />
 														<br />
 														<h5>내 지분</h5>
-														<strong>[보유지분율]</strong>
-														<span>%</span>
+														<strong>{totalstaked}</strong>
+														<span> YDEXToken</span>
 														<br />
 														<br />
 													</div>
@@ -302,7 +310,7 @@ function Single() {
 														noValidate
 														autoComplete="off">
 														{/* Lending Input  */}
-														<InputLabel component="h5">최대 금액 : 예치한 YDEXT의 150%</InputLabel>
+														<InputLabel component="h5">최대 금액 : 예치한 YDEXT 가치의 150%</InputLabel>
 														<FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
 															<OutlinedInput fullWidth
 																margin="dense"

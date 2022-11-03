@@ -114,55 +114,13 @@ const Liquidity = ({ form, former, children, todo, todoo, teacher }) => {
     setTokenAmount2(caver.utils.fromPeb(Tokenbalance2)) //-> 예시로 usestate사용해 토큰 잔액 넣고 불러와서 사용하면 될듯 
   }
 
-  // 페어풀 조회
-	// kip7 pair
-
-	const [Kip7Data, setKip7Data] = useState([{ token_address: '0xa7AdB3953C03Ee7Cca887cEFE35266a0b5F1e45d1' }]);
-	const [Kip7Pool, setKip7Pool] = useState([dummydata]);
-	const getKip7Pool = async () => {
-		await axios.get(`http://localhost:4000/staking/kip7pool/`)
-			.then((res) => {
-				setKip7Pool(() => {
-					return res.data['data']
-				})
-			})
-	};
-	// console.log(Kip7Pool);
-
-	useEffect(() => {
-		getKip7Pool();
-	}, []);
-
-	const Kip7_Pool = async (list) => {
-		let arr = [];
-		for (let i = 0; i < list.length; i++) {
-			let el = list[i];
-
-			let obj = {
-				pair_name: el.pair_name,
-				pair_address: el.pair_address,
-				tokenA_address: el.tokenA_address,
-				tokenB_address: el.tokenB_address,
-				token_amount: '토큰 수량',
-				token_price: "가격",
-				pid: el.pid,
-			}
-			arr.push(obj);
-		}
-		setKip7Data(arr);
-	}
-	useEffect(() => {
-		Kip7_Pool(Kip7Pool);
-	}, [Kip7Pool])
-
-
   const addLiquid = async () => {
     const kip7_1 = new caver.klay.KIP7(tokenAddress1);
     const kip7_2 = new caver.klay.KIP7(tokenAddress2);
     // 내가 소유한 입력받은 두 토큰의 페어쌍 존재하는지 유효성 검사 필요
 
-    const allowedA = await caver.utils.fromPeb(kip7_1.allowance(address.number, RouterAddress));
-		const allowedB = await caver.utils.fromPeb(kip7_2.allowance(address.number, RouterAddress));
+    const allowedA = await caver.utils.fromPeb(await kip7_1.allowance(address.number, RouterAddress));
+		const allowedB = await caver.utils.fromPeb(await kip7_2.allowance(address.number, RouterAddress));
 
     if (allowedA <= amount) {
       await kip7_1.approve(RouterAddress, '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', {
