@@ -14,8 +14,7 @@ function Footer() {
             <span className="copyright">Developed by</span>
             <span><a href="mailto:yuuuj72@gmail.com">홍유진</a></span>
             <span><a href="mailto:kyum0401@gmail.com">김윤겸</a></span>
-            <span><a 
-            href="mailto:ys.heo.korea@gmail.com">허윤석</a></span>
+            
           </div>
           <p className="copyright">
             Copyright &copy; 2022 

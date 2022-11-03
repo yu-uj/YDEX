@@ -45,7 +45,7 @@ function Navigation() {
 				<AppBar position="relative" color="primary">
 					<Container maxWidth="xl">
 						<Toolbar disableGutters>
-							<IconButton href="/" sx={{ p: 1 }}>
+							<IconButton component={Link} to="/" sx={{ p: 1 }}>
 								<Avatar
 									sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
 									alt="YDEX"
@@ -53,9 +53,6 @@ function Navigation() {
 								/>
 							</IconButton>
 							<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-								<Button component={Link} to="/" sx={{ my: 2, color: "white", display: "block" }} size="large">
-									Home
-								</Button>
 								<Button component={Link} to="/mytoken" sx={{ my: 2, color: "white", display: "block" }} size="large">
 									My Token
 								</Button>
@@ -111,7 +108,8 @@ function Navigation() {
 									TransitionComponent={Fade}
 								>
 									<MenuItem component={Link} to="/nft/explore">NFT Explore</MenuItem>
-									<MenuItem component={Link} to="/nft/profile">NFT Profile</MenuItem>
+									{/* <MenuItem component={Link} to="/nft/profile">NFT Profile</MenuItem> */}
+									<MenuItem component={Link} to="/nft/nftMint">NFT Create</MenuItem>
 								</Menu>
 								<Button component={Link} to="/dashboard" sx={{ my: 2, color: "white", display: "block" }} size="large">
 									DashBoard
