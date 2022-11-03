@@ -1,0 +1,59 @@
+.Pool {
+    text-align: center;
+}
+
+.pageInfo{
+    text-align: left;
+    font-size: 13px;
+}
+
+.pageInfoP {
+    text-align: center;
+    font-style: italic;
+    color: #747881;
+}
+
+.mb-4{
+    padding: 10px;
+    padding-top: 30px;
+}
+
+.ap {
+    font-size: 13px;
+    color: #747881;
+}
+
+.tname {
+   color: rgb(56, 86, 207);
+}
+
+.mytname {
+    font-size: 20px;
+    color: rgb(56, 86, 207);
+}
+
+.myklay {
+    font-size: 20px;
+    color: rgb(31, 48, 115);
+}
+
+.mnum {
+    font-size: 18px;
+    color: #747881;
+}
+
+.num {
+    font-size: 20px;
+    color: rgb(103, 131, 212);
+}
+
+.lp {
+    font-size: 20px;
+    color: #8e929c;
+}
+
+.mlp {
+    font-size: 18px;
+    font-style: italic;
+    color: #8e929c;
+}
